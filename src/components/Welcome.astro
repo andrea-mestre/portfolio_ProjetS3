@@ -3,19 +3,19 @@ import astroLogo from '../assets/astro.svg';
 import background from '../assets/background.svg';
 ---
 
-<div id="container">
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<main>
-		<section id="hero">
-			<a href="https://astro.build"
-				><img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" /></a
-			>
-			<h1>
-				To get started, open the <code><pre>src/pages</pre></code> directory in your project.
+<div class="relative min-h-screen overflow-hidden">
+	<img id="background" src={background.src} alt="" fetchpriority="high" class="absolute inset-0 w-full h-full object-cover" />
+	<main class="relative z-10 flex items-center justify-center min-h-screen px-4">
+		<section class="text-center">
+			<a href="https://astro.build" class="inline-block mb-8">
+				<img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" class="mx-auto" />
+			</a>
+			<h1 class="text-2xl md:text-4xl font-bold text-white mb-8 max-w-2xl mx-auto">
+				To get started, open the <code class="bg-gray-800 px-2 py-1 rounded text-yellow-300 font-mono text-lg"><pre class="inline">src/pages</pre></code> directory in your project.
 			</h1>
-			<section id="links">
-				<a class="button" href="https://docs.astro.build">Read our docs</a>
-				<a href="https://astro.build/chat"
+			<section class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+				<a class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200" href="https://docs.astro.build">Read our docs</a>
+				<a href="https://astro.build/chat" class="flex items-center gap-2 text-white hover:text-blue-300 transition-colors duration-200"
 					>Join our Discord <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36"
 						><path
 							fill="currentColor"
