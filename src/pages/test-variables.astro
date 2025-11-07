@@ -1,0 +1,236 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<div class="test-container">
+		<h1 class="test-title">Test des Variables CSS</h1>
+		
+		<!-- Test des couleurs -->
+		<section class="test-section">
+			<h2 class="section-title">Couleurs Principales</h2>
+			<div class="color-grid">
+				<div class="color-card">
+					<div class="color-sample bg-background"></div>
+					<p class="color-name">Background</p>
+					<p class="color-value">#000000</p>
+				</div>
+				<div class="color-card">
+					<div class="color-sample bg-darkpurple"></div>
+					<p class="color-name">Dark Purple</p>
+					<p class="color-value">#6154C5</p>
+				</div>
+				<div class="color-card">
+					<div class="color-sample bg-pink"></div>
+					<p class="color-name">Pink</p>
+					<p class="color-value">#962EB9</p>
+				</div>
+				<div class="color-card">
+					<div class="color-sample bg-purple"></div>
+					<p class="color-name">Purple</p>
+					<p class="color-value">#B8BBF0</p>
+				</div>
+				<div class="color-card">
+					<div class="color-sample bg-white"></div>
+					<p class="color-name">White</p>
+					<p class="color-value">#FFFFFF</p>
+				</div>
+			</div>
+		</section>
+		
+		<!-- Test des typographies -->
+		<section class="test-section">
+			<h2 class="section-title">Typographies</h2>
+			<div class="typo-grid">
+				<div class="typo-card">
+					<p class="typo-label">Title 1 - Nebula Hollow</p>
+					<p class="typo-sample font-title1">The Quick Brown Fox Jumps Over The Lazy Dog</p>
+					<p class="typo-sample font-title1 lowercase">the quick brown fox jumps over the lazy dog</p>
+					<p class="typo-sample font-title1">0123456789</p>
+				</div>
+				<div class="typo-card">
+					<p class="typo-label">Title 2 - Nebula Regular</p>
+					<p class="typo-sample font-title2">The Quick Brown Fox Jumps Over The Lazy Dog</p>
+					<p class="typo-sample font-title2 lowercase">the quick brown fox jumps over the lazy dog</p>
+					<p class="typo-sample font-title2">0123456789</p>
+				</div>
+				<div class="typo-card">
+					<p class="typo-label">Text - Space Mono</p>
+					<p class="typo-sample font-text">The Quick Brown Fox Jumps Over The Lazy Dog</p>
+					<p class="typo-sample font-text lowercase">the quick brown fox jumps over the lazy dog</p>
+					<p class="typo-sample font-text">0123456789</p>
+					<p class="typo-sample font-text font-bold">Bold: The Quick Brown Fox</p>
+				</div>
+				<div class="typo-card">
+					<p class="typo-label">Small Text - Share Tech Mono</p>
+					<p class="typo-sample font-smalltext">The Quick Brown Fox Jumps Over The Lazy Dog</p>
+					<p class="typo-sample font-smalltext lowercase">the quick brown fox jumps over the lazy dog</p>
+					<p class="typo-sample font-smalltext">0123456789</p>
+				</div>
+			</div>
+		</section>
+		
+		<!-- Test des combinaisons -->
+		<section class="test-section">
+			<h2 class="section-title">Combinaisons Couleurs + Typographies</h2>
+			<div class="combo-grid">
+				<div class="combo-card bg-darkpurple">
+					<h3 class="font-title1 text-white">Nebula Hollow</h3>
+					<p class="font-text text-purple">Space Mono sur Dark Purple</p>
+				</div>
+				<div class="combo-card bg-pink">
+					<h3 class="font-title2 text-white">Nebula Regular</h3>
+					<p class="font-smalltext text-purple">Share Tech Mono sur Pink</p>
+				</div>
+				<div class="combo-card bg-purple">
+					<h3 class="font-title1 text-background">Nebula Hollow</h3>
+					<p class="font-text text-darkpurple">Space Mono sur Purple</p>
+				</div>
+				<div class="combo-card bg-background border-white">
+					<h3 class="font-title2 text-white">Nebula Regular</h3>
+					<p class="font-text text-purple">Space Mono sur Background</p>
+				</div>
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.test-container {
+		padding: 40px 20px;
+		max-width: 1200px;
+		margin: 0 auto;
+		color: var(--color-white);
+	}
+	
+	.test-title {
+		font-family: var(--font-title1);
+		font-size: 3rem;
+		margin-bottom: 40px;
+		text-align: center;
+		color: var(--color-purple);
+	}
+	
+	.test-section {
+		margin-bottom: 60px;
+	}
+	
+	.section-title {
+		font-family: var(--font-title2);
+		font-size: 2rem;
+		margin-bottom: 30px;
+		color: var(--color-pink);
+	}
+	
+	/* Grilles */
+	.color-grid, .typo-grid, .combo-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 20px;
+	}
+	
+	/* Couleurs */
+	.color-card {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 20px;
+		border-radius: 8px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	
+	.color-sample {
+		width: 100%;
+		height: 100px;
+		border-radius: 8px;
+		margin-bottom: 15px;
+		border: 2px solid rgba(255, 255, 255, 0.2);
+	}
+	
+	.bg-background { background-color: var(--color-background); }
+	.bg-darkpurple { background-color: var(--color-darkpurple); }
+	.bg-pink { background-color: var(--color-pink); }
+	.bg-purple { background-color: var(--color-purple); }
+	.bg-white { background-color: var(--color-white); }
+	
+	.color-name {
+		font-family: var(--font-text);
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+	
+	.color-value {
+		font-family: var(--font-smalltext);
+		color: var(--color-purple);
+		font-size: 0.9rem;
+	}
+	
+	/* Typographies */
+	.typo-card {
+		background: rgba(255, 255, 255, 0.05);
+		padding: 20px;
+		border-radius: 8px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	
+	.typo-label {
+		font-family: var(--font-smalltext);
+		color: var(--color-pink);
+		margin-bottom: 15px;
+		font-size: 0.9rem;
+		text-transform: uppercase;
+	}
+	
+	.typo-sample {
+		margin-bottom: 10px;
+		color: var(--color-white);
+		font-size: 1.1rem;
+	}
+	
+	.font-title1 { font-family: var(--font-title1); font-size: 1.5rem; }
+	.font-title2 { font-family: var(--font-title2); font-size: 1.5rem; }
+	.font-text { font-family: var(--font-text); }
+	.font-smalltext { font-family: var(--font-smalltext); }
+	
+	/* Combinaisons */
+	.combo-card {
+		padding: 30px;
+		border-radius: 8px;
+		text-align: center;
+	}
+	
+	.combo-card h3 {
+		font-size: 2rem;
+		margin-bottom: 15px;
+	}
+	
+	.combo-card p {
+		font-size: 1rem;
+	}
+	
+	.border-white {
+		border: 2px solid var(--color-white);
+	}
+	
+	.text-white { color: var(--color-white); }
+	.text-background { color: var(--color-background); }
+	.text-darkpurple { color: var(--color-darkpurple); }
+	.text-pink { color: var(--color-pink); }
+	.text-purple { color: var(--color-purple); }
+	
+	.lowercase { text-transform: lowercase; }
+	.font-bold { font-weight: bold; }
+	
+	/* Responsive */
+	@media (max-width: 768px) {
+		.test-title {
+			font-size: 2rem;
+		}
+		
+		.section-title {
+			font-size: 1.5rem;
+		}
+		
+		.typo-sample, .font-title1, .font-title2 {
+			font-size: 1rem;
+		}
+	}
+</style>

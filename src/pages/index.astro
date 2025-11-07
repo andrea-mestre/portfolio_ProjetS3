@@ -1,8 +1,26 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import StarryBackground from '../components/StarryBackground.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<StarryBackground />
+	<main class="min-h-screen flex items-center justify-center relative z-10">
+		<div class="text-center text-white p-8">
+			<h1 class="text-4xl md:text-6xl font-bold mb-6">
+				Portfolio MMI
+			</h1>
+			<p class="text-xl md:text-2xl mb-8 text-gray-300">
+				Bienvenue dans mon univers créat
+			</p>
+			<div class="flex gap-4 justify-center flex-wrap">
+				<button class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition-colors">
+					Mes Projets
+				</button>
+				<button class="border border-white hover:bg-white hover:text-black px-6 py-3 rounded-lg font-semibold transition-colors">
+					Contact
+				</button>
+			</div>
+		</div>
+	</main>
 </Layout>

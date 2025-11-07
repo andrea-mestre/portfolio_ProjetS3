@@ -1,1 +1,33 @@
+/* Google Fonts - Import en premier */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Share+Tech+Mono&display=swap');
+
 @import "tailwindcss";
+
+ @font-face {
+    font-family: 'Nebula_Hollow';
+    src: url('/fonts/Nebula-Hollow.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;}
+
+@font-face {
+  font-family: 'Nebula_Regular';
+  src: url('/fonts/Nebula-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Couleurs principales et Typographie */
+:root {
+  /* Couleurs */
+  --color-background: #000000;
+  --color-darkpurple: #6154C5;
+  --color-pink: #962EB9;
+  --color-purple: #B8BBF0;
+  --color-white: #FFFFFF;
+  
+  /* Typographie */
+  --font-title1: 'Nebula_Hollow', sans-serif;
+  --font-title2: 'Nebula_Regular', sans-serif;
+  --font-text: 'Space Mono', sans-serif;
+  --font-smalltext: 'Share Tech Mono', sans-serif;
+}
