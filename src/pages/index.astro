@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import StarryBackground from '../components/StarryBackground.astro';
+import HudClock from '../components/HudClock.astro';
 ---
 
 <Layout>
@@ -23,4 +24,9 @@ import StarryBackground from '../components/StarryBackground.astro';
 			</div>
 		</div>
 	</main>
+	
+	<!-- Composant HUD Clock en bas à droite -->
+	<div class="fixed bottom-8 right-8 z-20">
+		<HudClock />
+	</div>
 </Layout>

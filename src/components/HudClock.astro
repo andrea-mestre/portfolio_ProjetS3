@@ -1,0 +1,235 @@
+---
+// Composant HUD Clock - Affichage de l'heure en temps réel
+import hourHud from '../assets/svg/hour_hud.svg';
+import utcIcon from '../assets/svg/UTC.svg';
+import clockIcon from '../assets/svg/clock.svg';
+---
+
+<div class="hud-clock-container">
+  <!-- SVG hour_hud en haut (agrandi) -->
+  <div class="hour-hud-top">
+    <img src={hourHud.src} alt="" />
+  </div>
+  
+  <!-- Ligne avec l'heure et UTC -->
+  <div class="time-utc-row">
+    <!-- Affichage de l'heure avec effet de flou -->
+    <div class="time-display">
+      <div class="time-blur" id="time-blur">15:30:24</div>
+      <div class="time-main" id="time-main">15:30:24</div>
+    </div>
+    
+    <!-- Boîte UTC -->
+    <div class="utc-container">
+      <img src={utcIcon.src} alt="UTC+2" class="utc-badge" />
+    </div>
+  </div>
+  
+  <!-- Textes de localisation -->
+  <div class="location-info">
+    <div class="location-label">LOCATION :</div>
+    <div class="location-value">POSITION IN FRANCE</div>
+  </div>
+  
+  <!-- Icône clock en bas à droite -->
+  <div class="clock-icon-bottom">
+    <img src={clockIcon.src} alt="Clock" />
+  </div>
+</div>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    
+    // Heure locale
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    
+    const timeString = `${hours}:${minutes}:${seconds}`;
+    
+    // Mettre à jour l'affichage
+    const timeMain = document.getElementById('time-main');
+    const timeBlur = document.getElementById('time-blur');
+    
+    if (timeMain) timeMain.textContent = timeString;
+    if (timeBlur) timeBlur.textContent = timeString;
+  }
+  
+  // Mettre à jour immédiatement
+  updateClock();
+  
+  // Mettre à jour toutes les secondes
+  setInterval(updateClock, 1000);
+</script>
+
+<style>
+  .hud-clock-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* SVG hour_hud en haut (agrandi) */
+  .hour-hud-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 120%;
+    transform: translateX(-10%);
+    z-index: 1;
+  }
+  
+  .hour-hud-top img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Ligne avec l'heure et UTC */
+  .time-utc-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 0 20px 0;
+    z-index: 2;
+  }
+  
+  /* Affichage de l'heure */
+  .time-display {
+    position: relative;
+    min-width: 280px;
+  }
+  
+  .time-blur {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-title2);
+    font-size: 56px;
+    font-weight: 400;
+    color: rgb(97, 84, 197);
+    filter: blur(18px);
+    letter-spacing: 0.05em;
+    pointer-events: none;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  
+  .time-main {
+    position: relative;
+    font-family: var(--font-title2);
+    font-size: 56px;
+    font-weight: 400;
+    color: rgb(97, 84, 197);
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  
+  /* Boîte UTC */
+  .utc-container {
+    position: relative;
+    z-index: 3;
+  }
+  
+  .utc-badge {
+    width: 150px;
+    height: auto;
+    display: block;
+  }
+  
+  /* Textes de localisation */
+  .location-info {
+    position: relative;
+    text-align: center;
+    margin-top: 10px;
+    z-index: 2;
+  }
+  
+  .location-label {
+    font-family: var(--font-smalltext);
+    font-size: 11px;
+    font-weight: 400;
+    color: white;
+    letter-spacing: 0.15em;
+    margin-bottom: 2px;
+  }
+  
+  .location-value {
+    font-family: var(--font-smalltext);
+    font-size: 11px;
+    font-weight: 400;
+    color: white;
+    letter-spacing: 0.15em;
+  }
+  
+  /* Icône clock en bas à droite */
+  .clock-icon-bottom {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 3;
+  }
+  
+  .clock-icon-bottom img {
+    width: 40px;
+    height: 40px;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hud-clock-container {
+      max-width: 380px;
+      padding: 15px;
+    }
+    
+    .time-blur,
+    .time-main {
+      font-size: 44px;
+    }
+    
+    .utc-badge {
+      width: 120px;
+    }
+    
+    .clock-icon-bottom img {
+      width: 35px;
+      height: 35px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hud-clock-container {
+      max-width: 320px;
+      padding: 10px;
+    }
+    
+    .time-blur,
+    .time-main {
+      font-size: 36px;
+    }
+    
+    .utc-badge {
+      width: 100px;
+    }
+    
+    .location-label,
+    .location-value {
+      font-size: 9px;
+    }
+    
+    .clock-icon-bottom img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+</style>
