@@ -1,0 +1,162 @@
+
+
+<section class="hero-section">
+  <!-- Lignes HUD animées -->
+  <svg class="hud-lines" viewBox="0 0 1400 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Coin supérieur gauche -->
+    <path class="line-top-left" d="M 50 200 L 230 200 L 300 130" stroke="white" stroke-width="2" opacity="0.9"/>
+    <circle class="corner-dot-tl" cx="300" cy="130" r="4" fill="white"/>
+    
+    <!-- Coin supérieur droit -->
+    <path class="line-top-right" d="M 1100 130 L 1170 200 L 1350 200" stroke="white" stroke-width="2" opacity="0.9"/>
+    <circle class="corner-dot-tr" cx="1100" cy="130" r="4" fill="white"/>
+    
+    <!-- Ligne verticale gauche -->
+    <path class="line-left-vertical" d="M 50 200 L 50 600" stroke="white" stroke-width="2" opacity="0.9"/>
+    
+    <!-- Ligne verticale droite -->
+    <path class="line-right-vertical" d="M 1350 200 L 1350 600" stroke="white" stroke-width="2" opacity="0.9"/>
+    
+    <!-- Coin inférieur gauche -->
+    <path class="line-bottom-left" d="M 50 600 L 230 600 L 300 670" stroke="white" stroke-width="2" opacity="0.9"/>
+    <circle class="corner-dot-bl" cx="300" cy="670" r="4" fill="white"/>
+    
+    <!-- Coin inférieur droit -->
+    <path class="line-bottom-right" d="M 1100 670 L 1170 600 L 1350 600" stroke="white" stroke-width="2" opacity="0.9"/>
+    <circle class="corner-dot-br" cx="1100" cy="670" r="4" fill="white"/>
+  </svg>
+
+  <!-- Slot pour le contenu (titres) -->
+  <slot />
+
+  <!-- Effet de scan lumineux -->
+  <div class="scan-line"></div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    overflow: hidden;
+  }
+
+  /* Lignes HUD */
+  .hud-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Animation des lignes - effet de tracé progressif */
+  .line-top-left {
+    stroke-dasharray: 280;
+    stroke-dashoffset: 280;
+    animation: drawLine 1.2s ease-out 2.2s forwards;
+  }
+
+  .line-top-right {
+    stroke-dasharray: 280;
+    stroke-dashoffset: 280;
+    animation: drawLine 1.2s ease-out 2.4s forwards;
+  }
+
+  .line-left-vertical,
+  .line-right-vertical {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: drawLine 1.5s ease-out 2.6s forwards;
+  }
+
+  .line-bottom-left {
+    stroke-dasharray: 280;
+    stroke-dashoffset: 280;
+    animation: drawLine 1.2s ease-out 2.8s forwards;
+  }
+
+  .line-bottom-right {
+    stroke-dasharray: 280;
+    stroke-dashoffset: 280;
+    animation: drawLine 1.2s ease-out 3s forwards;
+  }
+
+  .corner-dot-tl,
+  .corner-dot-tr,
+  .corner-dot-bl,
+  .corner-dot-br {
+    opacity: 0;
+    animation: fadeIn 0.3s ease-out 3.2s forwards;
+  }
+
+  @keyframes drawLine {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Scan line effect */
+  .scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(184,187,240,0.5), 
+      rgba(184,187,240,1),
+      rgba(184,187,240,0.5),
+      transparent
+    );
+    animation: scanMove 2s ease-in-out 1;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    z-index: 2;
+  }
+
+  @keyframes scanMove {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .orbital-decoration {
+      width: 500px;
+      height: 500px;
+    }
+
+    .hero-title-wrapper {
+      gap: 1rem;
+    }
+
+    .title-line {
+      width: 30px;
+    }
+  }
+</style>

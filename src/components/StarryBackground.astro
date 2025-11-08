@@ -1,280 +1,25 @@
 ---
-// Composant fond étoilé avec beaucoup d'étoiles et étoiles filantes
+// Composant fond étoilé avec layers de profondeur
+import sunSvg from '../assets/svg/Sun.svg';
 ---
 
-<div id="starry-bg" class="starry-background">
-  <!-- Étoiles statiques - Petites -->
-  <div class="star small" style="top: 10%; left: 15%;"></div>
-  <div class="star small" style="top: 25%; left: 80%;"></div>
-  <div class="star small" style="top: 35%; left: 40%;"></div>
-  <div class="star small" style="top: 50%; left: 70%;"></div>
-  <div class="star small" style="top: 65%; left: 20%;"></div>
-  <div class="star small" style="top: 75%; left: 60%;"></div>
-  <div class="star small" style="top: 85%; left: 30%;"></div>
-  <div class="star small" style="top: 15%; left: 90%;"></div>
-  <div class="star small" style="top: 45%; left: 10%;"></div>
-  <div class="star small" style="top: 55%; left: 85%;"></div>
-  <div class="star small" style="top: 8%; left: 25%;"></div>
-  <div class="star small" style="top: 22%; left: 55%;"></div>
-  <div class="star small" style="top: 38%; left: 75%;"></div>
-  <div class="star small" style="top: 52%; left: 35%;"></div>
-  <div class="star small" style="top: 68%; left: 65%;"></div>
-  <div class="star small" style="top: 78%; left: 15%;"></div>
-  <div class="star small" style="top: 88%; left: 85%;"></div>
-  <div class="star small" style="top: 12%; left: 48%;"></div>
-  <div class="star small" style="top: 28%; left: 92%;"></div>
-  <div class="star small" style="top: 42%; left: 22%;"></div>
+<div class="star-field">
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
+  <div class="layer"></div>
   
-  <!-- Étoiles statiques - Moyennes -->
-  <div class="star medium" style="top: 20%; left: 50%;"></div>
-  <div class="star medium" style="top: 70%; left: 45%;"></div>
-  <div class="star medium" style="top: 30%; left: 75%;"></div>
-  <div class="star medium" style="top: 60%; left: 25%;"></div>
-  <div class="star medium" style="top: 80%; left: 65%;"></div>
-  <div class="star medium" style="top: 40%; left: 35%;"></div>
-  <div class="star medium" style="top: 90%; left: 55%;"></div>
-  <div class="star medium" style="top: 5%; left: 45%;"></div>
-  <div class="star medium" style="top: 95%; left: 15%;"></div>
-  <div class="star medium" style="top: 18%; left: 65%;"></div>
-  <div class="star medium" style="top: 32%; left: 12%;"></div>
-  <div class="star medium" style="top: 48%; left: 88%;"></div>
-  <div class="star medium" style="top: 62%; left: 52%;"></div>
-  <div class="star medium" style="top: 72%; left: 78%;"></div>
-  <div class="star medium" style="top: 82%; left: 38%;"></div>
-  
-  <!-- Étoiles statiques - Grandes -->
-  <div class="star large" style="top: 15%; left: 35%;"></div>
-  <div class="star large" style="top: 45%; left: 60%;"></div>
-  <div class="star large" style="top: 65%; left: 80%;"></div>
-  <div class="star large" style="top: 25%; left: 15%;"></div>
-  <div class="star large" style="top: 55%; left: 42%;"></div>
-  <div class="star large" style="top: 75%; left: 72%;"></div>
-  <div class="star large" style="top: 35%; left: 90%;"></div>
-  <div class="star large" style="top: 85%; left: 50%;"></div>
-  
-  <!-- Étoiles statiques - Très petites (pour remplir) -->
-  <div class="star tiny" style="top: 7%; left: 33%;"></div>
-  <div class="star tiny" style="top: 13%; left: 72%;"></div>
-  <div class="star tiny" style="top: 23%; left: 18%;"></div>
-  <div class="star tiny" style="top: 33%; left: 62%;"></div>
-  <div class="star tiny" style="top: 43%; left: 28%;"></div>
-  <div class="star tiny" style="top: 53%; left: 68%;"></div>
-  <div class="star tiny" style="top: 63%; left: 38%;"></div>
-  <div class="star tiny" style="top: 73%; left: 82%;"></div>
-  <div class="star tiny" style="top: 83%; left: 12%;"></div>
-  <div class="star tiny" style="top: 93%; left: 58%;"></div>
-  <div class="star tiny" style="top: 17%; left: 44%;"></div>
-  <div class="star tiny" style="top: 27%; left: 88%;"></div>
-  <div class="star tiny" style="top: 37%; left: 8%;"></div>
-  <div class="star tiny" style="top: 47%; left: 78%;"></div>
-  <div class="star tiny" style="top: 57%; left: 24%;"></div>
-  <div class="star tiny" style="top: 67%; left: 94%;"></div>
-  <div class="star tiny" style="top: 77%; left: 48%;"></div>
-  <div class="star tiny" style="top: 87%; left: 66%;"></div>
-  <div class="star tiny" style="top: 11%; left: 56%;"></div>
-  <div class="star tiny" style="top: 21%; left: 36%;"></div>
-  
-  <!-- Étoiles filantes -->
-  <div class="shooting-star shooting-star-1"></div>
-  <div class="shooting-star shooting-star-2"></div>
-  <div class="shooting-star shooting-star-3"></div>
-  <div class="shooting-star shooting-star-4"></div>
-  <div class="shooting-star shooting-star-5"></div>
+  <!-- Soleil/Planète jaune -->
+  <div class="sun-planet">
+    <img src={sunSvg.src} alt="Sun" />
+  </div>
 </div>
 
-<style>
-  .starry-background {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background-color: #000000 !important;
-    z-index: -1 !important;
-    pointer-events: none !important;
-    overflow: hidden !important;
-  }
-  
-  /* Étoiles statiques - Base */
-  .star {
-    position: absolute !important;
-    background-color: white !important;
-    border-radius: 50% !important;
-    animation: twinkle 3s ease-in-out infinite !important;
-  }
-  
-  /* Très petites étoiles */
-  .star.tiny {
-    width: 1px !important;
-    height: 1px !important;
-    box-shadow: 0 0 2px rgba(255, 255, 255, 0.5) !important;
-    opacity: 0.6 !important;
-  }
-  
-  /* Petites étoiles */
-  .star.small {
-    width: 2px !important;
-    height: 2px !important;
-    box-shadow: 0 0 3px rgba(255, 255, 255, 0.6) !important;
-  }
-  
-  /* Étoiles moyennes */
-  .star.medium {
-    width: 3px !important;
-    height: 3px !important;
-    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8) !important;
-  }
-  
-  /* Grandes étoiles */
-  .star.large {
-    width: 4px !important;
-    height: 4px !important;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 1), 0 0 12px rgba(255, 255, 255, 0.5) !important;
-    animation: twinkle-bright 2s ease-in-out infinite !important;
-  }
-  
-  /* Animation de scintillement standard */
-  @keyframes twinkle {
-    0%, 100% {
-      opacity: 0.3 !important;
-      transform: scale(0.8) !important;
-    }
-    50% {
-      opacity: 1 !important;
-      transform: scale(1.2) !important;
-    }
-  }
-  
-  /* Animation de scintillement pour grandes étoiles */
-  @keyframes twinkle-bright {
-    0%, 100% {
-      opacity: 0.6 !important;
-      transform: scale(0.9) !important;
-    }
-    50% {
-      opacity: 1 !important;
-      transform: scale(1.4) !important;
-    }
-  }
-  
-  /* Variations de timing pour les étoiles */
-  .star:nth-child(2n) {
-    animation-delay: 0.5s !important;
-  }
-  
-  .star:nth-child(3n) {
-    animation-delay: 1s !important;
-    animation-duration: 4s !important;
-  }
-  
-  .star:nth-child(4n) {
-    animation-delay: 1.5s !important;
-  }
-  
-  .star:nth-child(5n) {
-    animation-delay: 2s !important;
-    animation-duration: 5s !important;
-  }
-  
-  /* Étoiles filantes */
-  .shooting-star {
-    position: absolute !important;
-    width: 3px !important;
-    height: 3px !important;
-    background: white !important;
-    border-radius: 50% !important;
-    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 1) !important;
-    animation: shoot 4s linear infinite !important;
-  }
-  
-  .shooting-star::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 50% !important;
-    right: 3px !important;
-    width: 100px !important;
-    height: 2px !important;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), white) !important;
-    transform: translateY(-50%) !important;
-    border-radius: 50% !important;
-  }
-  
-  /* Positionnement et délais pour chaque étoile filante */
-  .shooting-star-1 {
-    top: 15% !important;
-    left: 0% !important;
-    animation-delay: 0s !important;
-  }
-  
-  .shooting-star-2 {
-    top: 35% !important;
-    left: 0% !important;
-    animation-delay: 2s !important;
-  }
-  
-  .shooting-star-3 {
-    top: 55% !important;
-    left: 0% !important;
-    animation-delay: 4s !important;
-  }
-  
-  .shooting-star-4 {
-    top: 25% !important;
-    left: 0% !important;
-    animation-delay: 6s !important;
-  }
-  
-  .shooting-star-5 {
-    top: 75% !important;
-    left: 0% !important;
-    animation-delay: 8s !important;
-  }
-  
-  /* Animation des étoiles filantes */
-  @keyframes shoot {
-    0% {
-      transform: translateX(-10px) translateY(0) !important;
-      opacity: 0 !important;
-    }
-    10% {
-      opacity: 1 !important;
-    }
-    90% {
-      opacity: 1 !important;
-    }
-    100% {
-      transform: translateX(100vw) translateY(50vh) !important;
-      opacity: 0 !important;
-    }
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .shooting-star::before {
-      width: 60px !important;
-    }
-    
-    @keyframes shoot {
-      0% {
-        transform: translateX(-10px) translateY(0) !important;
-        opacity: 0 !important;
-      }
-      10% {
-        opacity: 1 !important;
-      }
-      90% {
-        opacity: 1 !important;
-      }
-      100% {
-        transform: translateX(100vw) translateY(40vh) !important;
-        opacity: 0 !important;
-      }
-    }
-  }
-</style>
 
 <style>
-  .starry-background {
+  .star-field {
     position: fixed;
     top: 0;
     left: 0;
@@ -285,162 +30,290 @@
     pointer-events: none;
     z-index: -1;
   }
-  
-  .stars-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+
+  .star-field .layer {
+    box-shadow: 
+      /* Layer 1 - étoiles les plus proches et brillantes */
+      462px 293px #FFF, 1318px 770px #FFF, 1095px 1216px #FFF, 
+      1763px 1375px #FFF, 1114px 1053px #FFF, 1557px 732px #FFF,
+      /* Ajout de beaucoup plus d'étoiles */
+      234px 567px #FFF, 789px 123px #FFF, 1456px 890px #FFF,
+      345px 1234px #FFF, 987px 456px #FFF, 1567px 234px #FFF,
+      678px 901px #FFF, 1234px 567px #FFF, 456px 1345px #FFF,
+      890px 678px #FFF, 1678px 901px #FFF, 234px 890px #FFF,
+      1345px 123px #FFF, 567px 1456px #FFF, 901px 234px #FFF,
+      1456px 1567px #FFF, 123px 678px #FFF, 1789px 345px #FFF,
+      456px 1123px #FFF, 1012px 890px #FFF, 1590px 456px #FFF,
+      345px 234px #FFF, 1123px 1678px #FFF, 678px 567px #FFF,
+      1890px 1234px #FFF, 234px 1456px #FFF, 1567px 901px #FFF,
+      789px 345px #FFF, 1234px 1890px #FFF, 456px 678px #FFF,
+      1678px 123px #FFF, 901px 1567px #FFF, 123px 1012px #FFF,
+      1456px 234px #FFF, 567px 1789px #FFF, 1789px 567px #FFF,
+      890px 1123px #FFF, 1345px 456px #FFF, 234px 1678px #FFF,
+      1567px 890px #FFF, 678px 1345px #FFF, 1901px 678px #FFF,
+      345px 456px #FFF, 1123px 234px #FFF, 789px 1890px #FFF,
+      1456px 1345px #FFF, 456px 901px #FFF, 1678px 1456px #FFF,
+      123px 345px #FFF, 1234px 1123px #FFF, 567px 234px #FFF,
+      1890px 789px #FFF, 901px 1456px #FFF, 1345px 567px #FFF,
+      234px 1234px #FFF, 1567px 1678px #FFF, 678px 789px #FFF,
+      1789px 901px #FFF, 456px 1567px #FFF, 1012px 123px #FFF,
+      890px 1345px #FFF, 1678px 234px #FFF, 123px 1890px #FFF,
+      1456px 678px #FFF, 345px 1012px #FFF, 1234px 456px #FFF,
+      567px 1678px #FFF, 1890px 1123px #FFF, 789px 234px #FFF,
+      1123px 890px #FFF, 234px 123px #FFF, 1567px 1456px #FFF,
+      678px 1234px #FFF, 1789px 789px #FFF, 456px 567px #FFF,
+      1345px 1890px #FFF, 901px 456px #FFF, 1678px 1567px #FFF,
+      123px 234px #FFF, 1456px 1012px #FFF, 567px 901px #FFF,
+      1890px 345px #FFF, 234px 678px #FFF, 1234px 789px #FFF,
+      789px 1678px #FFF, 1567px 123px #FFF, 345px 1456px #FFF,
+      1123px 567px #FFF, 456px 1789px #FFF, 1678px 890px #FFF,
+      901px 1012px #FFF, 1345px 234px #FFF, 678px 456px #FFF,
+      1789px 1234px #FFF, 123px 567px #FFF, 1456px 345px #FFF,
+      567px 1123px #FFF, 1890px 456px #FFF, 234px 789px #FFF;
+    
+    animation: moveStars 120s linear infinite;
   }
-  
-  /* Petites étoiles (beaucoup) */
-  .stars-small {
-    background-image: 
-      radial-gradient(1px 1px at 20px 30px, white, transparent),
-      radial-gradient(1px 1px at 40px 70px, white, transparent),
-      radial-gradient(1px 1px at 90px 40px, white, transparent),
-      radial-gradient(1px 1px at 130px 80px, white, transparent),
-      radial-gradient(1px 1px at 160px 30px, white, transparent),
-      radial-gradient(1px 1px at 190px 90px, white, transparent),
-      radial-gradient(1px 1px at 220px 10px, white, transparent),
-      radial-gradient(1px 1px at 290px 50px, white, transparent),
-      radial-gradient(1px 1px at 320px 120px, white, transparent),
-      radial-gradient(1px 1px at 380px 80px, white, transparent),
-      radial-gradient(1px 1px at 420px 40px, white, transparent),
-      radial-gradient(1px 1px at 480px 100px, white, transparent),
-      radial-gradient(1px 1px at 520px 20px, white, transparent),
-      radial-gradient(1px 1px at 580px 90px, white, transparent),
-      radial-gradient(1px 1px at 620px 60px, white, transparent),
-      radial-gradient(1px 1px at 680px 110px, white, transparent),
-      radial-gradient(1px 1px at 720px 30px, white, transparent),
-      radial-gradient(1px 1px at 780px 70px, white, transparent),
-      radial-gradient(1px 1px at 820px 120px, white, transparent),
-      radial-gradient(1px 1px at 880px 45px, white, transparent),
-      radial-gradient(1px 1px at 920px 85px, white, transparent),
-      radial-gradient(1px 1px at 980px 25px, white, transparent),
-      radial-gradient(1px 1px at 30px 150px, white, transparent),
-      radial-gradient(1px 1px at 80px 190px, white, transparent),
-      radial-gradient(1px 1px at 140px 170px, white, transparent),
-      radial-gradient(1px 1px at 200px 220px, white, transparent),
-      radial-gradient(1px 1px at 260px 180px, white, transparent),
-      radial-gradient(1px 1px at 330px 200px, white, transparent),
-      radial-gradient(1px 1px at 390px 160px, white, transparent),
-      radial-gradient(1px 1px at 450px 210px, white, transparent),
-      radial-gradient(1px 1px at 510px 170px, white, transparent),
-      radial-gradient(1px 1px at 570px 190px, white, transparent),
-      radial-gradient(1px 1px at 630px 220px, white, transparent),
-      radial-gradient(1px 1px at 690px 180px, white, transparent),
-      radial-gradient(1px 1px at 750px 200px, white, transparent),
-      radial-gradient(1px 1px at 810px 160px, white, transparent),
-      radial-gradient(1px 1px at 870px 210px, white, transparent),
-      radial-gradient(1px 1px at 930px 170px, white, transparent);
-    background-repeat: repeat;
-    background-size: 1000px 250px;
-    animation: sparkle 8s linear infinite;
-    opacity: 0.6;
+
+  .star-field .layer:nth-child(1) {
+    width: 1px;
+    height: 1px;
+    filter: blur(0.5px);
+    box-shadow: 
+      462px 293px #FFF, 1318px 770px #FFF, 1095px 1216px #FFF, 
+      1763px 1375px #FFF, 1114px 1053px #FFF, 1557px 732px #FFF,
+      234px 567px #FFF, 789px 123px #FFF, 1456px 890px #FFF,
+      345px 1234px #FFF, 987px 456px #FFF, 1567px 234px #FFF,
+      678px 901px #FFF, 1234px 567px #FFF, 456px 1345px #FFF,
+      890px 678px #FFF, 1678px 901px #FFF, 234px 890px #FFF,
+      156px 45px #FFF, 923px 1402px #FFF, 512px 789px #FFF,
+      1645px 234px #FFF, 89px 1156px #FFF, 1234px 45px #FFF,
+      756px 1523px #FFF, 423px 678px #FFF, 1567px 1089px #FFF,
+      201px 934px #FFF, 1089px 456px #FFF, 645px 1267px #FFF,
+      1423px 789px #FFF, 378px 1045px #FFF, 1156px 123px #FFF,
+      534px 1689px #FFF, 1745px 456px #FFF, 267px 823px #FFF,
+      1012px 1334px #FFF, 823px 234px #FFF, 1534px 1145px #FFF,
+      145px 756px #FFF, 1367px 534px #FFF, 689px 1456px #FFF,
+      1823px 912px #FFF, 456px 267px #FFF, 1189px 1678px #FFF,
+      578px 1023px #FFF, 1456px 645px #FFF, 312px 1389px #FFF,
+      1623px 823px #FFF, 734px 156px #FFF, 1267px 1534px #FFF,
+      489px 912px #FFF, 1534px 378px #FFF, 156px 1245px #FFF,
+      1745px 689px #FFF, 623px 1467px #FFF, 1089px 245px #FFF,
+      378px 1578px #FFF, 1456px 956px #FFF, 845px 423px #FFF,
+      1178px 1289px #FFF, 534px 734px #FFF, 1689px 1156px #FFF,
+      1923px 567px #FFF, 2145px 892px #FFF, 2367px 1234px #FFF,
+      1834px 423px #FFF, 2089px 1567px #FFF, 2234px 734px #FFF,
+      1945px 1123px #FFF, 2456px 289px #FFF, 2178px 1456px #FFF,
+      1712px 956px #FFF, 2334px 645px #FFF, 2567px 1389px #FFF,
+      1867px 1712px #FFF, 2123px 423px #FFF, 2489px 1089px #FFF;
   }
-  
-  /* Étoiles moyennes */
-  .stars-medium {
-    background-image: 
-      radial-gradient(2px 2px at 50px 60px, white, transparent),
-      radial-gradient(2px 2px at 150px 120px, white, transparent),
-      radial-gradient(2px 2px at 250px 80px, white, transparent),
-      radial-gradient(2px 2px at 350px 140px, white, transparent),
-      radial-gradient(2px 2px at 450px 90px, white, transparent),
-      radial-gradient(2px 2px at 550px 160px, white, transparent),
-      radial-gradient(2px 2px at 650px 110px, white, transparent),
-      radial-gradient(2px 2px at 750px 70px, white, transparent),
-      radial-gradient(2px 2px at 850px 130px, white, transparent),
-      radial-gradient(2px 2px at 950px 100px, white, transparent),
-      radial-gradient(2px 2px at 100px 200px, white, transparent),
-      radial-gradient(2px 2px at 300px 180px, white, transparent),
-      radial-gradient(2px 2px at 500px 220px, white, transparent),
-      radial-gradient(2px 2px at 700px 190px, white, transparent),
-      radial-gradient(2px 2px at 900px 210px, white, transparent);
-    background-repeat: repeat;
-    background-size: 1000px 250px;
-    animation: sparkle 12s linear infinite reverse;
-    opacity: 0.8;
+
+  .star-field .layer:nth-child(2) {
+    width: 2px;
+    height: 2px;
+    filter: blur(0.8px);
+    animation-duration: 100s;
+    box-shadow: 
+      1345px 123px #FFF, 567px 1456px #FFF, 901px 234px #FFF,
+      1456px 1567px #FFF, 123px 678px #FFF, 1789px 345px #FFF,
+      456px 1123px #FFF, 1012px 890px #FFF, 1590px 456px #FFF,
+      345px 234px #FFF, 1123px 1678px #FFF, 678px 567px #FFF,
+      1890px 1234px #FFF, 234px 1456px #FFF, 1567px 901px #FFF,
+      923px 1712px #FFF, 1456px 89px #FFF, 234px 1389px #FFF,
+      1734px 567px #FFF, 489px 1245px #FFF, 1189px 823px #FFF,
+      756px 1534px #FFF, 1623px 356px #FFF, 378px 1089px #FFF,
+      1267px 1456px #FFF, 645px 712px #FFF, 1534px 1178px #FFF,
+      156px 956px #FFF, 1845px 423px #FFF, 534px 1667px #FFF,
+      1367px 234px #FFF, 823px 1445px #FFF, 1689px 789px #FFF,
+      267px 1156px #FFF, 1456px 534px #FFF, 912px 1323px #FFF,
+      1734px 1089px #FFF, 445px 867px #FFF, 1156px 1578px #FFF,
+      623px 234px #FFF, 1534px 1712px #FFF, 289px 1034px #FFF,
+      1812px 645px #FFF, 734px 1389px #FFF, 1423px 912px #FFF,
+      356px 1623px #FFF, 1089px 378px #FFF, 867px 1256px #FFF,
+      2012px 1245px #FFF, 2234px 567px #FFF, 2445px 1389px #FFF,
+      1923px 823px #FFF, 2156px 1534px #FFF, 2378px 423px #FFF,
+      2089px 1089px #FFF, 2567px 734px #FFF, 2312px 1456px #FFF,
+      1867px 1678px #FFF, 2423px 912px #FFF, 2645px 234px #FFF;
   }
-  
-  /* Grandes étoiles brillantes */
-  .stars-large {
-    background-image: 
-      radial-gradient(3px 3px at 100px 50px, white, transparent),
-      radial-gradient(3px 3px at 300px 100px, white, transparent),
-      radial-gradient(3px 3px at 500px 150px, white, transparent),
-      radial-gradient(3px 3px at 700px 80px, white, transparent),
-      radial-gradient(3px 3px at 900px 120px, white, transparent),
-      radial-gradient(3px 3px at 200px 200px, white, transparent),
-      radial-gradient(3px 3px at 600px 180px, white, transparent),
-      radial-gradient(3px 3px at 800px 220px, white, transparent);
-    background-repeat: repeat;
-    background-size: 1000px 250px;
-    animation: twinkle 6s ease-in-out infinite;
-    opacity: 0.9;
+
+  .star-field .layer:nth-child(3) {
+    width: 3px;
+    height: 3px;
+    filter: blur(1px);
+    animation-duration: 80s;
+    box-shadow: 
+      789px 345px #FFF, 1234px 1890px #FFF, 456px 678px #FFF,
+      1678px 123px #FFF, 901px 1567px #FFF, 123px 1012px #FFF,
+      1456px 234px #FFF, 567px 1789px #FFF, 1789px 567px #FFF,
+      890px 1123px #FFF, 1345px 456px #FFF, 234px 1678px #FFF,
+      1534px 1423px #FFF, 378px 823px #FFF, 1189px 156px #FFF,
+      645px 1534px #FFF, 1823px 912px #FFF, 267px 1289px #FFF,
+      1456px 645px #FFF, 734px 1734px #FFF, 1623px 378px #FFF,
+      489px 1089px #FFF, 1267px 823px #FFF, 156px 1456px #FFF,
+      1734px 534px #FFF, 912px 1678px #FFF, 1534px 289px #FFF,
+      445px 1167px #FFF, 1689px 956px #FFF, 623px 1845px #FFF,
+      1367px 423px #FFF, 823px 1534px #FFF, 1812px 734px #FFF,
+      356px 1312px #FFF, 1156px 1089px #FFF, 534px 867px #FFF,
+      1423px 1623px #FFF, 756px 234px #FFF, 1689px 1456px #FFF,
+      2134px 1312px #FFF, 2367px 645px #FFF, 2589px 1467px #FFF,
+      1945px 901px #FFF, 2278px 1623px #FFF, 2501px 378px #FFF,
+      2023px 1178px #FFF, 2689px 823px #FFF, 2412px 1534px #FFF;
   }
-  
-  /* Animation de défilement pour créer un effet de mouvement */
-  @keyframes sparkle {
+
+  .star-field .layer:nth-child(4) {
+    width: 2px;
+    height: 2px;
+    filter: blur(1.5px);
+    animation-duration: 60s;
+    box-shadow: 
+      1567px 890px #FFF, 678px 1345px #FFF, 1901px 678px #FFF,
+      345px 456px #FFF, 1123px 234px #FFF, 789px 1890px #FFF,
+      1456px 1345px #FFF, 456px 901px #FFF, 1678px 1456px #FFF,
+      123px 345px #FFF, 1234px 1123px #FFF, 567px 234px #FFF,
+      1834px 1567px #FFF, 289px 912px #FFF, 1423px 345px #FFF,
+      645px 1689px #FFF, 1734px 823px #FFF, 423px 1234px #FFF,
+      1189px 567px #FFF, 867px 1534px #FFF, 1534px 1089px #FFF,
+      312px 756px #FFF, 1689px 1712px #FFF, 734px 423px #FFF,
+      1367px 1345px #FFF, 534px 1178px #FFF, 1812px 534px #FFF,
+      156px 1423px #FFF, 1623px 912px #FFF, 489px 1567px #FFF,
+      1267px 234px #FFF, 912px 1834px #FFF, 1534px 645px #FFF,
+      378px 1312px #FFF, 1689px 1023px #FFF, 623px 867px #FFF,
+      1456px 1678px #FFF, 845px 356px #FFF, 1178px 1534px #FFF,
+      2056px 1401px #FFF, 2289px 723px #FFF, 2512px 1534px #FFF,
+      1878px 978px #FFF, 2201px 1689px #FFF, 2434px 456px #FFF,
+      1989px 1267px #FFF, 2623px 889px #FFF, 2345px 1612px #FFF;
+  }
+
+  .star-field .layer:nth-child(5) {
+    width: 1px;
+    height: 1px;
+    filter: blur(2px);
+    animation-duration: 40s;
+    box-shadow: 
+      1890px 789px #FFF, 901px 1456px #FFF, 1345px 567px #FFF,
+      234px 1234px #FFF, 1567px 1678px #FFF, 678px 789px #FFF,
+      1789px 901px #FFF, 456px 1567px #FFF, 1012px 123px #FFF,
+      890px 1345px #FFF, 1678px 234px #FFF, 123px 1890px #FFF,
+      1734px 1423px #FFF, 534px 912px #FFF, 1423px 1712px #FFF,
+      267px 1534px #FFF, 1689px 378px #FFF, 823px 1267px #FFF,
+      1534px 956px #FFF, 445px 1689px #FFF, 1267px 645px #FFF,
+      623px 1823px #FFF, 1834px 289px #FFF, 356px 1089px #FFF,
+      1189px 1534px #FFF, 912px 423px #FFF, 1623px 1345px #FFF,
+      234px 867px #FFF, 1456px 1178px #FFF, 734px 1456px #FFF,
+      1367px 734px #FFF, 489px 1623px #FFF, 1689px 1089px #FFF,
+      156px 1312px #FFF, 1812px 823px #FFF, 645px 534px #FFF,
+      1534px 1834px #FFF, 378px 1023px #FFF, 1178px 356px #FFF,
+      2078px 1489px #FFF, 2312px 801px #FFF, 2545px 1623px #FFF,
+      1901px 1056px #FFF, 2234px 1734px #FFF, 2467px 512px #FFF,
+      2012px 1345px #FFF, 2656px 934px #FFF, 2378px 1689px #FFF;
+  }
+
+  .star-field .layer:nth-child(6) {
+    width: 1px;
+    height: 1px;
+    filter: blur(3px);
+    animation-duration: 30s;
+    box-shadow: 
+      1456px 678px #FFF, 345px 1012px #FFF, 1234px 456px #FFF,
+      567px 1678px #FFF, 1890px 1123px #FFF, 789px 234px #FFF,
+      1123px 890px #FFF, 234px 123px #FFF, 1567px 1456px #FFF,
+      678px 1234px #FFF, 1789px 789px #FFF, 456px 567px #FFF,
+      1623px 1534px #FFF, 823px 1367px #FFF, 1367px 912px #FFF,
+      489px 1789px #FFF, 1734px 423px #FFF, 267px 1156px #FFF,
+      1534px 1623px #FFF, 645px 867px #FFF, 1812px 1234px #FFF,
+      356px 734px #FFF, 1189px 1689px #FFF, 912px 534px #FFF,
+      1689px 1834px #FFF, 534px 1423px #FFF, 1423px 289px #FFF,
+      234px 1534px #FFF, 1834px 1089px #FFF, 756px 1712px #FFF,
+      1267px 1367px #FFF, 445px 956px #FFF, 1689px 645px #FFF,
+      623px 1534px #FFF, 1534px 823px #FFF, 378px 1267px #FFF,
+      1178px 1456px #FFF, 867px 378px #FFF, 1456px 1178px #FFF,
+      2101px 1556px #FFF, 2334px 878px #FFF, 2578px 1701px #FFF,
+      1923px 1123px #FFF, 2267px 1812px #FFF, 2489px 589px #FFF,
+      2034px 1423px #FFF, 2689px 1001px #FFF, 2401px 1756px #FFF;
+  }
+
+  @keyframes moveStars {
     from {
       transform: translateY(0px);
     }
     to {
-      transform: translateY(-250px);
+      transform: translateY(-2000px);
     }
   }
-  
-  /* Animation de scintillement pour les grandes étoiles */
-  @keyframes twinkle {
+
+  /* Soleil/Planète jaune */
+  .sun-planet {
+    position: fixed;
+    top: 15%;
+    right: 8%;
+    width: 120px;
+    height: 120px;
+    z-index: 1;
+    animation: sunGlow 3s ease-in-out infinite;
+  }
+
+  .sun-planet img {
+    width: 100%;
+    height: 100%;
+    filter: brightness(1.3) 
+            drop-shadow(0 0 30px rgba(255, 245, 200, 0.7))
+            drop-shadow(0 0 60px rgba(255, 230, 150, 0.5));
+  }
+
+  @keyframes sunGlow {
     0%, 100% {
-      opacity: 0.5;
       transform: scale(1);
-    }
-    25% {
-      opacity: 0.8;
-      transform: scale(1.1);
+      filter: brightness(1.3) 
+              drop-shadow(0 0 30px rgba(255, 245, 200, 0.7))
+              drop-shadow(0 0 60px rgba(255, 230, 150, 0.5));
     }
     50% {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-    75% {
-      opacity: 0.8;
-      transform: scale(1.1);
+      transform: scale(1.05);
+      filter: brightness(1.4) 
+              drop-shadow(0 0 40px rgba(255, 245, 200, 0.9))
+              drop-shadow(0 0 80px rgba(255, 230, 150, 0.7));
     }
   }
-  
-  /* Responsive design */
+
+  /* Responsive */
   @media (max-width: 768px) {
-    .stars-small {
-      background-size: 800px 200px;
-      animation-duration: 10s;
+    .star-field .layer {
+      animation-duration: 150s;
     }
     
-    .stars-medium {
-      background-size: 800px 200px;
-      animation-duration: 15s;
+    .star-field .layer:nth-child(2) {
+      animation-duration: 130s;
     }
     
-    .stars-large {
-      background-size: 800px 200px;
-      animation-duration: 8s;
+    .star-field .layer:nth-child(3) {
+      animation-duration: 110s;
+    }
+    
+    .star-field .layer:nth-child(4) {
+      animation-duration: 90s;
+    }
+    
+    .star-field .layer:nth-child(5) {
+      animation-duration: 70s;
+    }
+    
+    .star-field .layer:nth-child(6) {
+      animation-duration: 50s;
+    }
+
+    .sun-planet {
+      width: 80px;
+      height: 80px;
+      top: 12%;
+      right: 5%;
     }
   }
-  
+
   @media (max-width: 480px) {
-    .stars-small {
-      background-size: 600px 150px;
-    }
-    
-    .stars-medium {
-      background-size: 600px 150px;
-    }
-    
-    .stars-large {
-      background-size: 600px 150px;
+    .sun-planet {
+      width: 60px;
+      height: 60px;
+      top: 10%;
+      right: 3%;
     }
   }
 </style>

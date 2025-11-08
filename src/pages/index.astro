@@ -1,32 +1,146 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import StarryBackground from '../components/StarryBackground.astro';
+import HudHeader from '../components/HudHeader.astro';
+import HudSidebar from '../components/HudSidebar.astro';
+import HeroSection from '../components/HeroSection.astro';
 import HudClock from '../components/HudClock.astro';
 ---
 
 <Layout>
 	<StarryBackground />
-	<main class="min-h-screen flex items-center justify-center relative z-10">
-		<div class="text-center text-white p-8">
-			<h1 class="text-4xl md:text-6xl font-bold mb-6">
-				Portfolio MMI
-			</h1>
-			<p class="text-xl md:text-2xl mb-8 text-gray-300">
-				Bienvenue dans mon univers créat
-			</p>
-			<div class="flex gap-4 justify-center flex-wrap">
-				<button class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition-colors">
-					Mes Projets
-				</button>
-				<button class="border border-white hover:bg-white hover:text-black px-6 py-3 rounded-lg font-semibold transition-colors">
-					Contact
-				</button>
+	<HudHeader />
+	<HudSidebar />
+	
+	<main class="relative z-10">
+		<HeroSection>
+			<h1 class="hero-name">ANDREA MESTRE</h1>
+			<div class="hero-title-wrapper">
+				<div class="title-line"></div>
+				<p class="hero-title">WEB DESIGNER</p>
+				<div class="title-line"></div>
 			</div>
-		</div>
+		</HeroSection>
 	</main>
 	
-	<!-- Composant HUD Clock en bas à droite -->
+	<!-- HUD Clock en bas à droite -->
 	<div class="fixed bottom-8 right-8 z-20">
 		<HudClock />
 	</div>
 </Layout>
+
+<style>
+	main .hero-name {
+		font-family: var(--font-title2) !important;
+		font-size: clamp(64px, 10vw, 120px) !important;
+		color: white !important;
+		text-align: center;
+		letter-spacing: 0.15em;
+		margin: 2rem 0;
+		white-space: nowrap;
+		z-index: 1;
+		opacity: 0;
+		transform: translateX(-50px);
+		animation: nameSweep 1.2s ease-out 2s forwards, neonPulse 3s ease-in-out 3.5s infinite;
+		text-shadow: 
+			0 0 5px #fff,
+			0 0 10px rgba(184,187,240,0.8),
+			0 0 20px rgba(184,187,240,0.6),
+			0 0 40px rgba(184,187,240,0.4);
+	}
+
+	@keyframes nameSweep {
+		0% {
+			opacity: 0;
+			transform: translateX(-50px);
+			filter: blur(10px);
+		}
+		60% {
+			transform: translateX(5px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateX(0);
+			filter: blur(0);
+		}
+	}
+
+	@keyframes neonPulse {
+		0%, 100% {
+			text-shadow: 
+				0 0 5px #fff,
+				0 0 10px rgba(184,187,240,0.8),
+				0 0 20px rgba(184,187,240,0.6),
+				0 0 40px rgba(184,187,240,0.4);
+		}
+		50% {
+			text-shadow: 
+				0 0 8px #fff,
+				0 0 15px rgba(184,187,240,0.9),
+				0 0 30px rgba(184,187,240,0.7),
+				0 0 50px rgba(184,187,240,0.5);
+		}
+	}
+
+	main .hero-title-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		margin: 1rem 0 3rem;
+		opacity: 0;
+		animation: titleReveal 1s ease-out 3.2s forwards;
+		z-index: 1;
+	}
+
+	@keyframes titleReveal {
+		from {
+			opacity: 0;
+			letter-spacing: 0.5em;
+		}
+		to {
+			opacity: 1;
+			letter-spacing: 0.3em;
+		}
+	}
+
+	main .title-line {
+		width: 60px;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, var(--color-purple), transparent);
+		animation: lineExpand 1.5s ease-out 3.2s backwards;
+	}
+
+	@keyframes lineExpand {
+		from {
+			width: 0;
+		}
+		to {
+			width: 60px;
+		}
+	}
+
+	main .hero-title {
+		font-family: var(--font-smalltext) !important;
+		font-size: clamp(18px, 3vw, 24px) !important;
+		color: var(--color-purple) !important;
+		letter-spacing: 0.3em !important;
+		white-space: nowrap;
+		text-shadow: 
+			0 0 10px rgba(184,187,240,0.6),
+			0 0 20px rgba(184,187,240,0.4) !important;
+		animation: textGlow 3s ease-in-out infinite !important;
+	}
+
+	@keyframes textGlow {
+		0%, 100% {
+			text-shadow: 
+				0 0 10px rgba(184,187,240,0.6),
+				0 0 20px rgba(184,187,240,0.4);
+		}
+		50% {
+			text-shadow: 
+				0 0 15px rgba(184,187,240,0.8),
+				0 0 30px rgba(184,187,240,0.6);
+		}
+	}
+</style>

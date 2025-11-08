@@ -1,5 +1,4 @@
 ---
-// Composant HUD Clock - Affichage de l'heure en temps réel
 import hourHud from '../assets/svg/hour_hud.svg';
 import utcIcon from '../assets/svg/UTC.svg';
 import clockIcon from '../assets/svg/clock.svg';
@@ -33,7 +32,19 @@ import clockIcon from '../assets/svg/clock.svg';
   
   <!-- Icône clock en bas à droite -->
   <div class="clock-icon-bottom">
-    <img src={clockIcon.src} alt="Clock" />
+    <svg class="clock-svg" width="40" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Coins statiques -->
+      <path d="M31.5507 1H40V9.36" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+      <path d="M1 9.36V1H9.4493" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+      <path d="M9.4493 39H1V30.64" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+      <path d="M40 30.64V39H31.5507" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+      
+      <!-- Groupe rotatif (lignes centrales) -->
+      <g class="rotating-inner">
+        <path d="M17.8669 21.8604L23.8669 21.8604L23.8669 15.8604L17.8669 15.8604L17.8669 21.8604Z" fill="white"/>
+        <path d="M31.6451 29.6386L10.3679 8.3614" stroke="white" stroke-width="1.15" stroke-miterlimit="10"/>
+      </g>
+    </svg>
   </div>
 </div>
 
@@ -71,6 +82,19 @@ import clockIcon from '../assets/svg/clock.svg';
     height: auto;
     margin: 0 auto;
     padding: 20px;
+    opacity: 0;
+    animation: fadeInClock 1s ease-out 2s forwards;
+  }
+
+  @keyframes fadeInClock {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   /* SVG hour_hud en haut (agrandi) */
@@ -88,6 +112,17 @@ import clockIcon from '../assets/svg/clock.svg';
     width: 100%;
     height: auto;
     display: block;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+    }
+    50% {
+      filter: drop-shadow(0 0 10px rgba(184,187,240,0.6));
+    }
   }
   
   /* Ligne avec l'heure et UTC */
@@ -120,6 +155,18 @@ import clockIcon from '../assets/svg/clock.svg';
     pointer-events: none;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
+    animation: blurBreath 4s ease-in-out infinite;
+  }
+
+  @keyframes blurBreath {
+    0%, 100% {
+      filter: blur(18px);
+      opacity: 0.7;
+    }
+    50% {
+      filter: blur(22px);
+      opacity: 1;
+    }
   }
   
   .time-main {
@@ -131,6 +178,17 @@ import clockIcon from '../assets/svg/clock.svg';
     letter-spacing: 0.05em;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
+    text-shadow: 0 0 20px rgba(97, 84, 197, 0.8);
+    animation: textFlicker 5s ease-in-out infinite;
+  }
+
+  @keyframes textFlicker {
+    0%, 100% {
+      text-shadow: 0 0 20px rgba(97, 84, 197, 0.8);
+    }
+    50% {
+      text-shadow: 0 0 30px rgba(97, 84, 197, 1), 0 0 40px rgba(184, 187, 240, 0.5);
+    }
   }
   
   /* Boîte UTC */
@@ -143,19 +201,31 @@ import clockIcon from '../assets/svg/clock.svg';
     width: 150px;
     height: auto;
     display: block;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
+    animation: badgePulse 3s ease-in-out infinite;
+  }
+
+  @keyframes badgePulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
+    }
+    50% {
+      filter: drop-shadow(0 0 12px rgba(184,187,240,0.7));
+    }
   }
   
   /* Textes de localisation */
   .location-info {
-    position: relative;
-    text-align: center;
-    margin-top: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    text-align: left;
     z-index: 2;
   }
   
   .location-label {
-    font-family: var(--font-smalltext);
-    font-size: 11px;
+    font-family: var(--font-title2);
+    font-size: 10px;
     font-weight: 400;
     color: white;
     letter-spacing: 0.15em;
@@ -163,8 +233,8 @@ import clockIcon from '../assets/svg/clock.svg';
   }
   
   .location-value {
-    font-family: var(--font-smalltext);
-    font-size: 11px;
+    font-family: var(--font-title2);
+    font-size: 10px;
     font-weight: 400;
     color: white;
     letter-spacing: 0.15em;
@@ -178,11 +248,26 @@ import clockIcon from '../assets/svg/clock.svg';
     z-index: 3;
   }
   
-  .clock-icon-bottom img {
+  .clock-svg {
     width: 40px;
     height: 40px;
     display: block;
-    filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.5));
+  }
+
+  /* Rotation uniquement des lignes intérieures */
+  .rotating-inner {
+    transform-origin: center;
+    animation: iconRotate 20s linear infinite;
+  }
+
+  @keyframes iconRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
   
   /* Responsive */
@@ -201,7 +286,7 @@ import clockIcon from '../assets/svg/clock.svg';
       width: 120px;
     }
     
-    .clock-icon-bottom img {
+    .clock-svg {
       width: 35px;
       height: 35px;
     }
@@ -227,7 +312,7 @@ import clockIcon from '../assets/svg/clock.svg';
       font-size: 9px;
     }
     
-    .clock-icon-bottom img {
+    .clock-svg {
       width: 30px;
       height: 30px;
     }
