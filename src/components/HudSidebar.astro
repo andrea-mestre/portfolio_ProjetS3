@@ -4,7 +4,6 @@ import logoPortfolio from '../assets/svg/logo_portfolio.svg';
 ---
 
 <aside class="hud-sidebar">
-  <!-- Logo Portfolio tourné -->
   <div class="portfolio-logo">
     <img src={logoPortfolio.src} alt="Portfolio" />
   </div>
@@ -12,13 +11,13 @@ import logoPortfolio from '../assets/svg/logo_portfolio.svg';
 
 <style>
   .hud-sidebar {
-    position: fixed;
+    position: absolute !important;
     left: 1.5rem;
     top: 0;
     height: 100vh;
     display: flex;
     align-items: center;
-    z-index: 90;
+    z-index: 9999 !important;
     opacity: 0;
     animation: fadeInSidebar 1s ease-out 2s forwards;
   }

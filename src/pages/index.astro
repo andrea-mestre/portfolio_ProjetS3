@@ -5,6 +5,8 @@ import HudHeader from '../components/HudHeader.astro';
 import HudSidebar from '../components/HudSidebar.astro';
 import HeroSection from '../components/HeroSection.astro';
 import HudClock from '../components/HudClock.astro';
+import GlobeCanvas from '../components/GlobeCanvas.astro';
+import WarningHUD from '../components/WarningHUD.astro';
 ---
 
 <Layout>
@@ -14,6 +16,9 @@ import HudClock from '../components/HudClock.astro';
 	
 	<main class="relative z-10">
 		<HeroSection>
+			<!-- Globe 3D animé -->
+			<GlobeCanvas />
+			
 			<h1 class="hero-name">ANDREA MESTRE</h1>
 			<div class="hero-title-wrapper">
 				<div class="title-line"></div>
@@ -21,12 +26,33 @@ import HudClock from '../components/HudClock.astro';
 				<div class="title-line"></div>
 			</div>
 		</HeroSection>
+
+		<!-- Section supplémentaire pour permettre le scroll -->
+		<section class="scroll-section">
+			<div class="scroll-content">
+				
+		</section>
+
+		<section class="scroll-section">
+			<div class="scroll-content">
+			
+		</section>
+
+		<section class="scroll-section">
+			<div class="scroll-content">
+				<h2>CONTACT</h2>
+				<p>Entrons en contact pour vos projets...</p>
+			</div>
+		</section>
 	</main>
 	
 	<!-- HUD Clock en bas à droite -->
-	<div class="fixed bottom-8 right-8 z-20">
+	<div class="hud-clock-hero">
 		<HudClock />
 	</div>
+
+	<!-- Warning HUD pour les erreurs de scroll -->
+	<WarningHUD />
 </Layout>
 
 <style>
@@ -38,6 +64,7 @@ import HudClock from '../components/HudClock.astro';
 		letter-spacing: 0.15em;
 		margin: 2rem 0;
 		white-space: nowrap;
+		position: relative;
 		z-index: 1;
 		opacity: 0;
 		transform: translateX(-50px);
@@ -87,6 +114,7 @@ import HudClock from '../components/HudClock.astro';
 		align-items: center;
 		gap: 2rem;
 		margin: 1rem 0 3rem;
+		position: relative;
 		opacity: 0;
 		animation: titleReveal 1s ease-out 3.2s forwards;
 		z-index: 1;
@@ -142,5 +170,43 @@ import HudClock from '../components/HudClock.astro';
 				0 0 15px rgba(184,187,240,0.8),
 				0 0 30px rgba(184,187,240,0.6);
 		}
+	}
+
+	/* Sections pour permettre le scroll */
+	.scroll-section {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 4rem 2rem;
+		border-top: 1px solid rgba(184, 187, 240, 0.2);
+	}
+
+	.scroll-content {
+		text-align: center;
+		max-width: 800px;
+	}
+
+	.scroll-content h2 {
+		font-family: var(--font-title2);
+		font-size: clamp(32px, 6vw, 48px);
+		color: var(--color-purple);
+		margin-bottom: 2rem;
+		letter-spacing: 0.2em;
+	}
+
+	.scroll-content p {
+		font-family: var(--font-text);
+		font-size: clamp(16px, 2.5vw, 20px);
+		color: rgba(255, 255, 255, 0.7);
+		line-height: 1.6;
+	}
+
+	/* Fix pour HUD Clock dans la hero section */
+	.hud-clock-hero {
+		position: absolute !important;
+		bottom: 2rem;
+		right: 2rem;
+		z-index: 9999 !important;
 	}
 </style>
