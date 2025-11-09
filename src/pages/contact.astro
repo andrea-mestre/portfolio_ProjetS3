@@ -3,142 +3,64 @@ import Layout from '../layouts/Layout.astro';
 import StarryBackground from '../components/StarryBackground.astro';
 import HudHeader from '../components/HudHeader.astro';
 import ContactInfoBar from '../components/ContactInfoBar.astro';
+import BackgroundHUD from '../components/BackgroundHUD.astro';
+import Form from '../components/Form.astro';
+import CadreContactSvg from '../assets/svg/cadre_contact.svg?raw';
+import EarthWhiteSvg from '../assets/svg/earthwhite.svg?raw';
 ---
 
 <Layout title="Contact - Andrea Mestre">
 	<StarryBackground />
 	<HudHeader />
+	<BackgroundHUD />
 	
 	<main class="min-h-screen pt-32 pb-16 px-8 relative z-10 flex justify-center items-center">
-		<div class="hud-background">
-			<svg width="1777" height="1253" viewBox="0 0 1777 1253" fill="none" xmlns="http://www.w3.org/2000/svg" class="background-svg">
-				<path d="M21.5 312.632V1223.71L42.4805 1251.6H1757.5V832.738V553.798L1735.98 520.384V44.3462L1703.7 21.1012H1088.81V31.7551L1061.38 44.3462H633.7L607.877 21.1012H42.4805V74.8552V285.513L21.5 312.632Z" stroke="white" stroke-width="1.07637"/>
-				<line x1="103.635" y1="21.1012" x2="103.635" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="167.59" y1="21.1012" x2="167.59" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="231.546" y1="21.1012" x2="231.546" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="295.501" y1="21.1012" x2="295.501" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="359.457" y1="21.1012" x2="359.457" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="423.412" y1="21.1012" x2="423.412" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="487.369" y1="21.1012" x2="487.368" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="551.324" y1="21.1012" x2="551.324" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="615.499" y1="80.2589" x2="49.5356" y2="80.2589" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="615.499" y1="138.759" x2="49.5356" y2="138.759" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="615.499" y1="197.26" x2="49.5356" y2="197.26" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="615.499" y1="255.76" x2="49.5356" y2="255.76" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="615.499" y1="314.261" x2="21.5002" y2="314.261" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="615.499" y1="372.762" x2="21.5002" y2="372.762" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="615.657" y1="431.337" x2="25.8052" y2="431.337" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="616.156" y1="21.1012" x2="616.156" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="679.846" y1="42.6871" x2="679.846" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="744.428" y1="42.6871" x2="744.428" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="807.933" y1="42.6871" x2="807.933" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="872.516" y1="42.6871" x2="872.516" y2="426.667" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="936.022" y1="42.6871" x2="936.022" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="999.528" y1="42.6871" x2="999.528" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1064.11" y1="42.6871" x2="1064.11" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1128.02" y1="80.2589" x2="615.498" y2="80.2589" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1128.02" y1="138.759" x2="615.498" y2="138.759" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1128.02" y1="197.26" x2="615.498" y2="197.26" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1128.02" y1="255.76" x2="615.498" y2="255.76" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1128.02" y1="314.261" x2="615.498" y2="314.261" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1128.02" y1="372.762" x2="615.498" y2="372.762" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1128.02" y1="431.262" x2="615.498" y2="431.262" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1129.55" y1="21.1012" x2="1129.55" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1193.51" y1="21.1012" x2="1193.51" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1257.46" y1="21.1012" x2="1257.46" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1321.42" y1="21.1012" x2="1321.42" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1385.38" y1="21.1012" x2="1385.38" y2="426.598" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1449.33" y1="21.1012" x2="1449.33" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1513.29" y1="21.1012" x2="1513.29" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1577.24" y1="21.1012" x2="1577.24" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1641.42" y1="80.2589" x2="1128.9" y2="80.2589" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1641.42" y1="138.759" x2="1128.9" y2="138.759" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1641.42" y1="197.26" x2="1128.9" y2="197.26" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1641.42" y1="255.76" x2="1128.9" y2="255.76" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1641.42" y1="314.261" x2="1128.9" y2="314.261" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1641.42" y1="372.762" x2="1128.9" y2="372.762" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1641.42" y1="431.262" x2="1128.9" y2="431.262" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1641.2" y1="21.1012" x2="1641.2" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1705.15" y1="21.1012" x2="1705.15" y2="430.605" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1739.57" y1="80.016" x2="1640.54" y2="80.0159" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1739.57" y1="139.09" x2="1640.54" y2="139.09" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1739.57" y1="197.179" x2="1640.54" y2="197.179" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1739.57" y1="256.253" x2="1640.54" y2="256.253" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1739.57" y1="314.342" x2="1640.54" y2="314.342" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1739.57" y1="373.416" x2="1640.54" y2="373.416" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<line x1="1739.57" y1="431.505" x2="1640.54" y2="431.505" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<path d="M14 784.6L8.5 777.851V623.532L14 615.883V584.39L8.5 578.991V480.011L0.5 467.413V374.732L8.5 368.433V342.788L14 336.49V584.39V615.883V784.6Z" fill="white" stroke="white"/>
-				<path d="M1090.5 12.2997L1097.5 5.1012H1158.5L1166 12.2997H1274L1296 5.1012H1613.5L1623.5 8.70047H1635.5L1645.5 5.1012H1671.5H1687.5L1698 12.2997H1274H1166H1090.5Z" fill="white" stroke="white"/>
-				<path d="M1767.5 1252.1L1768.51 986.692" stroke="white"/>
-				<path d="M1776.5 1046.71L1767.5 1078.49V1033.65V573.101L1771.16 576.21V943.207L1776.5 973.722V1046.71Z" fill="white"/>
-			</svg>
-		</div>
 
 		<div class="w-full max-w-6xl relative p-8">
 			<h1 class="contact-title text-white text-center tracking-wide mb-8">CONTACT</h1>
-			<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+			
+			<!-- Barre d'information avec SVG sur toute la largeur -->
+			<ContactInfoBar />
+			
+			<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
 				<!-- Section gauche - Formulaire -->
 				<div class="lg:col-span-2 flex flex-col">
-					<!-- Barre d'information avec SVG -->
-					<ContactInfoBar />
-					
-					<!-- Zone de formulaire violette -->
-					<div class="bg-gradient-to-br from-[rgba(97,84,197,0.3)] to-[rgba(150,46,185,0.3)] border border-[rgba(97,84,197,0.5)] p-8 flex-1">
-						<form class="flex flex-col gap-6 h-full">
-							<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div class="flex flex-col gap-2">
-									<label class="font-mono text-[11px] text-white tracking-wider uppercase">PRÉNOM</label>
-									<input type="text" name="prenom" required class="bg-white/90 border-none p-3 font-mono text-sm text-gray-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-[rgba(97,84,197,0.8)] focus:bg-white">
-								</div>
-								<div class="flex flex-col gap-2">
-									<label class="font-mono text-[11px] text-white tracking-wider uppercase">NOM</label>
-									<input type="text" name="nom" required class="bg-white/90 border-none p-3 font-mono text-sm text-gray-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-[rgba(97,84,197,0.8)] focus:bg-white">
-								</div>
-							</div>
-							
-							<div class="flex flex-col gap-2">
-								<label class="font-mono text-[11px] text-white tracking-wider uppercase">EMAIL</label>
-								<input type="email" name="email" required class="bg-white/90 border-none p-3 font-mono text-sm text-gray-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-[rgba(97,84,197,0.8)] focus:bg-white">
-							</div>
-							
-							<div class="flex flex-col gap-2">
-								<label class="font-mono text-[11px] text-white tracking-wider uppercase">SUJET</label>
-								<input type="text" name="sujet" required class="bg-white/90 border-none p-3 font-mono text-sm text-gray-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-[rgba(97,84,197,0.8)] focus:bg-white">
-							</div>
-							
-							<div class="flex flex-col gap-2">
-								<label class="font-mono text-[11px] text-white tracking-wider uppercase">MESSAGE</label>
-								<textarea name="message" rows="6" required class="bg-white/90 border-none p-3 font-mono text-sm text-gray-800 rounded-sm resize-none focus:outline-none focus:ring-2 focus:ring-[rgba(97,84,197,0.8)] focus:bg-white"></textarea>
-							</div>
-							
-							<button type="submit" class="bg-transparent border-2 border-white text-white px-8 py-4 font-mono text-xs tracking-[0.2em] cursor-pointer mt-auto self-center flex items-center gap-2 transition-all duration-300 hover:bg-white hover:text-gray-800">
-								<span class="text-base">⟨</span>
-								ENVOYER
-								<span class="text-base">⟩</span>
-							</button>
-						</form>
-					</div>
+					<Form />
 				</div>
 				
 				<!-- Section droite - Éléments HUD -->
 				<div class="flex flex-col gap-8">
-					<!-- Globe wireframe -->
-					<div class="border border-white/30 bg-black/50 p-4 text-center">
-						<div class="mb-4">
-							<svg viewBox="0 0 200 200" class="wireframe-svg w-32 h-32 mx-auto">
-								<!-- Cercle extérieur -->
-								<circle cx="100" cy="100" r="90" fill="none" stroke="white" stroke-width="1"/>
-								<!-- Lignes de latitude -->
-								<ellipse cx="100" cy="100" rx="90" ry="30" fill="none" stroke="white" stroke-width="1"/>
-								<ellipse cx="100" cy="100" rx="90" ry="60" fill="none" stroke="white" stroke-width="1"/>
-								<!-- Lignes de longitude -->
-								<ellipse cx="100" cy="100" rx="30" ry="90" fill="none" stroke="white" stroke-width="1"/>
-								<ellipse cx="100" cy="100" rx="60" ry="90" fill="none" stroke="white" stroke-width="1"/>
-								<line x1="100" y1="10" x2="100" y2="190" stroke="white" stroke-width="1"/>
-							</svg>
+					<!-- Globe avec cadre -->
+					<div class="relative">
+						<!-- Cadre de contact -->
+						<div class="cadre-container" set:html={CadreContactSvg}></div>
+						
+						<!-- Globe terrestre à l'intérieur du cadre -->
+						<div class="absolute top-1/5 left-1/10 transform -translate-x-1/2 -translate-y-1/2" style="margin-top: -30px;">
+							<div class="globe-container w-32 h-32 flex items-center justify-center">
+								<div class="globe-svg" set:html={EarthWhiteSvg}></div>
+							</div>
 						</div>
-						<div class="font-mono text-[10px] text-white/70 tracking-wider">LOCALISATION GÉOGRAPHIQUE</div>
+						
+						<!-- Coordonnées géographiques en bas du cadre -->
+						<div class="absolute bottom-4.5 left-1/2 transform -translate-x-1/2">
+							<div class="text-[13 px] tracking-wide text-center whitespace-nowrap" style="font-family: var(--font-smalltext); color: var(--color-pink);">
+								46° 22' 30.212" N 72° 33' 28.962" W
+							</div>
+						</div>
 					</div>
+					
+					<!-- Barres d'égalisation audio -->
+					<div class="flex justify-center items-end gap-1 h-20">
+						<div class="bar bg-[#962EB9] w-3 h-8"></div>
+						<div class="bar bg-[#962EB9] w-3 h-12"></div>
+						<div class="bar bg-[#962EB9] w-3 h-6"></div>
+						<div class="bar bg-[#962EB9] w-3 h-16"></div>
+						<div class="bar bg-[#962EB9] w-3 h-10"></div>
+						<div class="bar bg-[#962EB9] w-3 h-20"></div>
+						<div class="bar bg-[#962EB9] w-3 h-14"></div>
+						<div class="bar bg-[#962EB9] w-3 h-8"></div>
+						<div class="bar bg-[#962EB9] w-3 h-18"></div>
 					</div>
 				</div>
 			</div>
@@ -147,26 +69,6 @@ import ContactInfoBar from '../components/ContactInfoBar.astro';
 </Layout>
 
 <style>
-	/* Background HUD */
-	.hud-background {
-		position: fixed;
-		top: 120px;
-		left: -10%;
-		width: 120vw;
-		height: calc(100vh - 120px);
-		z-index: 1;
-		pointer-events: none;
-		overflow: hidden;
-	}
-
-	.background-svg {
-		width: 100%;
-		height: 100%;
-		object-fit: fill;
-		opacity: 1;
-		filter: brightness(1.8) contrast(1.5);
-	}
-
 	/* Titre CONTACT avec police custom */
 	.contact-title {
 		font-family: var(--font-title1);
@@ -175,13 +77,30 @@ import ContactInfoBar from '../components/ContactInfoBar.astro';
 	}
 
 	/* Animations */
-	.wireframe-svg {
-		animation: globeRotate 10s linear infinite;
+	.cadre-container {
+		width: 100%;
+		max-width: 343px;
+		margin: 0 auto;
 	}
-
-	@keyframes globeRotate {
-		from { transform: rotateY(0deg); }
-		to { transform: rotateY(360deg); }
+	
+	.cadre-container svg {
+		width: 100%;
+		height: auto;
+	}
+	
+	.globe-container {
+		position: relative;
+	}
+	
+	.globe-svg {
+		width: 100px;
+		height: 100px;
+	}
+	
+	.globe-svg svg {
+		width: 100%;
+		height: 100%;
+		filter: brightness(1.2);
 	}
 
 	.bar {
