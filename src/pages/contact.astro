@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import StarryBackground from '../components/StarryBackground.astro';
 import HudHeader from '../components/HudHeader.astro';
+import ContactInfoBar from '../components/ContactInfoBar.astro';
 ---
 
 <Layout title="Contact - Andrea Mestre">
@@ -66,7 +67,6 @@ import HudHeader from '../components/HudHeader.astro';
 				<line x1="1739.57" y1="314.342" x2="1640.54" y2="314.342" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
 				<line x1="1739.57" y1="373.416" x2="1640.54" y2="373.416" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
 				<line x1="1739.57" y1="431.505" x2="1640.54" y2="431.505" stroke="white" stroke-opacity="0.05" stroke-width="1.31416"/>
-				<!-- Continuez avec les autres lignes de grille selon vos besoins -->
 				<path d="M14 784.6L8.5 777.851V623.532L14 615.883V584.39L8.5 578.991V480.011L0.5 467.413V374.732L8.5 368.433V342.788L14 336.49V584.39V615.883V784.6Z" fill="white" stroke="white"/>
 				<path d="M1090.5 12.2997L1097.5 5.1012H1158.5L1166 12.2997H1274L1296 5.1012H1613.5L1623.5 8.70047H1635.5L1645.5 5.1012H1671.5H1687.5L1698 12.2997H1274H1166H1090.5Z" fill="white" stroke="white"/>
 				<path d="M1767.5 1252.1L1768.51 986.692" stroke="white"/>
@@ -74,20 +74,13 @@ import HudHeader from '../components/HudHeader.astro';
 			</svg>
 		</div>
 
-		<div class="w-full max-w-6xl relative z-[2] p-8">
-			<h1 class="contact-title text-white text-center tracking-[0.3em] mb-8">CONTACT</h1>
+		<div class="w-full max-w-6xl relative p-8">
+			<h1 class="contact-title text-white text-center tracking-wide mb-8">CONTACT</h1>
 			<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 				<!-- Section gauche - Formulaire -->
 				<div class="lg:col-span-2 flex flex-col">
-					<!-- Barre d'onglets -->
-					<div class="bg-[rgba(97,84,197,0.2)] border border-[rgba(97,84,197,0.5)] px-4 py-2 mb-4 flex justify-between items-center">
-						<div class="font-mono text-xs text-white tracking-wider">VEUILLEZ TRANSMETTRE UN MESSAGE :</div>
-						<div class="flex gap-8">
-							<span class="font-mono text-[10px] text-white/70 tracking-wider">PROJETS</span>
-							<span class="font-mono text-[10px] text-white/70 tracking-wider">RETOURS</span>
-							<span class="font-mono text-[10px] text-white/70 tracking-wider">QUESTIONS</span>
-						</div>
-					</div>
+					<!-- Barre d'information avec SVG -->
+					<ContactInfoBar />
 					
 					<!-- Zone de formulaire violette -->
 					<div class="bg-gradient-to-br from-[rgba(97,84,197,0.3)] to-[rgba(150,46,185,0.3)] border border-[rgba(97,84,197,0.5)] p-8 flex-1">
@@ -146,20 +139,6 @@ import HudHeader from '../components/HudHeader.astro';
 						</div>
 						<div class="font-mono text-[10px] text-white/70 tracking-wider">LOCALISATION GÉOGRAPHIQUE</div>
 					</div>
-					
-					<!-- Graphique en barres -->
-					<div class="border border-white/30 bg-black/50 p-4 h-40">
-						<div class="flex items-end gap-1 h-full">
-							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 60%"></div>
-							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 40%"></div>
-							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 80%"></div>
-							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 90%"></div>
-							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 70%"></div>
-							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 95%"></div>
-							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 85%"></div>
-							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 60%"></div>
-							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 75%"></div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -191,7 +170,7 @@ import HudHeader from '../components/HudHeader.astro';
 	/* Titre CONTACT avec police custom */
 	.contact-title {
 		font-family: var(--font-title1);
-		font-size: clamp(48px, 8vw, 72px);
+		font-size: clamp(72px, 12vw, 120px);
 		text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 	}
 
