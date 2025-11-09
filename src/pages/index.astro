@@ -19,35 +19,35 @@ import WarningHUD from '../components/WarningHUD.astro';
 			<!-- Globe 3D animé -->
 			<GlobeCanvas />
 			
-			<h1 class="hero-name">ANDREA MESTRE</h1>
-			<div class="hero-title-wrapper">
-				<div class="title-line"></div>
+			<h1 class="hero-name text-white text-center tracking-[0.15em] my-8 whitespace-nowrap relative z-[1] opacity-0 -translate-x-12">ANDREA MESTRE</h1>
+			<div class="hero-title-wrapper flex items-center gap-8 my-4 mb-12 relative opacity-0 z-[1]">
+				<div class="title-line w-16 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"></div>
 				<p class="hero-title">WEB DESIGNER</p>
-				<div class="title-line"></div>
+				<div class="title-line w-16 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"></div>
 			</div>
 		</HeroSection>
 
 		<!-- Section supplémentaire pour permettre le scroll -->
-		<section class="scroll-section">
-			<div class="scroll-content">
+		<section class="min-h-screen flex items-center justify-center py-16 px-8 border-t border-[rgba(184,187,240,0.2)]">
+			<div class="text-center max-w-4xl">
 				
 		</section>
 
-		<section class="scroll-section">
-			<div class="scroll-content">
+		<section class="min-h-screen flex items-center justify-center py-16 px-8 border-t border-[rgba(184,187,240,0.2)]">
+			<div class="text-center max-w-4xl">
 			
 		</section>
 
-		<section class="scroll-section">
-			<div class="scroll-content">
-				<h2>CONTACT</h2>
-				<p>Entrons en contact pour vos projets...</p>
+		<section class="min-h-screen flex items-center justify-center py-16 px-8 border-t border-[rgba(184,187,240,0.2)]">
+			<div class="text-center max-w-4xl">
+				<h2 class="font-[family-name:var(--font-title2)] text-4xl md:text-5xl lg:text-6xl text-[--color-purple] mb-8 tracking-[0.2em]">CONTACT</h2>
+				<p class="font-[family-name:var(--font-text)] text-lg md:text-xl text-white/70 leading-relaxed">Entrons en contact pour vos projets...</p>
 			</div>
 		</section>
 	</main>
 	
-	<!-- HUD Clock en bas à droite -->
-	<div class="hud-clock-hero">
+	<!-- HUD Clock en bas à droite de la hero section -->
+	<div class="absolute bottom-8 right-8 z-[9999]">
 		<HudClock />
 	</div>
 
@@ -56,18 +56,10 @@ import WarningHUD from '../components/WarningHUD.astro';
 </Layout>
 
 <style>
-	main .hero-name {
+	/* Animations personnalisées pour le hero */
+	.hero-name {
 		font-family: var(--font-title2) !important;
 		font-size: clamp(64px, 10vw, 120px) !important;
-		color: white !important;
-		text-align: center;
-		letter-spacing: 0.15em;
-		margin: 2rem 0;
-		white-space: nowrap;
-		position: relative;
-		z-index: 1;
-		opacity: 0;
-		transform: translateX(-50px);
 		animation: nameSweep 1.2s ease-out 2s forwards, neonPulse 3s ease-in-out 3.5s infinite;
 		text-shadow: 
 			0 0 5px #fff,
@@ -109,15 +101,8 @@ import WarningHUD from '../components/WarningHUD.astro';
 		}
 	}
 
-	main .hero-title-wrapper {
-		display: flex;
-		align-items: center;
-		gap: 2rem;
-		margin: 1rem 0 3rem;
-		position: relative;
-		opacity: 0;
+	.hero-title-wrapper {
 		animation: titleReveal 1s ease-out 3.2s forwards;
-		z-index: 1;
 	}
 
 	@keyframes titleReveal {
@@ -131,10 +116,7 @@ import WarningHUD from '../components/WarningHUD.astro';
 		}
 	}
 
-	main .title-line {
-		width: 60px;
-		height: 1px;
-		background: linear-gradient(90deg, transparent, var(--color-purple), transparent);
+	.title-line {
 		animation: lineExpand 1.5s ease-out 3.2s backwards;
 	}
 
@@ -143,16 +125,20 @@ import WarningHUD from '../components/WarningHUD.astro';
 			width: 0;
 		}
 		to {
-			width: 60px;
+			width: 4rem;
 		}
 	}
 
-	main .hero-title {
+	.title-line {
+		background: linear-gradient(90deg, transparent, var(--color-purple), transparent) !important;
+	}
+
+	.hero-title {
 		font-family: var(--font-smalltext) !important;
 		font-size: clamp(18px, 3vw, 24px) !important;
 		color: var(--color-purple) !important;
 		letter-spacing: 0.3em !important;
-		white-space: nowrap;
+		white-space: nowrap !important;
 		text-shadow: 
 			0 0 10px rgba(184,187,240,0.6),
 			0 0 20px rgba(184,187,240,0.4) !important;
@@ -170,43 +156,5 @@ import WarningHUD from '../components/WarningHUD.astro';
 				0 0 15px rgba(184,187,240,0.8),
 				0 0 30px rgba(184,187,240,0.6);
 		}
-	}
-
-	/* Sections pour permettre le scroll */
-	.scroll-section {
-		min-height: 100vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 4rem 2rem;
-		border-top: 1px solid rgba(184, 187, 240, 0.2);
-	}
-
-	.scroll-content {
-		text-align: center;
-		max-width: 800px;
-	}
-
-	.scroll-content h2 {
-		font-family: var(--font-title2);
-		font-size: clamp(32px, 6vw, 48px);
-		color: var(--color-purple);
-		margin-bottom: 2rem;
-		letter-spacing: 0.2em;
-	}
-
-	.scroll-content p {
-		font-family: var(--font-text);
-		font-size: clamp(16px, 2.5vw, 20px);
-		color: rgba(255, 255, 255, 0.7);
-		line-height: 1.6;
-	}
-
-	/* Fix pour HUD Clock dans la hero section */
-	.hud-clock-hero {
-		position: absolute !important;
-		bottom: 2rem;
-		right: 2rem;
-		z-index: 9999 !important;
 	}
 </style>

@@ -1,33 +1,15 @@
-<header class="hud-header">
-  <nav class="hud-nav">
-    <a href="#projets" class="nav-button">
-      <span class="button-text">PROJETS</span>
-      <span class="button-scan"></span>
+<header class="fixed top-0 left-0 right-0 h-20 flex justify-center items-center px-8 z-[100] bg-gradient-to-b from-black/80 to-transparent border-b border-white/10 opacity-0 -translate-y-full animate-[headerSlideDown_1s_ease-out_2s_forwards]">
+  <nav class="flex gap-8 opacity-0 animate-[fadeIn_1s_ease-out_2.8s_forwards]">
+    <a href="#projets" class="nav-button relative px-8 py-3 font-mono text-sm tracking-[0.2em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
+      <span class="relative z-[1]">PROJETS</span>
     </a>
-    <a href="/contact" class="nav-button">
-      <span class="button-text">CONTACT</span>
-      <span class="button-scan"></span>
+    <a href="/contact" class="nav-button relative px-8 py-3 font-mono text-sm tracking-[0.2em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
+      <span class="relative z-[1]">CONTACT</span>
     </a>
   </nav>
 </header>
 
 <style>
-  .hud-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 2rem;
-    z-index: 100;
-    background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    animation: headerSlideDown 1s ease-out 2s backwards;
-  }
-
   @keyframes headerSlideDown {
     from {
       transform: translateY(-100%);
@@ -39,25 +21,13 @@
     }
   }
 
-  .hud-nav {
-    display: flex;
-    gap: 2rem;
-    animation: fadeIn 1s ease-out 2.8s backwards;
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   .nav-button {
-    position: relative;
-    padding: 12px 32px;
-    font-family: var(--font-smalltext);
-    font-size: 14px;
-    letter-spacing: 0.2em;
-    color: white;
-    text-decoration: none;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.3);
     clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-    overflow: hidden;
-    transition: all 0.3s ease;
   }
 
   .nav-button::before {
@@ -71,45 +41,23 @@
     transition: left 0.5s ease;
   }
 
-  .nav-button:hover {
-    border-color: var(--color-purple);
-    box-shadow: 0 0 20px rgba(184,187,240,0.4);
-    transform: translateY(-2px);
-  }
-
   .nav-button:hover::before {
     left: 100%;
   }
 
-  .button-text {
-    position: relative;
-    z-index: 1;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
   @media (max-width: 768px) {
-    .hud-header {
+    header {
       height: 60px;
       padding: 0 1rem;
     }
 
-    .header-corner-left,
-    .header-corner-right {
-      width: 60px;
-      height: 60px;
-    }
-
-    .hud-nav {
+    nav {
       gap: 1rem;
     }
 
     .nav-button {
-      padding: 8px 16px;
-      font-size: 12px;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
     }
   }
 </style>

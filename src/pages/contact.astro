@@ -8,8 +8,7 @@ import HudHeader from '../components/HudHeader.astro';
 	<StarryBackground />
 	<HudHeader />
 	
-	<main class="contact-main">
-		<!-- Background HUD -->
+	<main class="min-h-screen pt-32 pb-16 px-8 relative z-10 flex justify-center items-center">
 		<div class="hud-background">
 			<svg width="1777" height="1253" viewBox="0 0 1777 1253" fill="none" xmlns="http://www.w3.org/2000/svg" class="background-svg">
 				<path d="M21.5 312.632V1223.71L42.4805 1251.6H1757.5V832.738V553.798L1735.98 520.384V44.3462L1703.7 21.1012H1088.81V31.7551L1061.38 44.3462H633.7L607.877 21.1012H42.4805V74.8552V285.513L21.5 312.632Z" stroke="white" stroke-width="1.07637"/>
@@ -75,69 +74,65 @@ import HudHeader from '../components/HudHeader.astro';
 			</svg>
 		</div>
 
-		<!-- Cadre HUD principal -->
-		<div class="hud-frame">
-			<!-- Titre CONTACT -->
-			<h1 class="contact-title">CONTACT</h1>
-			
-			<!-- Interface principale -->
-			<div class="contact-interface">
+		<div class="w-full max-w-6xl relative z-[2] p-8">
+			<h1 class="contact-title text-white text-center tracking-[0.3em] mb-8">CONTACT</h1>
+			<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 				<!-- Section gauche - Formulaire -->
-				<div class="form-section">
+				<div class="lg:col-span-2 flex flex-col">
 					<!-- Barre d'onglets -->
-					<div class="tab-bar">
-						<div class="tab-item active">VEUILLEZ TRANSMETTRE UN MESSAGE :</div>
-						<div class="tab-controls">
-							<span class="tab-label">PROJETS</span>
-							<span class="tab-label">RETOURS</span>
-							<span class="tab-label">QUESTIONS</span>
+					<div class="bg-[rgba(97,84,197,0.2)] border border-[rgba(97,84,197,0.5)] px-4 py-2 mb-4 flex justify-between items-center">
+						<div class="font-mono text-xs text-white tracking-wider">VEUILLEZ TRANSMETTRE UN MESSAGE :</div>
+						<div class="flex gap-8">
+							<span class="font-mono text-[10px] text-white/70 tracking-wider">PROJETS</span>
+							<span class="font-mono text-[10px] text-white/70 tracking-wider">RETOURS</span>
+							<span class="font-mono text-[10px] text-white/70 tracking-wider">QUESTIONS</span>
 						</div>
 					</div>
 					
 					<!-- Zone de formulaire violette -->
-					<div class="form-container">
-						<form class="contact-form">
-							<div class="form-row">
-								<div class="form-group">
-									<label>PRÉNOM</label>
-									<input type="text" name="prenom" required>
+					<div class="bg-gradient-to-br from-[rgba(97,84,197,0.3)] to-[rgba(150,46,185,0.3)] border border-[rgba(97,84,197,0.5)] p-8 flex-1">
+						<form class="flex flex-col gap-6 h-full">
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+								<div class="flex flex-col gap-2">
+									<label class="font-mono text-[11px] text-white tracking-wider uppercase">PRÉNOM</label>
+									<input type="text" name="prenom" required class="bg-white/90 border-none p-3 font-mono text-sm text-gray-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-[rgba(97,84,197,0.8)] focus:bg-white">
 								</div>
-								<div class="form-group">
-									<label>NOM</label>
-									<input type="text" name="nom" required>
+								<div class="flex flex-col gap-2">
+									<label class="font-mono text-[11px] text-white tracking-wider uppercase">NOM</label>
+									<input type="text" name="nom" required class="bg-white/90 border-none p-3 font-mono text-sm text-gray-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-[rgba(97,84,197,0.8)] focus:bg-white">
 								</div>
 							</div>
 							
-							<div class="form-group full-width">
-								<label>EMAIL</label>
-								<input type="email" name="email" required>
+							<div class="flex flex-col gap-2">
+								<label class="font-mono text-[11px] text-white tracking-wider uppercase">EMAIL</label>
+								<input type="email" name="email" required class="bg-white/90 border-none p-3 font-mono text-sm text-gray-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-[rgba(97,84,197,0.8)] focus:bg-white">
 							</div>
 							
-							<div class="form-group full-width">
-								<label>SUJET</label>
-								<input type="text" name="sujet" required>
+							<div class="flex flex-col gap-2">
+								<label class="font-mono text-[11px] text-white tracking-wider uppercase">SUJET</label>
+								<input type="text" name="sujet" required class="bg-white/90 border-none p-3 font-mono text-sm text-gray-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-[rgba(97,84,197,0.8)] focus:bg-white">
 							</div>
 							
-							<div class="form-group full-width">
-								<label>MESSAGE</label>
-								<textarea name="message" rows="6" required></textarea>
+							<div class="flex flex-col gap-2">
+								<label class="font-mono text-[11px] text-white tracking-wider uppercase">MESSAGE</label>
+								<textarea name="message" rows="6" required class="bg-white/90 border-none p-3 font-mono text-sm text-gray-800 rounded-sm resize-none focus:outline-none focus:ring-2 focus:ring-[rgba(97,84,197,0.8)] focus:bg-white"></textarea>
 							</div>
 							
-							<button type="submit" class="submit-button">
-								<span class="button-arrows">⟨</span>
+							<button type="submit" class="bg-transparent border-2 border-white text-white px-8 py-4 font-mono text-xs tracking-[0.2em] cursor-pointer mt-auto self-center flex items-center gap-2 transition-all duration-300 hover:bg-white hover:text-gray-800">
+								<span class="text-base">⟨</span>
 								ENVOYER
-								<span class="button-arrows">⟩</span>
+								<span class="text-base">⟩</span>
 							</button>
 						</form>
 					</div>
 				</div>
 				
 				<!-- Section droite - Éléments HUD -->
-				<div class="hud-elements">
+				<div class="flex flex-col gap-8">
 					<!-- Globe wireframe -->
-					<div class="globe-container">
-						<div class="globe-wireframe">
-							<svg viewBox="0 0 200 200" class="wireframe-svg">
+					<div class="border border-white/30 bg-black/50 p-4 text-center">
+						<div class="mb-4">
+							<svg viewBox="0 0 200 200" class="wireframe-svg w-32 h-32 mx-auto">
 								<!-- Cercle extérieur -->
 								<circle cx="100" cy="100" r="90" fill="none" stroke="white" stroke-width="1"/>
 								<!-- Lignes de latitude -->
@@ -149,21 +144,21 @@ import HudHeader from '../components/HudHeader.astro';
 								<line x1="100" y1="10" x2="100" y2="190" stroke="white" stroke-width="1"/>
 							</svg>
 						</div>
-						<div class="globe-label">LOCALISATION GÉOGRAPHIQUE</div>
+						<div class="font-mono text-[10px] text-white/70 tracking-wider">LOCALISATION GÉOGRAPHIQUE</div>
 					</div>
 					
 					<!-- Graphique en barres -->
-					<div class="chart-container">
-						<div class="bar-chart">
-							<div class="bar" style="height: 60%"></div>
-							<div class="bar" style="height: 40%"></div>
-							<div class="bar" style="height: 80%"></div>
-							<div class="bar" style="height: 90%"></div>
-							<div class="bar" style="height: 70%"></div>
-							<div class="bar" style="height: 95%"></div>
-							<div class="bar" style="height: 85%"></div>
-							<div class="bar" style="height: 60%"></div>
-							<div class="bar" style="height: 75%"></div>
+					<div class="border border-white/30 bg-black/50 p-4 h-40">
+						<div class="flex items-end gap-1 h-full">
+							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 60%"></div>
+							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 40%"></div>
+							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 80%"></div>
+							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 90%"></div>
+							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 70%"></div>
+							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 95%"></div>
+							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 85%"></div>
+							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 60%"></div>
+							<div class="bar flex-1 bg-gradient-to-t from-[#962EB9] to-[#B8BBF0]" style="height: 75%"></div>
 						</div>
 					</div>
 				</div>
@@ -173,22 +168,12 @@ import HudHeader from '../components/HudHeader.astro';
 </Layout>
 
 <style>
-	.contact-main {
-		min-height: 100vh;
-		padding: 8rem 2rem 4rem;
-		position: relative;
-		z-index: 10;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
 	/* Background HUD */
 	.hud-background {
 		position: fixed;
 		top: 120px;
-		left: 0;
-		width: 100vw;
+		left: -10%;
+		width: 120vw;
 		height: calc(100vh - 120px);
 		z-index: 1;
 		pointer-events: none;
@@ -198,195 +183,20 @@ import HudHeader from '../components/HudHeader.astro';
 	.background-svg {
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
-		opacity: 0.6;
-		filter: brightness(1.5) contrast(1.2);
+		object-fit: fill;
+		opacity: 1;
+		filter: brightness(1.8) contrast(1.5);
 	}
 
-	/* Cadre HUD principal */
-	.hud-frame {
-		width: 100%;
-		max-width: 1200px;
-		min-height: 600px;
-		background: transparent;
-		border: 2px solid rgba(255, 255, 255, 0.3);
-		position: relative;
-		padding: 2rem;
-		clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 30px 100%, 0 calc(100% - 30px));
-		z-index: 2;
-	}
-
-	.hud-frame::before {
-		content: '';
-		position: absolute;
-		top: -2px;
-		left: -2px;
-		right: -2px;
-		bottom: -2px;
-		background: transparent;
-		clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 30px 100%, 0 calc(100% - 30px));
-		z-index: -1;
-	}
-
-	/* Titre CONTACT */
+	/* Titre CONTACT avec police custom */
 	.contact-title {
-		font-family: var(--font-title2);
-		font-size: clamp(32px, 6vw, 48px);
-		color: white;
-		text-align: center;
-		letter-spacing: 0.3em;
-		margin-bottom: 2rem;
+		font-family: var(--font-title1);
+		font-size: clamp(48px, 8vw, 72px);
 		text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 	}
 
-	/* Interface principale */
-	.contact-interface {
-		display: grid;
-		grid-template-columns: 2fr 1fr;
-		gap: 2rem;
-		height: 100%;
-	}
-
-	/* Section formulaire */
-	.form-section {
-		display: flex;
-		flex-direction: column;
-	}
-
-	/* Barre d'onglets */
-	.tab-bar {
-		background: rgba(97, 84, 197, 0.2);
-		border: 1px solid rgba(97, 84, 197, 0.5);
-		padding: 0.5rem 1rem;
-		margin-bottom: 1rem;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.tab-item {
-		font-family: var(--font-smalltext);
-		font-size: 12px;
-		color: white;
-		letter-spacing: 0.1em;
-	}
-
-	.tab-controls {
-		display: flex;
-		gap: 2rem;
-	}
-
-	.tab-label {
-		font-family: var(--font-smalltext);
-		font-size: 10px;
-		color: rgba(255, 255, 255, 0.7);
-		letter-spacing: 0.1em;
-	}
-
-	/* Container formulaire violet */
-	.form-container {
-		background: linear-gradient(135deg, rgba(97, 84, 197, 0.3), rgba(150, 46, 185, 0.3));
-		border: 1px solid rgba(97, 84, 197, 0.5);
-		padding: 2rem;
-		flex: 1;
-	}
-
-	.contact-form {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-		height: 100%;
-	}
-
-	.form-row {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1rem;
-	}
-
-	.form-group {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.form-group.full-width {
-		grid-column: 1 / -1;
-	}
-
-	.form-group label {
-		font-family: var(--font-smalltext);
-		font-size: 11px;
-		color: white;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-	}
-
-	.form-group input,
-	.form-group textarea {
-		background: rgba(255, 255, 255, 0.9);
-		border: none;
-		padding: 0.8rem;
-		font-family: var(--font-text);
-		font-size: 14px;
-		color: #333;
-		border-radius: 2px;
-	}
-
-	.form-group input:focus,
-	.form-group textarea:focus {
-		outline: 2px solid rgba(97, 84, 197, 0.8);
-		background: white;
-	}
-
-	.submit-button {
-		background: transparent;
-		border: 2px solid white;
-		color: white;
-		padding: 1rem 2rem;
-		font-family: var(--font-smalltext);
-		font-size: 12px;
-		letter-spacing: 0.2em;
-		cursor: pointer;
-		margin-top: auto;
-		align-self: center;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		transition: all 0.3s ease;
-	}
-
-	.submit-button:hover {
-		background: white;
-		color: #333;
-	}
-
-	.button-arrows {
-		font-size: 16px;
-	}
-
-	/* Section éléments HUD */
-	.hud-elements {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-	}
-
-	/* Globe wireframe */
-	.globe-container {
-		border: 1px solid rgba(255, 255, 255, 0.3);
-		background: rgba(0, 0, 0, 0.5);
-		padding: 1rem;
-		text-align: center;
-	}
-
-	.globe-wireframe {
-		margin-bottom: 1rem;
-	}
-
+	/* Animations */
 	.wireframe-svg {
-		width: 150px;
-		height: 150px;
 		animation: globeRotate 10s linear infinite;
 	}
 
@@ -395,33 +205,8 @@ import HudHeader from '../components/HudHeader.astro';
 		to { transform: rotateY(360deg); }
 	}
 
-	.globe-label {
-		font-family: var(--font-smalltext);
-		font-size: 10px;
-		color: rgba(255, 255, 255, 0.7);
-		letter-spacing: 0.1em;
-	}
-
-	/* Graphique en barres */
-	.chart-container {
-		border: 1px solid rgba(255, 255, 255, 0.3);
-		background: rgba(0, 0, 0, 0.5);
-		padding: 1rem;
-		height: 150px;
-	}
-
-	.bar-chart {
-		display: flex;
-		align-items: flex-end;
-		gap: 4px;
-		height: 100%;
-	}
-
 	.bar {
-		flex: 1;
-		background: linear-gradient(to top, #962EB9, #B8BBF0);
 		animation: barPulse 2s ease-in-out infinite;
-		animation-delay: calc(var(--i) * 0.1s);
 	}
 
 	.bar:nth-child(1) { animation-delay: 0s; }
@@ -437,24 +222,5 @@ import HudHeader from '../components/HudHeader.astro';
 	@keyframes barPulse {
 		0%, 100% { opacity: 0.7; }
 		50% { opacity: 1; }
-	}
-
-	/* Responsive */
-	@media (max-width: 768px) {
-		.contact-interface {
-			grid-template-columns: 1fr;
-		}
-		
-		.form-row {
-			grid-template-columns: 1fr;
-		}
-		
-		.contact-main {
-			padding: 6rem 1rem 2rem;
-		}
-		
-		.hud-frame {
-			padding: 1rem;
-		}
 	}
 </style>
