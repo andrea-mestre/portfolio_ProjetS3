@@ -44,7 +44,7 @@ import EarthWhiteSvg from '../assets/svg/earthwhite.svg?raw';
 						
 						<!-- Coordonnées géographiques en bas du cadre -->
 						<div class="absolute bottom-4.5 left-1/2 transform -translate-x-1/2">
-							<div class="text-[13 px] tracking-wide text-center whitespace-nowrap" style="font-family: var(--font-smalltext); color: var(--color-pink);">
+							<div class="coordinates-text text-[14 px] tracking-wide text-center whitespace-nowrap" style="font-family: var(--font-smalltext); color: var(--color-pink);">
 								46° 22' 30.212" N 72° 33' 28.962" W
 							</div>
 						</div>
@@ -101,6 +101,35 @@ import EarthWhiteSvg from '../assets/svg/earthwhite.svg?raw';
 		width: 100%;
 		height: 100%;
 		filter: brightness(1.2);
+	}
+
+	/* Effet de scintillement néon pour les coordonnées */
+	.coordinates-text {
+		text-shadow: 
+			0 0 5px var(--color-pink),
+			0 0 10px var(--color-pink),
+			0 0 15px var(--color-pink),
+			0 0 20px var(--color-pink);
+		animation: neonFlicker 2s ease-in-out infinite alternate;
+	}
+
+	@keyframes neonFlicker {
+		0%, 18%, 22%, 25%, 53%, 57%, 100% {
+			text-shadow: 
+				0 0 5px var(--color-pink),
+				0 0 10px var(--color-pink),
+				0 0 15px var(--color-pink),
+				0 0 20px var(--color-pink),
+				0 0 35px var(--color-pink),
+				0 0 40px var(--color-pink);
+		}
+		20%, 24%, 55% {
+			text-shadow: 
+				0 0 2px var(--color-pink),
+				0 0 5px var(--color-pink),
+				0 0 8px var(--color-pink),
+				0 0 12px var(--color-pink);
+		}
 	}
 
 	.bar {
