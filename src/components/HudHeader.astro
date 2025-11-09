@@ -1,5 +1,5 @@
-<header class="fixed top-0 left-0 right-0 h-20 flex justify-center items-center px-8 z-[100] bg-gradient-to-b from-black/80 to-transparent border-b border-white/10 opacity-0 -translate-y-full animate-[headerSlideDown_1s_ease-out_2s_forwards]">
-  <nav class="flex gap-8 opacity-0 animate-[fadeIn_1s_ease-out_2.8s_forwards]">
+<header class="fixed top-0 left-0 right-0 h-20 flex justify-center items-center px-8 z-[100] bg-gradient-to-b from-black/80 to-transparent border-b border-white/10 header-slide">
+  <nav class="flex gap-8 nav-fade">
     <a href="#projets" class="nav-button relative px-8 py-3 font-mono text-sm tracking-[0.2em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
       <span class="relative z-[1]">PROJETS</span>
     </a>
@@ -10,6 +10,17 @@
 </header>
 
 <style>
+  .header-slide {
+    opacity: 0;
+    transform: translateY(-100%);
+    animation: headerSlideDown 1s ease-out 2s forwards;
+  }
+
+  .nav-fade {
+    opacity: 0;
+    animation: fadeIn 1s ease-out 2.8s forwards;
+  }
+
   @keyframes headerSlideDown {
     from {
       transform: translateY(-100%);
