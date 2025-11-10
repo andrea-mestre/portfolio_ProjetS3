@@ -1,54 +1,122 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import StarryBackground from '../components/StarryBackground.astro';
-import HudHeader from '../components/HudHeader.astro';
-import BackgroundHUD from '../components/BackgroundHUD.astro';
+import Layout from "../layouts/Layout.astro";
+import StarryBackground from "../components/StarryBackground.astro";
+import HudHeader from "../components/HudHeader.astro";
+import BackgroundHUD from "../components/BackgroundHUD.astro";
 ---
 
 <Layout title="Mentions Légales - Andrea Mestre">
 	<StarryBackground />
 	<HudHeader currentPage="mentions-legales" />
 	<BackgroundHUD />
-	
-	<main class="min-h-screen pt-32 pb-16 px-8 relative z-10 flex flex-col justify-start items-center">
+
+	<main
+		class="min-h-screen pt-32 pb-16 px-8 relative z-10 flex flex-col justify-start items-center"
+	>
 		<div class="w-full max-w-6xl relative p-8">
 			<div class="flex justify-center mb-12">
-				<h1 class="text-white tracking-wide whitespace-nowrap drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" style="font-family: var(--font-title1); font-size: var(--size-title1);">MENTIONS LÉGALES</h1>
+				<h1
+					class="text-white tracking-wide whitespace-nowrap drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+					style="font-family: var(--font-title1); font-size: var(--size-title1);"
+				>
+					MENTIONS LÉGALES
+				</h1>
 			</div>
-			
-			<div class="text-white space-y-12" style="font-family: var(--font-text); line-height: 1.6;">
+
+			<div
+				class="text-white space-y-16"
+				style="font-family: var(--font-text); line-height: 1.6;"
+			>
 				<!-- Section 1 - Éditeur du site -->
-				<section class="mb-12">
-					<h2 class="text-3xl font-bold mb-6 section-neon" style="font-family: var(--font-title2); color: var(--color-darkpurple);">1. ÉDITEUR DU SITE</h2>
+				<section class="mb-19">
+					<h2
+						class="text-5xl font-bold mb-6 section-neon"
+						style="font-family: var(--font-title2); color: var(--color-darkpurple);"
+					>
+						1. ÉDITEUR DU SITE
+					</h2>
 					<div class="pl-8 border-l-2 border-[#B8BBF0]">
-						<p class="mb-4 text-[#E5E5E5] text-lg">Le site est édité par Andrea Mestre, étudiante, projet réalisé dans le cadre scolaire.</p>
-						<p class="mb-4 text-[#E5E5E5] text-lg">Email : andrea.mestre@thegraphique.com</p>
-						<p class="text-[#E5E5E5] text-lg">Il s'agit d'un site portfolio personnel, à but non commercial, destiné à présenter différents projets réalisés par l'auteur dans les domaines web, applicatif, graphique et audiovisuel.</p>
+						<p class="mb-4 text-[#E5E5E5] text-lg">
+							Le site est édité par Andréa Mestre, étudiante,
+							projet réalisé dans le cadre scolaire.
+						</p>
+						<p class="mb-4 text-[#E5E5E5] text-lg">
+							Email : andrea.mestre4510@gmail.com
+						</p>
+						<p class="text-[#E5E5E5] text-lg">
+							Le site constitue un portfolio personnel, à but non
+							commercial, destiné à présenter différents projets
+							réalisés par l'auteur dans les domaines web,
+							applicatif, graphique et audiovisuel.
+						</p>
 					</div>
 				</section>
 
-				<!-- Section 2 - Hébergement -->
-				<section class="mb-12">
-					<h2 class="text-3xl font-bold mb-6 section-neon" style="font-family: var(--font-title2); color: var(--color-darkpurple);">2. HÉBERGEMENT</h2>
+				<section class="mb-19">
+					<h2
+						class="text-5xl font-bold mb-6 section-neon"
+						style="font-family: var(--font-title2); color: var(--color-darkpurple);"
+					>
+						2. HÉBERGEMENT
+					</h2>
 					<div class="pl-8 border-l-2 border-[#B8BBF0]">
-						<p class="mb-4 text-[#E5E5E5] text-lg">Le site est hébergé par : Infomaniak Network SA Rue Eugène-Marziano 25, 1227 Genève, Suisse</p>
-						<p class="text-[#E5E5E5] text-lg">Site : www.infomaniak.com</p>
+						<p class="mb-4 text-[#E5E5E5] text-lg">
+							Le site est hébergé par : Infomaniak Network SA Rue
+							Eugène-Marziano 25, 1227 Genève, Suisse Site :
+						</p>
+						<a
+							class="text-[#E5E5E5] text-lg"
+							href="https://www.infomaniak.com"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							www.infomaniak.com
+						</a>
 					</div>
 				</section>
 
-				<!-- Section 3 - Propriété intellectuelle -->
-				<section class="mb-12">
-					<h2 class="text-3xl font-bold mb-6 section-neon" style="font-family: var(--font-title2); color: var(--color-darkpurple);">3. PROPRIÉTÉ INTELLECTUELLE</h2>
+				<section class="mb-19">
+					<h2
+						class="text-5xl font-bold mb-6 section-neon"
+						style="font-family: var(--font-title2); color: var(--color-darkpurple);"
+					>
+						3. PROPRIÉTÉ INTELLECTUELLE
+					</h2>
 					<div class="pl-8 border-l-2 border-[#B8BBF0]">
-						<p class="text-[#E5E5E5] text-lg">L'ensemble des contenus présents sur ce site (textes, images, vidéos, animations, graphismes, logos, code source, etc.) est la propriété exclusive de Andrea Mestre, sauf mention contraire explicite. Toute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, de ces différents éléments est strictement interdite sans l'accord préalable de l'auteur. Toute reproduction à l'identique, par quelque procédé que ce soit, constitue une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la propriété intellectuelle.</p>
+						<p class="text-[#E5E5E5] text-lg">
+							L'ensemble des contenus présents sur ce site
+							(textes, images, vidéos, animations, graphismes,
+							logos, code source, etc.) est la propriété exclusive
+							de Andréa Mestre, sauf mention contraire. Toute
+							reproduction, représentation, modification,
+							publication ou adaptation, totale ou partielle, est
+							interdite sans accord préalable de l'auteur. Toute
+							reproduction à l'identique, par quelque procédé que
+							ce soit, constitue une contrefaçon sanctionnée par
+							les articles L.335-2 et suivants du Code de la
+							propriété intellectuelle.
+						</p>
 					</div>
 				</section>
 
 				<!-- Section 4 - Données personnelles -->
-				<section class="mb-12">
-					<h2 class="text-3xl font-bold mb-6 section-neon" style="font-family: var(--font-title2); color: var(--color-darkpurple);">4. DONNÉES PERSONNELLES</h2>
+				<section class="mb-19">
+					<h2
+						class="text-5xl font-bold mb-6 section-neon"
+						style="font-family: var(--font-title2); color: var(--color-darkpurple);"
+					>
+						4. DONNÉES PERSONNELLES
+					</h2>
 					<div class="pl-8 border-l-2 border-[#B8BBF0]">
-						<p class="text-[#E5E5E5] text-lg">Aucune donnée personnelle n'est collectée à des fins commerciales ou statistiques. Le formulaire de contact permet uniquement d'envoyer un message directement par email à l'auteur. Les messages ne sont pas stockés sur le site. Aucun cookie de tracking ou outils tiers (Analytics, réseaux sociaux, etc.) n'est utilisé.</p>
+						<p class="text-[#E5E5E5] text-lg">
+							Aucune donnée personnelle n'est collectée à des fins
+							commerciales ou statistiques. Le formulaire de
+							contact permet uniquement d'envoyer un message
+							directement par email à l'éditeur. Les messages ne
+							sont pas stockés sur le site. Aucun cookie de
+							traçage ni outil tiers (Analytics, reCAPTCHA, etc.)
+							n'est utilisé.
+						</p>
 					</div>
 				</section>
 			</div>
@@ -57,25 +125,25 @@ import BackgroundHUD from '../components/BackgroundHUD.astro';
 </Layout>
 
 <style>
-	/* Effet néon pour les titres H2 - inspiré du HudClock */
 	.section-neon {
-		text-shadow: 
+		text-shadow:
 			0 0 10px var(--color-darkpurple),
 			0 0 20px var(--color-darkpurple),
-			0 0 30px var(--color-darkpurple);
+			0 0 20px var(--color-darkpurple);
 		animation: neonBreath 4s ease-in-out infinite;
 		transition: all 0.3s ease;
 	}
 
 	@keyframes neonBreath {
-		0%, 100% {
-			text-shadow: 
+		0%,
+		100% {
+			text-shadow:
 				0 0 10px var(--color-darkpurple),
 				0 0 20px var(--color-darkpurple),
 				0 0 30px var(--color-darkpurple);
 		}
 		50% {
-			text-shadow: 
+			text-shadow:
 				0 0 15px var(--color-darkpurple),
 				0 0 25px var(--color-darkpurple),
 				0 0 35px var(--color-darkpurple),
@@ -84,7 +152,7 @@ import BackgroundHUD from '../components/BackgroundHUD.astro';
 	}
 
 	.section-neon:hover {
-		text-shadow: 
+		text-shadow:
 			0 0 15px var(--color-darkpurple),
 			0 0 25px var(--color-darkpurple),
 			0 0 35px var(--color-darkpurple),
@@ -97,25 +165,25 @@ import BackgroundHUD from '../components/BackgroundHUD.astro';
 		.section-neon {
 			font-size: 1.5rem;
 		}
-		
+
 		.pl-8 {
 			padding-left: 1.5rem;
 		}
-		
+
 		.text-lg {
 			font-size: 1rem;
 		}
 	}
-	
+
 	@media (max-width: 480px) {
 		.section-neon {
 			font-size: 1.25rem;
 		}
-		
+
 		.pl-8 {
 			padding-left: 1rem;
 		}
-		
+
 		.text-lg {
 			font-size: 0.95rem;
 		}
