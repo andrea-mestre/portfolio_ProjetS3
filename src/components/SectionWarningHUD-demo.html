@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section Warning HUD - Exemple d'utilisation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --color-background: #000000;
+            --color-darkpurple: #6154C5;
+            --color-pink: #962EB9;
+            --color-purple: #B8BBF0;
+            --color-white: #FFFFFF;
+            
+            --font-title2: 'Arial', sans-serif;
+            --font-text: 'Courier New', monospace;
+        }
+
+        body {
+            background: var(--color-background);
+            color: var(--color-white);
+            font-family: var(--font-text);
+        }
+
+        /* Styles pour les sections avec révélation animée */
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            filter: blur(5px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .section-revealed {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            animation: sectionReveal 1s ease-out forwards;
+        }
+
+        @keyframes sectionReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+                filter: blur(5px);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateY(-10px) scale(1.02);
+                filter: blur(2px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        .section-revealed .content-item {
+            animation: contentItemReveal 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-revealed .content-item:nth-child(1) { animation-delay: 0.1s; }
+        .section-revealed .content-item:nth-child(2) { animation-delay: 0.2s; }
+        .section-revealed .content-item:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes contentItemReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Section d'introduction -->
+    <section class="min-h-screen flex items-center justify-center p-8">
+        <div class="text-center max-w-4xl">
+            <h1 class="text-6xl font-bold mb-8" style="color: var(--color-purple);">
+                DÉMO SECTION WARNING
+            </h1>
+            <p class="text-xl text-gray-300 mb-8">
+                Scrollez vers le bas pour déclencher l'avertissement spatial
+            </p>
+            <div class="animate-bounce">
+                <svg class="w-8 h-8 mx-auto" style="color: var(--color-purple);" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 3a1 1 0 00-1 1v10.586l-3.293-3.293a1 1 0 10-1.414 1.414l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414L11 14.586V4a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section normale -->
+    <section class="min-h-screen flex items-center justify-center p-8 border-t" style="border-color: rgba(184,187,240,0.2);">
+        <div class="text-center max-w-4xl">
+            <h2 class="text-4xl font-bold mb-8" style="color: var(--color-purple);">
+                SECTION NORMALE
+            </h2>
+            <p class="text-lg text-gray-300">
+                Cette section ne déclenche aucun avertissement.
+                Continuez à scroller pour atteindre la zone sécurisée.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section sécurisée qui déclenche l'avertissement -->
+    <section class="secure-section section-hidden min-h-screen flex items-center justify-center p-8 border-t relative" style="border-color: rgba(184,187,240,0.2);">
+        <div class="text-center max-w-4xl">
+            <h2 class="content-item text-4xl font-bold mb-8" style="color: var(--color-purple);">
+                ZONE SÉCURISÉE
+            </h2>
+            <div class="content-item">
+                <p class="text-lg text-gray-300 mb-6">
+                    Cette section est protégée par un système d'avertissement spatial.
+                    Le contenu a été révélé après vérification de sécurité.
+                </p>
+            </div>
+            <div class="content-item">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <div class="p-6 border rounded-lg backdrop-blur-sm" style="border-color: rgba(184,187,240,0.3);">
+                        <h3 class="text-xl mb-2" style="color: var(--color-purple);">Données Sensibles</h3>
+                        <p class="text-gray-400 text-sm">Informations protégées</p>
+                    </div>
+                    <div class="p-6 border rounded-lg backdrop-blur-sm" style="border-color: rgba(184,187,240,0.3);">
+                        <h3 class="text-xl mb-2" style="color: var(--color-purple);">Accès Autorisé</h3>
+                        <p class="text-gray-400 text-sm">Vérification complète</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Boutons de contrôle pour les tests -->
+    <div class="fixed bottom-4 right-4 space-y-2">
+        <button 
+            id="trigger-warning" 
+            class="block px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded text-white font-bold transition-colors"
+        >
+            Déclencher Manuellement
+        </button>
+        <button 
+            id="reset-warning" 
+            class="block px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded text-white font-bold transition-colors"
+        >
+            Réinitialiser
+        </button>
+    </div>
+
+    <!-- Section Warning HUD Component -->
+    <div class="section-warning-overlay" id="section-warning-overlay">
+        <div class="warning-container">
+            <!-- Cercles de scanner spatial -->
+            <div class="scanner-ring ring-1"></div>
+            <div class="scanner-ring ring-2"></div>
+            <div class="scanner-ring ring-3"></div>
+            
+            <!-- Élément d'avertissement principal -->
+            <div class="warning-box">
+                <div class="warning-header">
+                    <div class="warning-icon">
+                        <div class="triangle-warning">
+                            <span class="exclamation">!</span>
+                        </div>
+                    </div>
+                    <div class="warning-text">
+                        <h3 class="warning-title">ZONE RESTREINTE</h3>
+                        <p class="warning-subtitle">ACCÈS EN COURS DE VÉRIFICATION</p>
+                    </div>
+                </div>
+                
+                <!-- Barre de progression -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">ANALYSE: <span id="progress-percentage">0</span>%</div>
+                </div>
+                
+                <!-- Éléments HUD additionnels -->
+                <div class="hud-corners">
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                </div>
+            </div>
+            
+            <!-- Particules d'énergie -->
+            <div class="energy-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .section-warning-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .section-warning-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .warning-container {
+            position: relative;
+            width: clamp(320px, 80vw, 600px);
+            height: clamp(250px, 50vh, 400px);
+        }
+
+        /* Anneaux de scanner */
+        .scanner-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid transparent;
+            border-radius: 50%;
+            opacity: 0;
+            animation: scannerPulse 2s ease-out infinite;
+        }
+
+        .ring-1 {
+            width: 150px;
+            height: 150px;
+            border-color: var(--color-purple);
+            animation-delay: 0s;
+        }
+
+        .ring-2 {
+            width: 200px;
+            height: 200px;
+            border-color: var(--color-darkpurple);
+            animation-delay: 0.3s;
+        }
+
+        .ring-3 {
+            width: 250px;
+            height: 250px;
+            border-color: #B8BBF0;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes scannerPulse {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        /* Boîte d'avertissement principale */
+        .warning-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, rgba(97, 84, 197, 0.2), rgba(184, 187, 240, 0.1));
+            border: 2px solid var(--color-purple);
+            border-radius: 8px;
+            padding: 2rem;
+            min-width: 300px;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 30px rgba(97, 84, 197, 0.5),
+                inset 0 0 20px rgba(184, 187, 240, 0.1);
+            animation: warningGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes warningGlow {
+            0% {
+                box-shadow: 
+                    0 0 30px rgba(97, 84, 197, 0.5),
+                    inset 0 0 20px rgba(184, 187, 240, 0.1);
+            }
+            100% {
+                box-shadow: 
+                    0 0 50px rgba(97, 84, 197, 0.8),
+                    inset 0 0 30px rgba(184, 187, 240, 0.2);
+            }
+        }
+
+        /* En-tête d'avertissement */
+        .warning-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .warning-icon {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+
+        .triangle-warning {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: trianglePulse 1s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .exclamation {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-top: 10px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: exclamationBlink 0.8s ease-in-out infinite;
+        }
+
+        @keyframes trianglePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes exclamationBlink {
+            0%, 50%, 100% {
+                opacity: 1;
+            }
+            25%, 75% {
+                opacity: 0.3;
+            }
+        }
+
+        .warning-text {
+            flex: 1;
+        }
+
+        .warning-title {
+            font-family: var(--font-title2);
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.6);
+            animation: textFlicker 2s ease-in-out infinite;
+        }
+
+        .warning-subtitle {
+            font-family: var(--font-text);
+            font-size: 0.9rem;
+            color: #B8BBF0;
+            margin: 0;
+            letter-spacing: 0.05em;
+            opacity: 0.8;
+        }
+
+        @keyframes textFlicker {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255, 107, 107, 0.6);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 107, 107, 0.9);
+            }
+        }
+
+        /* Barre de progression */
+        .progress-container {
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(184, 187, 240, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--color-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-purple), #B8BBF0);
+            width: 0%;
+            border-radius: 4px;
+            animation: progressAnimation 3s ease-out forwards;
+            box-shadow: 0 0 10px var(--color-purple);
+        }
+
+        @keyframes progressAnimation {
+            0% {
+                width: 0%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        .progress-text {
+            font-family: var(--font-text);
+            font-size: 0.8rem;
+            color: #B8BBF0;
+            text-align: center;
+            letter-spacing: 0.1em;
+        }
+
+        /* Coins HUD */
+        .hud-corners {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            pointer-events: none;
+        }
+
+        .corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-purple);
+            animation: cornerPulse 2s ease-in-out infinite;
+        }
+
+        .corner-tl {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-tr {
+            top: 0;
+            right: 0;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-bl {
+            bottom: 0;
+            left: 0;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-br {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
+        }
+
+        @keyframes cornerPulse {
+            0%, 100% {
+                opacity: 0.5;
+                border-color: var(--color-purple);
+            }
+            50% {
+                opacity: 1;
+                border-color: #B8BBF0;
+                box-shadow: 0 0 5px var(--color-purple);
+            }
+        }
+
+        /* Particules d'énergie */
+        .energy-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--color-purple);
+            border-radius: 50%;
+            animation: particleFloat 3s ease-in-out infinite;
+            box-shadow: 0 0 6px var(--color-purple);
+        }
+
+        .particle:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            top: 60%;
+            left: 80%;
+            animation-delay: 0.6s;
+        }
+
+        .particle:nth-child(3) {
+            top: 80%;
+            left: 20%;
+            animation-delay: 1.2s;
+        }
+
+        .particle:nth-child(4) {
+            top: 30%;
+            left: 90%;
+            animation-delay: 1.8s;
+        }
+
+        .particle:nth-child(5) {
+            top: 10%;
+            left: 60%;
+            animation-delay: 2.4s;
+        }
+
+        @keyframes particleFloat {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .warning-box {
+                padding: 1.5rem;
+                min-width: 280px;
+            }
+
+            .warning-title {
+                font-size: 1.2rem;
+            }
+
+            .warning-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .exclamation {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+
+    <script>
+        class SectionWarningHUD {
+            constructor(options) {
+                this.options = {
+                    triggerOffset: 50,
+                    warningDuration: 3000,
+                    contentRevealDelay: 300,
+                    ...options
+                };
+
+                this.overlay = document.getElementById('section-warning-overlay');
+                this.progressPercentage = document.getElementById('progress-percentage');
+                this.isActive = false;
+                
+                this.init();
+            }
+
+            init() {
+                window.addEventListener('scroll', this.handleScroll.bind(this));
+                
+                // Boutons de contrôle
+                document.getElementById('trigger-warning')?.addEventListener('click', () => {
+                    this.trigger();
+                });
+                
+                document.getElementById('reset-warning')?.addEventListener('click', () => {
+                    this.reset();
+                });
+            }
+
+            handleScroll() {
+                if (this.isActive) return;
+
+                const targetSection = document.querySelector(this.options.targetSection);
+                if (!targetSection) return;
+
+                const rect = targetSection.getBoundingClientRect();
+                const triggerPoint = window.innerHeight - this.options.triggerOffset;
+
+                if (rect.top <= triggerPoint && rect.bottom >= 0) {
+                    this.showWarning();
+                }
+            }
+
+            showWarning() {
+                if (this.isActive || !this.overlay) return;
+
+                this.isActive = true;
+                this.overlay.classList.add('active');
+
+                this.animateProgress();
+
+                setTimeout(() => {
+                    this.hideWarning();
+                }, this.options.warningDuration);
+            }
+
+            animateProgress() {
+                if (!this.progressPercentage) return;
+
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 15 + 5;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                    }
+                    this.progressPercentage.textContent = Math.round(progress).toString();
+                }, 100);
+            }
+
+            hideWarning() {
+                if (!this.overlay) return;
+
+                this.overlay.classList.remove('active');
+
+                setTimeout(() => {
+                    this.revealSectionContent();
+                    this.isActive = false;
+                }, this.options.contentRevealDelay);
+            }
+
+            revealSectionContent() {
+                const targetSection = document.querySelector(this.options.targetSection);
+                if (!targetSection) return;
+
+                targetSection.classList.remove('section-hidden');
+                targetSection.classList.add('section-revealed');
+
+                const event = new CustomEvent('sectionRevealed', {
+                    detail: { section: this.options.targetSection }
+                });
+                window.dispatchEvent(event);
+            }
+
+            trigger() {
+                if (!this.isActive) {
+                    this.showWarning();
+                }
+            }
+
+            reset() {
+                this.isActive = false;
+                if (this.overlay) {
+                    this.overlay.classList.remove('active');
+                }
+                
+                const targetSection = document.querySelector(this.options.targetSection);
+                if (targetSection) {
+                    targetSection.classList.remove('section-revealed');
+                    targetSection.classList.add('section-hidden');
+                }
+                
+                if (this.progressPercentage) {
+                    this.progressPercentage.textContent = '0';
+                }
+            }
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            const warningHUD = new SectionWarningHUD({
+                targetSection: '.secure-section',
+                triggerOffset: 100,
+                warningDuration: 3000,
+                contentRevealDelay: 500
+            });
+
+            // Écouter l'événement de révélation
+            window.addEventListener('sectionRevealed', (event) => {
+                console.log('Section révélée:', event.detail.section);
+            });
+
+            window.sectionWarningHUD = warningHUD;
+        });
+    </script>
+</body>
+</html>
