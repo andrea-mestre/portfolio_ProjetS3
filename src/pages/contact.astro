@@ -17,9 +17,7 @@ import EarthWhiteSvg from '../assets/svg/earthwhite.svg?raw';
 	<main class="min-h-screen pt-32 pb-16 px-8 relative z-10 flex justify-center items-center">
 
 		<div class="w-full max-w-6xl relative p-8">
-			<h1 class="contact-title text-white text-center tracking-wide mb-8">CONTACT</h1>
-			
-			<!-- Barre d'information avec SVG sur toute la largeur -->
+			<h1 class="text-white text-center tracking-wide mb-8 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" style="font-family: var(--font-title1); font-size: var(--size-title1);">CONTACT</h1>
 			<ContactInfoBar />
 			
 			<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
@@ -33,18 +31,18 @@ import EarthWhiteSvg from '../assets/svg/earthwhite.svg?raw';
 					<!-- Globe avec cadre -->
 					<div class="relative">
 						<!-- Cadre de contact -->
-						<div class="cadre-container" set:html={CadreContactSvg}></div>
+						<div class="w-full max-w-[343px] mx-auto" set:html={CadreContactSvg}></div>
 						
 						<!-- Globe terrestre à l'intérieur du cadre -->
-						<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="margin-top: -20px;">
-							<div class="globe-container w-56 h-56 flex items-center justify-center">
-								<canvas id="contact-globe"></canvas>
+						<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -mt-5">
+							<div class="relative w-56 h-56 flex items-center justify-center">
+								<canvas id="contact-globe" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56"></canvas>
 							</div>
 						</div>
 						
 						<!-- Coordonnées géographiques en bas du cadre -->
-						<div class="absolute bottom-4.5 left-1/2 transform -translate-x-1/2">
-							<div class="coordinates-text text-[14 px] tracking-wide text-center whitespace-nowrap" style="font-family: var(--font-smalltext); color: var(--color-pink);">
+						<div class="absolute bottom-[18px] left-1/2 transform -translate-x-1/2">
+							<div class="text-sm tracking-wide text-center whitespace-nowrap coordinates-glow" style="font-family: var(--font-smalltext); color: var(--color-pink);">
 								46° 22' 30.212" N 72° 33' 28.962" W
 							</div>
 						</div>
@@ -52,15 +50,15 @@ import EarthWhiteSvg from '../assets/svg/earthwhite.svg?raw';
 					
 					<!-- Barres d'égalisation audio -->
 					<div class="flex justify-center items-end gap-1 h-20">
-						<div class="bar bg-[#962EB9] w-3 h-8"></div>
-						<div class="bar bg-[#962EB9] w-3 h-12"></div>
-						<div class="bar bg-[#962EB9] w-3 h-6"></div>
-						<div class="bar bg-[#962EB9] w-3 h-16"></div>
-						<div class="bar bg-[#962EB9] w-3 h-10"></div>
-						<div class="bar bg-[#962EB9] w-3 h-20"></div>
-						<div class="bar bg-[#962EB9] w-3 h-14"></div>
-						<div class="bar bg-[#962EB9] w-3 h-8"></div>
-						<div class="bar bg-[#962EB9] w-3 h-18"></div>
+						<div class="bg-[#962EB9] w-3 h-8 opacity-70 animate-pulse" style="animation-delay: 0s;"></div>
+						<div class="bg-[#962EB9] w-3 h-12 opacity-70 animate-pulse" style="animation-delay: 0.1s;"></div>
+						<div class="bg-[#962EB9] w-3 h-6 opacity-70 animate-pulse" style="animation-delay: 0.2s;"></div>
+						<div class="bg-[#962EB9] w-3 h-16 opacity-70 animate-pulse" style="animation-delay: 0.3s;"></div>
+						<div class="bg-[#962EB9] w-3 h-10 opacity-70 animate-pulse" style="animation-delay: 0.4s;"></div>
+						<div class="bg-[#962EB9] w-3 h-20 opacity-70 animate-pulse" style="animation-delay: 0.5s;"></div>
+						<div class="bg-[#962EB9] w-3 h-14 opacity-70 animate-pulse" style="animation-delay: 0.6s;"></div>
+						<div class="bg-[#962EB9] w-3 h-8 opacity-70 animate-pulse" style="animation-delay: 0.7s;"></div>
+						<div class="bg-[#962EB9] w-3 h-18 opacity-70 animate-pulse" style="animation-delay: 0.8s;"></div>
 					</div>
 				</div>
 			</div>
@@ -69,40 +67,20 @@ import EarthWhiteSvg from '../assets/svg/earthwhite.svg?raw';
 </Layout>
 
 <style>
-	/* Titre CONTACT avec police custom */
-	.contact-title {
-		font-family: var(--font-title1);
-		font-size: clamp(72px, 12vw, 120px);
-		text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-	}
-
-	/* Animations */
-	.cadre-container {
-		width: 100%;
-		max-width: 343px;
-		margin: 0 auto;
-	}
-	
+	/* SVG du cadre responsive */
 	.cadre-container svg {
 		width: 100%;
 		height: auto;
 	}
-	
-	.globe-container {
-		position: relative;
-	}
-	
+
+	/* Canvas globe - taille fixe nécessaire pour l'animation */
 	#contact-globe {
-		width: 224px;
-		height: 224px;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+		width: 224px !important;
+		height: 224px !important;
 	}
 
-	/* Effet de scintillement néon pour les coordonnées */
-	.coordinates-text {
+	/* Effet de scintillement néon pour les coordonnées - animation complexe */
+	.coordinates-glow {
 		text-shadow: 
 			0 0 5px var(--color-pink),
 			0 0 10px var(--color-pink),
@@ -128,25 +106,6 @@ import EarthWhiteSvg from '../assets/svg/earthwhite.svg?raw';
 				0 0 8px var(--color-pink),
 				0 0 12px var(--color-pink);
 		}
-	}
-
-	.bar {
-		animation: barPulse 2s ease-in-out infinite;
-	}
-
-	.bar:nth-child(1) { animation-delay: 0s; }
-	.bar:nth-child(2) { animation-delay: 0.1s; }
-	.bar:nth-child(3) { animation-delay: 0.2s; }
-	.bar:nth-child(4) { animation-delay: 0.3s; }
-	.bar:nth-child(5) { animation-delay: 0.4s; }
-	.bar:nth-child(6) { animation-delay: 0.5s; }
-	.bar:nth-child(7) { animation-delay: 0.6s; }
-	.bar:nth-child(8) { animation-delay: 0.7s; }
-	.bar:nth-child(9) { animation-delay: 0.8s; }
-
-	@keyframes barPulse {
-		0%, 100% { opacity: 0.7; }
-		50% { opacity: 1; }
 	}
 </style>
 
