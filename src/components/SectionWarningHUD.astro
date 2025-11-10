@@ -31,6 +31,14 @@
 				<div class="progress-text">ANALYSE: <span id="progress-percentage">0</span>%</div>
 			</div>
 			
+			<!-- Bouton de validation -->
+			<div class="validation-container" id="validation-container" style="display: none;">
+				<button class="validation-button" id="validation-button">
+					<span class="button-icon">◉</span>
+					<span class="button-text">INITIALISER ACCÈS</span>
+				</button>
+			</div>
+			
 			<!-- Éléments HUD additionnels -->
 			<div class="hud-corners">
 				<div class="corner corner-tl"></div>
@@ -285,6 +293,112 @@
 		letter-spacing: 0.1em;
 	}
 
+	/* Bouton de validation */
+	.validation-container {
+		display: flex;
+		justify-content: center;
+		margin-top: 1rem;
+		opacity: 0;
+		transform: translateY(20px);
+		transition: all 0.5s ease;
+	}
+
+	.validation-container.show {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.validation-button {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.8rem 1.5rem;
+		background: linear-gradient(45deg, rgba(184, 187, 240, 0.2), rgba(97, 84, 197, 0.3));
+		border: 2px solid var(--color-purple);
+		border-radius: 6px;
+		color: #B8BBF0;
+		font-family: var(--font-text);
+		font-weight: bold;
+		font-size: 0.9rem;
+		letter-spacing: 0.15em;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+		backdrop-filter: blur(10px);
+		box-shadow: 
+			0 0 20px rgba(184, 187, 240, 0.3),
+			inset 0 0 10px rgba(184, 187, 240, 0.1);
+		animation: buttonPulseHUD 2s ease-in-out infinite;
+	}
+
+	.validation-button::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(184, 187, 240, 0.3), transparent);
+		transition: left 0.8s ease;
+	}
+
+	.validation-button:hover::before {
+		left: 100%;
+	}
+
+	.validation-button:hover {
+		transform: scale(1.05);
+		border-color: #B8BBF0;
+		color: white;
+		text-shadow: 0 0 10px rgba(184, 187, 240, 0.8);
+		box-shadow: 
+			0 0 30px rgba(184, 187, 240, 0.6),
+			inset 0 0 15px rgba(184, 187, 240, 0.2);
+	}
+
+	.validation-button:active {
+		transform: scale(0.98);
+	}
+
+	.button-icon {
+		font-size: 1.2rem;
+		animation: iconPulseHUD 2s ease-in-out infinite;
+		text-shadow: 0 0 10px currentColor;
+	}
+
+	.button-text {
+		white-space: nowrap;
+		position: relative;
+		z-index: 1;
+	}
+
+	@keyframes buttonPulseHUD {
+		0%, 100% {
+			box-shadow: 
+				0 0 20px rgba(184, 187, 240, 0.3),
+				inset 0 0 10px rgba(184, 187, 240, 0.1);
+			border-color: var(--color-purple);
+		}
+		50% {
+			box-shadow: 
+				0 0 30px rgba(184, 187, 240, 0.5),
+				inset 0 0 15px rgba(184, 187, 240, 0.2);
+			border-color: #B8BBF0;
+		}
+	}
+
+	@keyframes iconPulseHUD {
+		0%, 100% {
+			transform: scale(1);
+			opacity: 0.8;
+		}
+		50% {
+			transform: scale(1.1);
+			opacity: 1;
+		}
+	}
+
 	/* Coins HUD */
 	.hud-corners {
 		position: absolute;
@@ -438,6 +552,7 @@
 		private overlay: HTMLElement | null;
 		private progressPercentage: HTMLElement | null;
 		private isActive: boolean = false;
+		private hasBeenTriggered: boolean = false; // Nouveau flag pour éviter les déclenchements multiples
 		private options: Required<SectionWarningOptions>;
 
 		constructor(options: SectionWarningOptions) {
@@ -459,33 +574,33 @@
 		}
 
 		private handleScroll(): void {
-			if (this.isActive) return;
+			// Ne pas déclencher si déjà actif ou si déjà déclenché précédemment
+			if (this.isActive || this.hasBeenTriggered) return;
 
 			const targetSection = document.querySelector(this.options.targetSection) as HTMLElement;
 			if (!targetSection) return;
 
 			const rect = targetSection.getBoundingClientRect();
-			const triggerPoint = window.innerHeight - this.options.triggerOffset;
+			const viewportHeight = window.innerHeight;
 
-			// Vérifier si on entre dans la zone de déclenchement
-			if (rect.top <= triggerPoint && rect.bottom >= 0) {
+			// Déclencher seulement quand la section occupe une grande partie de l'écran
+			// La section doit être centrée dans le viewport
+			if (rect.top <= viewportHeight * 0.1 && rect.bottom >= viewportHeight * 0.5) {
 				this.showWarning();
 			}
 		}
 
 		private showWarning(): void {
-			if (this.isActive || !this.overlay) return;
+			if (this.isActive || !this.overlay || this.hasBeenTriggered) return;
 
 			this.isActive = true;
+			this.hasBeenTriggered = true; // Marquer comme déclenché pour éviter les futurs déclenchements
 			this.overlay.classList.add('active');
 
 			// Animation du pourcentage
 			this.animateProgress();
 
-			// Masquer l'avertissement après la durée spécifiée
-			setTimeout(() => {
-				this.hideWarning();
-			}, this.options.warningDuration);
+			// Ne plus masquer automatiquement - attendre le clic
 		}
 
 		private animateProgress(): void {
@@ -497,9 +612,31 @@
 				if (progress >= 100) {
 					progress = 100;
 					clearInterval(interval);
+					
+					// Afficher le bouton de validation après la progression
+					setTimeout(() => {
+						this.showValidationButton();
+					}, 500);
 				}
 				this.progressPercentage!.textContent = Math.round(progress).toString();
 			}, 100);
+		}
+
+		private showValidationButton(): void {
+			const validationContainer = document.getElementById('validation-container');
+			const validationButton = document.getElementById('validation-button');
+			
+			if (validationContainer && validationButton) {
+				validationContainer.style.display = 'flex';
+				setTimeout(() => {
+					validationContainer.classList.add('show');
+				}, 50);
+				
+				// Ajouter l'événement de clic
+				validationButton.addEventListener('click', () => {
+					this.hideWarning();
+				});
+			}
 		}
 
 		private hideWarning(): void {
@@ -511,6 +648,7 @@
 			setTimeout(() => {
 				this.revealSectionContent();
 				this.isActive = false;
+				// Note: hasBeenTriggered reste à true pour éviter les futurs déclenchements
 			}, this.options.contentRevealDelay);
 		}
 
@@ -530,26 +668,47 @@
 
 		// Méthode publique pour déclencher manuellement
 		public trigger(): void {
-			if (!this.isActive) {
+			if (!this.isActive && !this.hasBeenTriggered) {
 				this.showWarning();
 			}
 		}
 
-		// Méthode publique pour réinitialiser
+		// Méthode publique pour réinitialiser complètement
 		public reset(): void {
 			this.isActive = false;
+			this.hasBeenTriggered = false; // Permettre un nouveau déclenchement
+			
 			if (this.overlay) {
 				this.overlay.classList.remove('active');
+			}
+			
+			// Réinitialiser le bouton de validation
+			const validationContainer = document.getElementById('validation-container');
+			if (validationContainer) {
+				validationContainer.style.display = 'none';
+				validationContainer.classList.remove('show');
+			}
+			
+			// Réinitialiser le pourcentage
+			if (this.progressPercentage) {
+				this.progressPercentage.textContent = '0';
+			}
+			
+			// Réinitialiser la section
+			const targetSection = document.querySelector(this.options.targetSection) as HTMLElement;
+			if (targetSection) {
+				targetSection.classList.remove('section-revealed');
+				targetSection.classList.add('section-hidden');
 			}
 		}
 	}
 
 	// Initialisation automatique quand le DOM est prêt
 	document.addEventListener('DOMContentLoaded', () => {
-		// Configuration pour déclencher sur la première section (À PROPOS)
+		// Configuration pour déclencher sur la section À PROPOS avec la classe section-hidden
 		const warningHUD = new SectionWarningHUD({
-			targetSection: 'main section:first-of-type', // Sélecteur pour la première section
-			triggerOffset: 200, // Distance plus importante pour déclencher plus tôt
+			targetSection: '.section-hidden', // Sélecteur spécifique pour la section À PROPOS
+			triggerOffset: 10, // Distance très réduite pour déclencher encore plus bas dans le scroll
 			warningDuration: 3000,
 			contentRevealDelay: 500
 		});

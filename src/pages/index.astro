@@ -39,7 +39,7 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 
 		<!-- Section À Propos de Moi - Interface Spatiale -->
 		<section
-			class="min-h-screen flex items-center justify-center py-100 px-4 border-t mt-100"
+			class="section-hidden min-h-screen flex items-center justify-center py-50 px-4 border-t mt-50"
 		>
 			<div class="container max-w-full mx-auto">
 				<div
@@ -308,8 +308,7 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 		<HudClock />
 	</div>
 
-	<!-- SectionWarningHUD temporairement désactivé -->
-	<!-- <SectionWarningHUD /> -->
+	<SectionWarningHUD />
 </Layout>
 
 <style>
@@ -505,5 +504,61 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 	.social-icon:hover {
 		transform: translateY(-2px) scale(1.05);
 		box-shadow: 0 10px 25px rgba(184, 187, 240, 0.3);
+	}
+
+	/* Styles pour les sections avec révélation animée */
+	.section-hidden {
+		opacity: 0;
+		transform: translateY(50px);
+		filter: blur(5px);
+		transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		pointer-events: none;
+	}
+
+	.section-revealed {
+		opacity: 1;
+		transform: translateY(0);
+		filter: blur(0);
+		pointer-events: auto;
+		animation: sectionReveal 1s ease-out forwards;
+	}
+
+	@keyframes sectionReveal {
+		0% {
+			opacity: 0;
+			transform: translateY(50px) scale(0.95);
+			filter: blur(5px);
+		}
+		50% {
+			opacity: 0.7;
+			transform: translateY(-10px) scale(1.02);
+			filter: blur(2px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+			filter: blur(0);
+		}
+	}
+
+	.section-revealed .content-item {
+		animation: contentItemReveal 0.6s ease-out forwards;
+		opacity: 0;
+		transform: translateY(30px);
+	}
+
+	.section-revealed .content-item:nth-child(1) { animation-delay: 0.1s; }
+	.section-revealed .content-item:nth-child(2) { animation-delay: 0.2s; }
+	.section-revealed .content-item:nth-child(3) { animation-delay: 0.3s; }
+
+	@keyframes contentItemReveal {
+		0% {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 </style>
