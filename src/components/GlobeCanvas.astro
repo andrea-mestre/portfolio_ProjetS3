@@ -3,8 +3,8 @@
 <style>
 	#globe-canvas {
 		position: absolute;
-		width: 1200px;
-		height: 1200px;
+		width: 900px;
+		height: 900px;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
@@ -22,28 +22,30 @@
 
 	@media (max-width: 768px) {
 		#globe-canvas {
-			width: 800px;
-			height: 800px;
+			width: 600px;
+			height: 600px;
+			top: 50%;
 		}
 	}
 
 	@media (max-width: 480px) {
 		#globe-canvas {
-			width: 600px;
-			height: 600px;
+			width: 450px;
+			height: 450px;
+			top: 50%;
 		}
 	}
 </style>
 
 <script>
 	const c = document.getElementById('globe-canvas') as HTMLCanvasElement;
-	const s = c.width = c.height = 1200;
+	const s = c.width = c.height = 900;
 	const ctx = c.getContext('2d')!;
 	
 	const opts = {
-		globeRadius: 400,
-		depth: 800,
-		focalLength: 800,
+		globeRadius: 300,
+		depth: 600,
+		focalLength: 600,
 		center: s / 2,
 		
 		rotYVel: .003,

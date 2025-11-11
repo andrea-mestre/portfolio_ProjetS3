@@ -6,25 +6,25 @@ export interface Props {
 const { currentPage = 'home' } = Astro.props;
 ---
 
-<header class="fixed top-0 left-0 right-0 h-20 flex justify-center items-center px-8 z-[100] bg-gradient-to-b from-black/80 to-transparent border-b border-white/10 header-slide">
-  <nav class="flex gap-8 nav-fade">
+<header class="fixed top-0 left-0 right-0 h-14 flex justify-center items-center px-6 z-[100] bg-gradient-to-b from-black/80 to-transparent border-b border-white/10 header-slide">
+  <nav class="flex gap-5 nav-fade">
     {currentPage !== 'home' && (
-      <a href="/" class="nav-button relative px-8 py-3 font-mono text-sm tracking-[0.2em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
+      <a href="/" class="nav-button relative px-5 py-2 font-mono text-xs tracking-[0.15em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
         <span class="relative">ACCUEIL</span>
       </a>
     )}
     {currentPage !== 'projets' && (
-      <a href="#projets" class="nav-button relative px-8 py-3 font-mono text-sm tracking-[0.2em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
+      <a href="#projets" class="nav-button relative px-5 py-2 font-mono text-xs tracking-[0.15em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
         <span class="relative">PROJETS</span>
       </a>
     )}
     {currentPage !== 'contact' && (
-      <a href="/contact" class="nav-button relative px-8 py-3 font-mono text-sm tracking-[0.2em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
+      <a href="/contact" class="nav-button relative px-5 py-2 font-mono text-xs tracking-[0.15em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
         <span class="relative">CONTACT</span>
       </a>
     )}
     {currentPage !== 'mentions-legales' && (
-      <a href="/mentions-legales" class="nav-button relative px-8 py-3 font-mono text-sm tracking-[0.2em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
+      <a href="/mentions-legales" class="nav-button relative px-5 py-2 font-mono text-xs tracking-[0.15em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
         <span class="relative">MENTIONS</span>
       </a>
     )}
@@ -80,17 +80,17 @@ const { currentPage = 'home' } = Astro.props;
 
   @media (max-width: 768px) {
     header {
-      height: 60px;
+      height: 45px;
       padding: 0 1rem;
     }
 
     nav {
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
     .nav-button {
-      padding: 0.5rem 1rem;
-      font-size: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.65rem;
     }
   }
 </style>

@@ -58,32 +58,32 @@ try {
 					class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
 				>
 					<!-- Cadre gauche - Informations personnelles -->
-					<div class="relative p-4 min-h-[700px]">
+					<div class="relative p-4 min-h-[600px]">
 						<!-- SVG HUD Apropos en arrière-plan -->
 						<div class="absolute inset-0 pointer-events-none">
 							<img
 								src="/src/assets/svg/hud_apropos.svg?v=1731340000"
 								alt="HUD Apropos"
-								class="w-full h-full object-fill scale-100"
+								class="w-full h-full object-fill scale-90"
 							/>
 						</div>
 
 						<!-- Contenu positionné à l'intérieur du HUD -->
 						<div
-							class="relative z-10 h-full flex flex-col justify-center items-center space-y-6 px-12 py-16"
+							class="relative z-10 h-full flex flex-col justify-center items-center space-y-5 px-10 py-12"
 						>
 							<h2
-								class="content-item font-[family-name:var(--font-title2)] text-5xl font-bold mb-12 tracking-[0.15em] text-left section-neon"
+								class="content-item font-[family-name:var(--font-title2)] text-4xl font-bold mb-8 tracking-[0.15em] text-left section-neon"
 								style="color: var(--color-darkpurple);"
 							>
 								À PROPOS DE MOI
 							</h2>
 
 							<!-- Texte de présentation repositionné -->
-							<div class="content-item space-y-12 max-w-2xl">
+							<div class="content-item space-y-5 max-w-lg">
 								<p
-									class="font-[family-name:var(--font-text)] text-xl text-[#E5E5E5] leading-relaxed text-left"
-									style="line-height: 1.6;"
+									class="font-[family-name:var(--font-text)] text-l text-[#E5E5E5] leading-relaxed text-left"
+									style="line-height: 1.5;"
 								>
 									Bonjour, je m'appelle
 									<span
@@ -105,8 +105,8 @@ try {
 									projets variés et innovants.
 								</p>
 								<p
-									class="font-[family-name:var(--font-text)] text-xl text-[#E5E5E5] leading-relaxed text-left"
-									style="line-height: 1.6;"
+									class="font-[family-name:var(--font-text)] text-l text-[#E5E5E5] leading-relaxed text-left"
+									style="line-height: 1.5;"
 								>
 									Spécialisée en création graphique, j'ai
 									également de solides compétences en
@@ -119,16 +119,16 @@ try {
 
 							<!-- Icônes sociales et bouton CV sur la même ligne centrés -->
 							<div
-								class="content-item flex items-center justify-center gap-25 py-8"
+								class="content-item flex items-center justify-center gap-20 py-6"
 							>
 								<a
 									href="#"
-									class="group relative w-12 h-12 border border-[--color-purple] rounded-lg bg-black/40 flex items-center justify-center transition-all duration-300 hover:border-[--color-pink] hover:scale-110 hover:shadow-lg hover:shadow-[--color-purple]/30"
+									class="group relative w-10 h-10 border border-[--color-purple] rounded-lg bg-black/40 flex items-center justify-center transition-all duration-300 hover:border-[--color-pink] hover:scale-110 hover:shadow-lg hover:shadow-[--color-purple]/30"
 								>
 									<img
 										src="/src/assets/icons/behance.svg?v=1731340000"
 										alt="Behance"
-										class="w-13 h-13 brightness-0 invert group-hover:brightness-100"
+										class="w-11 h-11 brightness-0 invert group-hover:brightness-100"
 									/>
 									<div
 										class="absolute inset-0 bg-gradient-to-r from-[--color-purple]/20 to-[--color-pink]/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"
@@ -137,12 +137,12 @@ try {
 								</a>
 								<a
 									href="#"
-									class="group relative w-12 h-12 border border-[--color-purple] rounded-lg bg-black/40 flex items-center justify-center transition-all duration-300 hover:border-[--color-pink] hover:scale-110 hover:shadow-lg hover:shadow-[--color-purple]/30"
+									class="group relative w-10 h-10 border border-[--color-purple] rounded-lg bg-black/40 flex items-center justify-center transition-all duration-300 hover:border-[--color-pink] hover:scale-110 hover:shadow-lg hover:shadow-[--color-purple]/30"
 								>
 									<img
 										src="/src/assets/icons/linkedin.svg?v=1731340000"
 										alt="LinkedIn"
-										class="w-15 h-15"
+										class="w-12 h-12"
 									/>
 									<div
 										class="absolute inset-0 bg-gradient-to-r from-[--color-purple]/20 to-[--color-pink]/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"
@@ -150,7 +150,7 @@ try {
 									</div>
 								</a>
 								<button
-									class="group relative px-4 py-2 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink]"
+									class="group relative px-3 py-2 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink]"
 								>
 									<!-- Effet lumineux de fond -->
 									<div
@@ -163,7 +163,7 @@ try {
 										class="relative z-10 flex items-center gap-2"
 									>
 										<svg
-											class="w-3 h-3 group-hover:rotate-12 transition-transform"
+											class="w-2 h-2 group-hover:rotate-12 transition-transform"
 											fill="currentColor"
 											viewBox="0 0 20 20"
 										>
@@ -245,7 +245,7 @@ try {
 									<img
 										src="/src/assets/svg/donutround_hud.svg?v=1731340000"
 										alt="Donut Round Element"
-										class="w-50 h-50 opacity-80"
+										class="w-30 h-30 opacity-80"
 										style="animation: float 6s ease-in-out infinite;"
 									/>
 								</div>
@@ -255,7 +255,7 @@ try {
 									<img
 										src="/src/assets/svg/donut_hud.svg?v=1731340000"
 										alt="Donut Central Element"
-										class="w-60 h-60 opacity-90"
+										class="w-50 h-50 opacity-90"
 										style="animation: float 6s ease-in-out infinite 2s;"
 									/>
 								</div>
@@ -265,7 +265,7 @@ try {
 									<img
 										src="/src/assets/svg/donutround2.svg?v=1731340000"
 										alt="Donut Round Element 2"
-										class="w-50 h-50 opacity-75"
+										class="w-30 h-30 opacity-75"
 										style="animation: float 6s ease-in-out infinite 4s;"
 									/>
 								</div>
@@ -278,7 +278,7 @@ try {
 						<!-- Contenu logiciels -->
 						<div class="relative z-10 h-full flex flex-col justify-center items-center p-8">
 							<h2
-								class="content-item font-[family-name:var(--font-title2)] text-5xl font-bold mb-6 tracking-[0.15em] text-center section-neon"
+								class="content-item font-[family-name:var(--font-title2)] text-4xl font-bold mb-8 tracking-[0.15em] text-center section-neon"
 								style="color: var(--color-darkpurple);"
 							>
 								LOGICIELS MAÎTRISÉS
@@ -294,25 +294,25 @@ try {
 									<div class="software-row flex justify-center gap-12">
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/figma.svg?v=1731340000" alt="Figma" class="w-20 h-20 software-img" />
+												<img src="/src/assets/icons/figma.svg?v=1731340000" alt="Figma" class="w-15 h-15 software-img" />
 											</div>
 											<span class="software-label">FIGMA</span>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/illustrator.svg?v=1731340000" alt="Adobe Illustrator" class="w-20 h-20 software-img" />
+												<img src="/src/assets/icons/illustrator.svg?v=1731340000" alt="Adobe Illustrator" class="w-15 h-15 software-img" />
 											</div>
 											<span class="software-label">ILLUSTRATOR</span>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/photoshop.svg?v=1731340000" alt="Adobe Photoshop" class="w-20 h-20 software-img" />
+												<img src="/src/assets/icons/photoshop.svg?v=1731340000" alt="Adobe Photoshop" class="w-15 h-15 software-img" />
 											</div>
 											<span class="software-label">PHOTOSHOP</span>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/krita.svg?v=1731340000" alt="Krita" class="w-20 h-20 software-img" />
+												<img src="/src/assets/icons/krita.svg?v=1731340000" alt="Krita" class="w-15 h-15 software-img" />
 											</div>
 											<span class="software-label">KRITA</span>
 										</div>
@@ -327,25 +327,25 @@ try {
 									<div class="software-row flex justify-center gap-12">
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/javascrip.svg?v=1731340000" alt="JavaScript" class="w-20 h-20 software-img" />
+												<img src="/src/assets/icons/javascrip.svg?v=1731340000" alt="JavaScript" class="w-15 h-15 software-img" />
 											</div>
 											<span class="software-label">JAVASCRIPT</span>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/Tailwind.svg?v=1731340000" alt="Tailwind CSS" class="w-20 h-20 software-img" />
+												<img src="/src/assets/icons/Tailwind.svg?v=1731340000" alt="Tailwind CSS" class="w-16 h-16 software-img" />
 											</div>
 											<span class="software-label">TAILWINDCSS</span>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/astrojs.svg?v=1731340000" alt="Astro.js" class="w-20 h-20 software-img" />
+												<img src="/src/assets/icons/astrojs.svg?v=1731340000" alt="Astro.js" class="w-15 h-15 software-img" />
 											</div>
 											<span class="software-label">ASTRO</span>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/wordpress.svg?v=1731340000" alt="WordPress" class="w-20 h-20 software-img" />
+												<img src="/src/assets/icons/wordpress.svg?v=1731340000" alt="WordPress" class="w-15 h-15 software-img" />
 											</div>
 											<span class="software-label">WORDPRESS</span>
 										</div>
@@ -360,13 +360,13 @@ try {
 									<div class="software-row flex justify-center gap-16">
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/notion.svg?v=1731340000" alt="Notion" class="w-20 h-20 software-img" />
+												<img src="/src/assets/icons/notion.svg?v=1731340000" alt="Notion" class="w-15 h-15 software-img" />
 											</div>
 											<span class="software-label">NOTION</span>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/miro.svg?v=1731340000" alt="Miro" class="w-20 h-20 software-img" />
+												<img src="/src/assets/icons/miro.svg?v=1731340000" alt="Miro" class="w-15 h-15 software-img" />
 											</div>
 											<span class="software-label">MIRO</span>
 										</div>
@@ -384,7 +384,7 @@ try {
 		>
 			<div class="text-center max-w-4xl">
 				<h2
-					class="content-item font-[family-name:var(--font-title2)] text-4xl md:text-5xl lg:text-6xl mb-8 tracking-[0.2em] section-neon"
+					class="content-item font-[family-name:var(--font-title2)] text-4xl font-bold mb-8 tracking-[0.15em] text-center section-neon"
 					style="color: var(--color-darkpurple);"
 				>
 					MES MEILLEURS PROJETS
@@ -440,7 +440,8 @@ try {
 		>
 			<div class="text-center max-w-4xl">
 				<h2
-					class="content-item font-[family-name:var(--font-title2)] text-4xl md:text-5xl lg:text-6xl text-[--color-purple] mb-8 tracking-[0.2em]"
+					class="content-item font-[family-name:var(--font-title2)] text-4xl font-bold mb-8 tracking-[0.15em] text-center section-neon"
+					style="color: var(--color-darkpurple);"
 				>
 					CONTACT
 				</h2>
@@ -497,7 +498,7 @@ try {
 	/* Animations personnalisées pour le hero */
 	.hero-name {
 		font-family: var(--font-title2) !important;
-		font-size: clamp(64px, 10vw, 120px) !important;
+		font-size: clamp(56px, 9vw, 90px) !important;
 		animation:
 			nameSweep 1.2s ease-out 2s forwards,
 			neonPulse 3s ease-in-out 3.5s infinite;
@@ -581,7 +582,7 @@ try {
 
 	.hero-title {
 		font-family: var(--font-smalltext) !important;
-		font-size: clamp(18px, 3vw, 24px) !important;
+		font-size: clamp(14px, 2.5vw, 18px) !important;
 		color: var(--color-purple) !important;
 		letter-spacing: 0.3em !important;
 		white-space: nowrap !important;
