@@ -6,6 +6,20 @@ import HeroSection from "../components/HeroSection.astro";
 import HudClock from "../components/HudClock.astro";
 import GlobeCanvas from "../components/GlobeCanvas.astro";
 import SectionWarningHUD from "../components/SectionWarningHUD.astro";
+import CardProject from "../components/CardProject.astro";
+import ProjectStatus from "../components/ProjectStatus.astro";
+import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId } from "../lib/pocketbase";
+
+// Récupération des projets depuis PocketBase
+let projects = [];
+let hasError = false;
+
+try {
+  projects = await getProjects();
+} catch (error) {
+  console.error('Erreur lors du chargement des projets:', error);
+  hasError = true;
+}
 ---
 
 <Layout>
@@ -212,13 +226,52 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 		>
 			<div class="container max-w-full mx-auto">
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-					<!-- Partie gauche - Section décorative -->
+					<!-- Partie gauche - Section décorative avec éléments violets -->
 					<div class="relative p-4 min-h-[700px]">
-						<!-- Contenu des compétences techniques -->
-						<div class="relative z-10 h-full flex flex-col justify-center items-center space-y-8 px-8 py-16">
-	
+						<!-- SVG HUD Element Donut en arrière-plan -->
+						<div class="absolute inset-0 pointer-events-none">
+							<img
+								src="/src/assets/svg/hud_elementdonut.svg?v=1731340000"
+								alt="HUD Element Donut Frame"
+								class="w-full h-full object-fill scale-75"
+							/>
+						</div>
 
-							
+						<!-- Éléments violets décoratifs positionnés à l'intérieur horizontalement -->
+						<div class="relative z-10 h-full flex justify-center items-center px-8 py-16">
+							<div class="flex items-center justify-center gap-19">
+								<!-- Premier élément donut rond -->
+								<div class="decorative-element relative">
+									<img
+										src="/src/assets/svg/donutround_hud.svg?v=1731340000"
+										alt="Donut Round Element"
+										class="w-50 h-50 opacity-80"
+										style="animation: float 6s ease-in-out infinite;"
+									/>
+								</div>
+
+								<!-- Deuxième élément donut central (plus grand) -->
+								<div class="decorative-element relative">
+									<img
+										src="/src/assets/svg/donut_hud.svg?v=1731340000"
+										alt="Donut Central Element"
+										class="w-60 h-60 opacity-90"
+										style="animation: float 6s ease-in-out infinite 2s;"
+									/>
+								</div>
+
+								<!-- Troisième élément donut rond -->
+								<div class="decorative-element relative">
+									<img
+										src="/src/assets/svg/donutround2.svg?v=1731340000"
+										alt="Donut Round Element 2"
+										class="w-50 h-50 opacity-75"
+										style="animation: float 6s ease-in-out infinite 4s;"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
 
 					<!-- Partie droite - Logiciels maîtrisés -->
 					<div class="relative h-[700px] lg:h-full">
@@ -327,45 +380,56 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 		</section>
 
 		<section
-			class="min-h-screen flex items-center justify-center py-16 px-8 border-t"
+			class="projects-section min-h-screen flex items-center justify-center py-16 px-8 border-t"
 		>
 			<div class="text-center max-w-4xl">
 				<h2
-					class="font-[family-name:var(--font-title2)] text-4xl md:text-5xl lg:text-6xl text-[--color-purple] mb-8 tracking-[0.2em]"
+					class="content-item font-[family-name:var(--font-title2)] text-4xl md:text-5xl lg:text-6xl mb-8 tracking-[0.2em] section-neon"
+					style="color: var(--color-darkpurple);"
 				>
-					PROJETS
+					MES MEILLEURS PROJETS
 				</h2>
+				
+				<!-- Ligne animée sous le titre -->
+				<div class="projects-title-line-wrapper flex items-center justify-center gap-8 mb-12 relative opacity-0">
+					<div class="projects-title-line w-24 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"></div>
+					<div class="projects-title-line w-24 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"></div>
+				</div>
+
 				<div class="content-item">
 					<p
-						class="font-[family-name:var(--font-text)] text-lg md:text-xl text-white/70 leading-relaxed mb-6"
+						class="font-[family-name:var(--font-text)] text-lg md:text-xl text-white/70 leading-relaxed mb-12"
 					>
 						Portfolio de projets innovants et d'expériences
 						digitales uniques.
 					</p>
 				</div>
-				<div class="content-item">
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-						<div
-							class="p-6 border border-[rgba(184,187,240,0.3)] rounded-lg backdrop-blur-sm"
-						>
-							<h3 class="text-[--color-purple] text-xl mb-2">
-								Interface Spatiale
-							</h3>
-							<p class="text-white/60 text-sm">
-								Design d'interface futuriste
-							</p>
-						</div>
-						<div
-							class="p-6 border border-[rgba(184,187,240,0.3)] rounded-lg backdrop-blur-sm"
-						>
-							<h3 class="text-[--color-purple] text-xl mb-2">
-								HUD Interactif
-							</h3>
-							<p class="text-white/60 text-sm">
-								Éléments d'interface immersifs
-							</p>
-						</div>
-					</div>
+				
+				<!-- Grille de cartes projets -->
+				<div class="projects-grid flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
+					{hasError ? (
+						<ProjectStatus 
+							type="error" 
+							message="Impossible de se connecter à la base de données. Vérifiez que PocketBase est en cours d'exécution sur le port 8090." 
+						/>
+					) : projects.length > 0 ? (
+						projects.map((project) => (
+							<CardProject 
+								title={project.titre}
+								subtitle={project.etude_annee}
+								description={project.resume}
+								stats={calculateProjectStats(project)}
+								id={generateProjectId(project)}
+								date={formatProjectDate(project.projet_annee)}
+								buttonText="Voir le projet"
+							/>
+						))
+					) : (
+						<ProjectStatus 
+							type="empty" 
+							message="Aucun projet n'a été trouvé dans la base de données. Ajoutez des projets via l'interface d'administration PocketBase." 
+						/>
+					)}
 				</div>
 			</div>
 		</section>
@@ -943,34 +1007,170 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 			transform: translateY(0);
 		}
 	}
+
+	/* Styles pour les éléments décoratifs violets */
+	.decorative-element {
+		transition: all 0.3s ease;
+		filter: drop-shadow(0 0 10px rgba(184, 187, 240, 0.4));
+	}
+
+	/* Styles pour la section Projets */
+	.projects-section {
+		opacity: 0;
+		transform: translateY(50px);
+		transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	.projects-section.projects-revealed {
+		opacity: 1;
+		transform: translateY(0);
+		animation: projectsSectionReveal 1s ease-out forwards;
+	}
+
+	@keyframes projectsSectionReveal {
+		0% {
+			opacity: 0;
+			transform: translateY(50px) scale(0.95);
+		}
+		50% {
+			opacity: 0.7;
+			transform: translateY(-10px) scale(1.02);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	.projects-revealed .content-item {
+		animation: projectsContentReveal 0.6s ease-out forwards;
+		opacity: 0;
+		transform: translateY(30px);
+	}
+
+	.projects-revealed .content-item:nth-child(1) { animation-delay: 0.1s; }
+	.projects-revealed .content-item:nth-child(2) { animation-delay: 0.2s; }
+	.projects-revealed .content-item:nth-child(3) { animation-delay: 0.3s; }
+
+	@keyframes projectsContentReveal {
+		0% {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Animation de la ligne sous le titre des projets */
+	.projects-title-line-wrapper {
+		animation: projectsTitleLineReveal 1s ease-out 0.5s forwards;
+	}
+
+	@keyframes projectsTitleLineReveal {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	.projects-title-line {
+		animation: projectsLineExpand 1.5s ease-out 0.8s backwards;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			var(--color-purple),
+			transparent
+		) !important;
+	}
+
+	@keyframes projectsLineExpand {
+		from {
+			width: 0;
+		}
+		to {
+			width: 6rem;
+		}
+	}
+
+	/* Animation pour les éléments décoratifs */
+	@keyframes rotate {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes float {
+		0%, 100% {
+			transform: translateY(0px);
+		}
+		50% {
+			transform: translateY(-10px);
+		}
+	}
+
+	/* Animation pulsante avec variation de luminosité */
+	@keyframes pulse-glow {
+		0%, 100% {
+			opacity: 0.7;
+			filter: drop-shadow(0 0 10px rgba(184, 187, 240, 0.4));
+		}
+		50% {
+			opacity: 1;
+			filter: drop-shadow(0 0 25px rgba(184, 187, 240, 0.8));
+		}
+	}
 </style>
 
 <script>
 	// Gestion de l'animation de la section Skills au scroll
 	document.addEventListener('DOMContentLoaded', () => {
 		const skillsSection = document.querySelector('.skills-section');
+		const projectsSection = document.querySelector('.projects-section');
 		let skillsAnimated = false;
+		let projectsAnimated = false;
 
-		if (skillsSection) {
-			const observerOptions = {
-				threshold: 0.3, // Déclencher quand 30% de la section est visible
-				rootMargin: '0px 0px -50px 0px'
-			};
+		const observerOptions = {
+			threshold: 0.3, // Déclencher quand 30% de la section est visible
+			rootMargin: '0px 0px -50px 0px'
+		};
 
-			const skillsObserver = new IntersectionObserver((entries) => {
-				entries.forEach(entry => {
-					if (entry.isIntersecting && !skillsAnimated) {
-						skillsSection.classList.add('skills-revealed');
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					if (entry.target.classList.contains('skills-section') && !skillsAnimated) {
+						entry.target.classList.add('skills-revealed');
 						skillsAnimated = true;
 						
 						// Déclencher l'événement personnalisé
 						const event = new CustomEvent('skillsSectionRevealed');
 						window.dispatchEvent(event);
 					}
-				});
-			}, observerOptions);
+					
+					if (entry.target.classList.contains('projects-section') && !projectsAnimated) {
+						entry.target.classList.add('projects-revealed');
+						projectsAnimated = true;
+						
+						// Déclencher l'événement personnalisé
+						const event = new CustomEvent('projectsSectionRevealed');
+						window.dispatchEvent(event);
+					}
+				}
+			});
+		}, observerOptions);
 
-			skillsObserver.observe(skillsSection);
+		if (skillsSection) {
+			observer.observe(skillsSection);
+		}
+		
+		if (projectsSection) {
+			observer.observe(projectsSection);
 		}
 	});
 </script>

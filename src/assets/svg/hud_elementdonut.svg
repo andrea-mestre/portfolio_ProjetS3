@@ -1,0 +1,22 @@
+<svg width="695" height="263" viewBox="0 0 695 263" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M289 15.5H203L212 19.5H282.5L289 15.5Z" fill="white"/>
+<path d="M3.5 73C3.5 73.5 3.5 19 3.5 19L18.5 3H110M160 3H110M110 3L117 15.5H203M203 15.5H289L282.5 19.5H212L203 15.5Z" stroke="white" stroke-width="1.73"/>
+<circle cx="160.5" cy="3.5" r="3" fill="white"/>
+<circle cx="3.5" cy="74.5" r="3" fill="white"/>
+<path d="M14.5 0.5C10.1667 5.16667 1.3 14.7 0.5 15.5V0.5H14.5Z" stroke="white"/>
+<path d="M405.5 15.5H491.5L482.5 19.5H412L405.5 15.5Z" fill="white"/>
+<path d="M691 73C691 73.5 691 19 691 19L676 3H584.5M534.5 3H584.5M584.5 3L577.5 15.5H491.5M491.5 15.5H405.5L412 19.5H482.5L491.5 15.5Z" stroke="white" stroke-width="1.73"/>
+<circle cx="3" cy="3" r="3" transform="matrix(-1 0 0 1 537 0.5)" fill="white"/>
+<circle cx="3" cy="3" r="3" transform="matrix(-1 0 0 1 694 71.5)" fill="white"/>
+<path d="M680 0.5C684.333 5.16667 693.2 14.7 694 15.5V0.5H680Z" stroke="white"/>
+<path d="M289 247.5H203L212 243.5H282.5L289 247.5Z" fill="white"/>
+<path d="M3.5 190C3.5 189.5 3.5 244 3.5 244L18.5 260H110M160 260H110M110 260L117 247.5H203M203 247.5H289L282.5 243.5H212L203 247.5Z" stroke="white" stroke-width="1.73"/>
+<circle cx="3" cy="3" r="3" transform="matrix(1 0 0 -1 157.5 262.5)" fill="white"/>
+<circle cx="3" cy="3" r="3" transform="matrix(1 0 0 -1 0.5 191.5)" fill="white"/>
+<path d="M14.5 262.5C10.1667 257.833 1.3 248.3 0.5 247.5V262.5H14.5Z" stroke="white"/>
+<path d="M405.5 247.5H491.5L482.5 243.5H412L405.5 247.5Z" fill="white"/>
+<path d="M691 190C691 189.5 691 244 691 244L676 260H584.5M534.5 260H584.5M584.5 260L577.5 247.5H491.5M491.5 247.5H405.5L412 243.5H482.5L491.5 247.5Z" stroke="white" stroke-width="1.73"/>
+<circle cx="534" cy="259.5" r="3" transform="rotate(180 534 259.5)" fill="white"/>
+<circle cx="691" cy="188.5" r="3" transform="rotate(180 691 188.5)" fill="white"/>
+<path d="M680 262.5C684.333 257.833 693.2 248.3 694 247.5V262.5H680Z" stroke="white"/>
+</svg>

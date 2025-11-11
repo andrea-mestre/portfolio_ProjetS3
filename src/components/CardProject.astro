@@ -1,0 +1,170 @@
+---
+interface Props {
+	title: string;
+	subtitle: string;
+	description: string;
+	stats: {
+		value: string;
+		label: string;
+	}[];
+	id: string;
+	date: string;
+	buttonText?: string;
+}
+
+const { title, subtitle, description, stats, id, date, buttonText = "Voir le projet" } = Astro.props;
+---
+
+<div class="card-container relative w-[350px] h-[480px] m-5 perspective-1000 z-10 opacity-0 translate-y-8 animate-card-reveal">
+	<div class="card relative w-full h-full transform-gpu transition-transform duration-700 ease-out cursor-pointer hover:rotate-y-10 hover:rotate-x-5">
+		<div class="card-face absolute w-full h-full rounded-[20px] overflow-hidden border border-[var(--color-purple)] shadow-[0_0_30px_rgba(184,187,240,0.5)] bg-gradient-to-br from-[#12121e] to-[#1c1c2d] flex flex-col">
+			<div class="card-inner-curve absolute inset-5 rounded-xl overflow-hidden bg-gradient-to-br from-[#191927] to-[#13131d] border border-[rgba(184,187,240,0.3)] z-[1] grid-pattern">
+				
+				<div class="card-header relative z-[2] p-6 pb-4">
+					<div class="card-chip w-10 h-8 rounded-md mb-4 relative chip-gradient"></div>
+					<h3 class="font-[family-name:var(--font-title2)] text-xl font-bold uppercase text-[var(--color-purple)] mb-2 tracking-wide text-shadow-glow">{title}</h3>
+					<div class="font-[family-name:var(--font-text)] text-xs text-[var(--color-pink)] mb-1 uppercase tracking-wider">{subtitle}</div>
+					<div class="font-[family-name:var(--font-smalltext)] text-xs text-[rgba(184,187,240,0.6)] uppercase tracking-wide absolute top-6 right-6">{date}</div>
+				</div>
+
+				<div class="card-content relative z-[2] px-6 flex-1">
+					<p class="font-[family-name:var(--font-text)] text-sm text-[#b3b3cc] leading-relaxed tracking-wide mb-6">{description}</p>
+
+					<div class="card-stats flex justify-between mb-5">
+						{stats.map((stat) => (
+							<div class="stat text-center">
+								<div class="font-[family-name:var(--font-smalltext)] text-xl text-[var(--color-purple)] font-bold text-shadow-glow">{stat.value}</div>
+								<div class="font-[family-name:var(--font-text)] text-xs text-[#b3b3cc] uppercase tracking-wide mt-1">{stat.label}</div>
+							</div>
+						))}
+					</div>
+				</div>
+
+				<div class="card-footer relative z-[2] p-6 flex justify-between items-center">
+					<button class="bg-gradient-to-r from-[var(--color-pink)] to-[var(--color-purple)] border-none rounded-md px-4 py-2 font-[family-name:var(--font-text)] text-xs font-bold uppercase text-white cursor-pointer shadow-[0_0_10px_rgba(184,187,240,0.5)] transition-all duration-300 tracking-wide hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(184,187,240,0.8)]">{buttonText}</button>
+					<div class="font-[family-name:var(--font-smalltext)] text-xs text-[var(--color-purple)] text-shadow-glow">{id}</div>
+				</div>
+			</div>
+
+			<div class="glow-effect absolute inset-0 rounded-[20px] shadow-[inset_0_0_20px_rgba(184,187,240,0.3)] pointer-events-none z-[3]"></div>
+			<div class="edge-highlight absolute inset-0 rounded-[20px] shadow-[inset_0_0_2px_rgba(255,255,255,0.3)] pointer-events-none z-[4]"></div>
+			<div class="scanline absolute inset-0 overflow-hidden opacity-15 z-[5] pointer-events-none rounded-[20px]"></div>
+			<div class="glitch absolute inset-0 opacity-0 pointer-events-none z-[6] rounded-[20px] animate-glitch-effect"></div>
+			<div class="hologram-effect absolute inset-0 bg-gradient-to-br from-[rgba(184,187,240,0.1)] to-[rgba(184,187,240,0.1)] rounded-[20px] opacity-50 z-[7] pointer-events-none"></div>
+		</div>
+	</div>
+</div>
+
+<style>
+	/* Classes utilitaires custom minimales */
+	.perspective-1000 { perspective: 1000px; }
+	.rotate-y-10 { transform: rotateY(10deg); }
+	.rotate-x-5 { transform: rotateX(5deg); }
+	.transform-gpu { transform-style: preserve-3d; }
+	.text-shadow-glow { text-shadow: 0 0 10px rgba(184, 187, 240, 0.7); }
+	
+	/* Animations custom */
+	@keyframes card-reveal {
+		0% { opacity: 0; transform: translateY(30px); }
+		100% { opacity: 1; transform: translateY(0); }
+	}
+	
+	@keyframes scanline {
+		0% { top: 0%; }
+		100% { top: 100%; }
+	}
+	
+	@keyframes glitch-effect {
+		0%, 1.5%, 15%, 16%, 100% { opacity: 0; }
+		1% { 
+			opacity: 0.3; 
+			transform: translate3d(3px, 0, 0);
+			background: linear-gradient(90deg, rgba(184, 187, 240, 0.2) 0%, rgba(184, 187, 240, 0.2) 100%);
+		}
+		15.5% { 
+			opacity: 0.3; 
+			transform: translate3d(-3px, 0, 0);
+			background: linear-gradient(90deg, rgba(184, 187, 240, 0.2) 0%, rgba(184, 187, 240, 0.2) 100%);
+		}
+	}
+	
+	/* Effets spéciaux */
+	.grid-pattern::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDIwIDAgTCAwIDAgTCAwIDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMGMzZmYiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjIiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=");
+		opacity: 0.3;
+	}
+	
+	.chip-gradient {
+		background: linear-gradient(135deg, var(--color-pink) 0%, var(--color-purple) 100%);
+		box-shadow: 0 0 10px rgba(184, 187, 240, 0.7);
+	}
+	
+	.chip-gradient::before {
+		content: "";
+		position: absolute;
+		top: 2px;
+		left: 2px;
+		right: 2px;
+		bottom: 2px;
+		background: linear-gradient(135deg, rgba(184, 187, 240, 0.8) 0%, rgba(184, 187, 240, 0.6) 100%);
+		border-radius: 3px;
+		backdrop-filter: blur(4px);
+	}
+	
+	.scanline::before {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 2px;
+		background: rgba(184, 187, 240, 0.5);
+		animation: scanline 6s linear infinite;
+	}
+	
+	.animate-card-reveal {
+		animation: card-reveal 0.8s ease-out forwards;
+	}
+	
+	.animate-glitch-effect {
+		animation: glitch-effect 12s infinite;
+	}
+	
+	/* Animation delays pour les cartes */
+	.card-container:nth-child(1) { animation-delay: 0.2s; }
+	.card-container:nth-child(2) { animation-delay: 0.4s; }
+	.card-container:nth-child(3) { animation-delay: 0.6s; }
+</style>
+
+<script>
+	// Animation interactive pour chaque carte
+	document.addEventListener('DOMContentLoaded', () => {
+		const cardContainers = document.querySelectorAll('.card-container');
+		
+		cardContainers.forEach((cardContainer) => {
+			const card = cardContainer.querySelector('.card');
+			const glowEffect = cardContainer.querySelector('.glow-effect');
+			
+			cardContainer.addEventListener('mousemove', function (e) {
+				const rect = cardContainer.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+
+				const centerX = rect.width / 2;
+				const centerY = rect.height / 2;
+
+				const deltaX = (x - centerX) / centerX;
+				const deltaY = (y - centerY) / centerY;
+
+				card.style.transform = `rotateY(${deltaX * 15}deg) rotateX(${-deltaY * 15}deg)`;
+				glowEffect.style.boxShadow = `inset ${-deltaX * 10}px ${-deltaY * 10}px 20px rgba(184, 187, 240, 0.3)`;
+			});
+
+			cardContainer.addEventListener('mouseleave', function () {
+				card.style.transform = 'rotateY(0) rotateX(0)';
+				glowEffect.style.boxShadow = 'inset 0 0 20px rgba(184, 187, 240, 0.3)';
+			});
+		});
+	});
+</script>

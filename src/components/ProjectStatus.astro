@@ -1,0 +1,55 @@
+---
+interface Props {
+  message?: string;
+  type?: 'loading' | 'error' | 'empty';
+}
+
+const { message = 'Chargement en cours...', type = 'loading' } = Astro.props;
+
+const getIcon = () => {
+  switch (type) {
+    case 'error':
+      return '⚠️';
+    case 'empty':
+      return '📂';
+    default:
+      return '⚡';
+  }
+};
+
+const getColor = () => {
+  switch (type) {
+    case 'error':
+      return 'text-red-400';
+    case 'empty':
+      return 'text-[var(--color-purple)]';
+    default:
+      return 'text-[var(--color-purple)]';
+  }
+};
+---
+
+<div class="flex flex-col items-center justify-center py-16 px-8 max-w-2xl mx-auto text-center">
+  <div class="text-6xl mb-6 opacity-60">{getIcon()}</div>
+  <h3 class={`font-[family-name:var(--font-title2)] text-2xl font-bold mb-4 tracking-[0.1em] ${getColor()}`}>
+    {type === 'error' ? 'ERREUR DE CONNEXION' : type === 'empty' ? 'AUCUN PROJET TROUVÉ' : 'CHARGEMENT DES DONNÉES'}
+  </h3>
+  <p class="font-[family-name:var(--font-text)] text-lg text-white/70 leading-relaxed">
+    {message}
+  </p>
+  
+  {type === 'loading' && (
+    <div class="mt-8 w-64 h-2 bg-[#1c1c2d] rounded-full overflow-hidden">
+      <div class="h-full bg-gradient-to-r from-[var(--color-purple)] to-[var(--color-pink)] animate-pulse"></div>
+    </div>
+  )}
+  
+  {type === 'error' && (
+    <button 
+      onclick="window.location.reload()" 
+      class="mt-8 bg-gradient-to-r from-[var(--color-pink)] to-[var(--color-purple)] border-none rounded-md px-6 py-3 font-[family-name:var(--font-text)] text-sm font-bold uppercase text-white cursor-pointer shadow-[0_0_10px_rgba(184,187,240,0.5)] transition-all duration-300 tracking-wide hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(184,187,240,0.8)]"
+    >
+      Réessayer
+    </button>
+  )}
+</div>
