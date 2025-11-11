@@ -149,23 +149,25 @@ import clockIcon from '../assets/svg/clock.svg';
     font-family: var(--font-title2);
     font-size: 56px;
     font-weight: 400;
-    color: rgb(97, 84, 197);
+    color: var(--color-darkpurple);
     filter: blur(18px);
     letter-spacing: 0.05em;
     pointer-events: none;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
-    animation: blurBreath 4s ease-in-out infinite;
+    animation: neonBlurBreath 4s ease-in-out infinite;
   }
 
-  @keyframes blurBreath {
+  @keyframes neonBlurBreath {
     0%, 100% {
       filter: blur(18px);
       opacity: 0.7;
+      text-shadow: 0 0 40px var(--color-darkpurple);
     }
     50% {
-      filter: blur(22px);
+      filter: blur(25px);
       opacity: 1;
+      text-shadow: 0 0 60px var(--color-darkpurple), 0 0 80px var(--color-purple);
     }
   }
   
@@ -174,20 +176,32 @@ import clockIcon from '../assets/svg/clock.svg';
     font-family: var(--font-title2);
     font-size: 56px;
     font-weight: 400;
-    color: rgb(97, 84, 197);
+    color: var(--color-darkpurple);
     letter-spacing: 0.05em;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
-    text-shadow: 0 0 20px rgba(97, 84, 197, 0.8);
-    animation: textFlicker 5s ease-in-out infinite;
+    text-shadow:
+      0 0 10px var(--color-darkpurple),
+      0 0 20px var(--color-darkpurple),
+      0 0 20px var(--color-darkpurple);
+    animation: neonBreath 4s ease-in-out infinite;
+    transition: all 0.3s ease;
   }
 
-  @keyframes textFlicker {
-    0%, 100% {
-      text-shadow: 0 0 20px rgba(97, 84, 197, 0.8);
+  @keyframes neonBreath {
+    0%,
+    100% {
+      text-shadow:
+        0 0 10px var(--color-darkpurple),
+        0 0 20px var(--color-darkpurple),
+        0 0 30px var(--color-darkpurple);
     }
     50% {
-      text-shadow: 0 0 30px rgba(97, 84, 197, 1), 0 0 40px rgba(184, 187, 240, 0.5);
+      text-shadow:
+        0 0 15px var(--color-darkpurple),
+        0 0 25px var(--color-darkpurple),
+        0 0 35px var(--color-darkpurple),
+        0 0 40px var(--color-purple);
     }
   }
   

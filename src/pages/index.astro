@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import StarryBackground from "../components/StarryBackground.astro";
 import HudHeader from "../components/HudHeader.astro";
 import HudSidebar from "../components/HudSidebar.astro";
 import HeroSection from "../components/HeroSection.astro";
@@ -10,7 +9,6 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 ---
 
 <Layout>
-	<StarryBackground />
 	<HudHeader currentPage="home" />
 	<HudSidebar />
 
@@ -50,7 +48,7 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 						<!-- SVG HUD Apropos en arrière-plan -->
 						<div class="absolute inset-0 pointer-events-none">
 							<img
-								src="/src/assets/svg/hud_apropos.svg"
+								src="/src/assets/svg/hud_apropos.svg?v=1731340000"
 								alt="HUD Apropos"
 								class="w-full h-full object-fill scale-100"
 							/>
@@ -114,7 +112,7 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 									class="group relative w-12 h-12 border border-[--color-purple] rounded-lg bg-black/40 flex items-center justify-center transition-all duration-300 hover:border-[--color-pink] hover:scale-110 hover:shadow-lg hover:shadow-[--color-purple]/30"
 								>
 									<img
-										src="/src/assets/icons/behance.svg"
+										src="/src/assets/icons/behance.svg?v=1731340000"
 										alt="Behance"
 										class="w-13 h-13 brightness-0 invert group-hover:brightness-100"
 									/>
@@ -128,7 +126,7 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 									class="group relative w-12 h-12 border border-[--color-purple] rounded-lg bg-black/40 flex items-center justify-center transition-all duration-300 hover:border-[--color-pink] hover:scale-110 hover:shadow-lg hover:shadow-[--color-purple]/30"
 								>
 									<img
-										src="/src/assets/icons/linkedin.svg?v=1731269000"
+										src="/src/assets/icons/linkedin.svg?v=1731340000"
 										alt="LinkedIn"
 										class="w-15 h-15"
 									/>
@@ -180,7 +178,7 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 						<!-- SVG HUD Visual en arrière-plan -->
 						<div class="absolute inset-0 pointer-events-none">
 							<img
-								src="/src/assets/svg/hud_visual.svg"
+								src="/src/assets/svg/hud_visual.svg?v=1731340000"
 								alt="HUD Visual Data"
 								class="w-full h-full object-fill scale-75"
 							/>
@@ -200,6 +198,126 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 								<div
 									class="mt-1 mx-auto w-12 h-px bg-gradient-to-r from-transparent via-[--color-pink] to-transparent"
 								>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Section Logiciels Maîtrisés - Interface Spatiale -->
+		<section
+			class="skills-section min-h-screen flex items-center justify-center py-50 px-4 border-t"
+		>
+			<div class="container max-w-full mx-auto">
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+					<!-- Partie gauche - Section décorative -->
+					<div class="relative p-4 min-h-[700px]">
+						<!-- Contenu des compétences techniques -->
+						<div class="relative z-10 h-full flex flex-col justify-center items-center space-y-8 px-8 py-16">
+	
+
+							
+
+					<!-- Partie droite - Logiciels maîtrisés -->
+					<div class="relative h-[700px] lg:h-full">
+						<!-- Contenu logiciels -->
+						<div class="relative z-10 h-full flex flex-col justify-center items-center p-8">
+							<h2
+								class="content-item font-[family-name:var(--font-title2)] text-5xl font-bold mb-6 tracking-[0.15em] text-center section-neon"
+								style="color: var(--color-darkpurple);"
+							>
+								LOGICIELS MAÎTRISÉS
+							</h2>
+
+							<!-- Grille de logiciels organisée par catégorie -->
+							<div class="content-item space-y-6 w-full max-w-2xl mt-8">
+								<!-- Catégorie Design -->
+								<div class="category-section">
+									<h3 class="category-title font-[family-name:var(--font-text)] text-sm text-[--color-purple] tracking-[0.2em] uppercase mb-4 text-center">
+										DESIGN
+									</h3>
+									<div class="software-row flex justify-center gap-12">
+										<div class="software-item group">
+											<div class="software-icon-wrapper">
+												<img src="/src/assets/icons/figma.svg?v=1731340000" alt="Figma" class="w-20 h-20 software-img" />
+											</div>
+											<span class="software-label">FIGMA</span>
+										</div>
+										<div class="software-item group">
+											<div class="software-icon-wrapper">
+												<img src="/src/assets/icons/illustrator.svg?v=1731340000" alt="Adobe Illustrator" class="w-20 h-20 software-img" />
+											</div>
+											<span class="software-label">ILLUSTRATOR</span>
+										</div>
+										<div class="software-item group">
+											<div class="software-icon-wrapper">
+												<img src="/src/assets/icons/photoshop.svg?v=1731340000" alt="Adobe Photoshop" class="w-20 h-20 software-img" />
+											</div>
+											<span class="software-label">PHOTOSHOP</span>
+										</div>
+										<div class="software-item group">
+											<div class="software-icon-wrapper">
+												<img src="/src/assets/icons/krita.svg?v=1731340000" alt="Krita" class="w-20 h-20 software-img" />
+											</div>
+											<span class="software-label">KRITA</span>
+										</div>
+									</div>
+								</div>
+
+								<!-- Catégorie Développement Web -->
+								<div class="category-section">
+									<h3 class="category-title font-[family-name:var(--font-text)] text-sm text-[--color-purple] tracking-[0.2em] uppercase mb-4 text-center">
+										DÉVELOPPEMENT WEB
+									</h3>
+									<div class="software-row flex justify-center gap-12">
+										<div class="software-item group">
+											<div class="software-icon-wrapper">
+												<img src="/src/assets/icons/javascrip.svg?v=1731340000" alt="JavaScript" class="w-20 h-20 software-img" />
+											</div>
+											<span class="software-label">JAVASCRIPT</span>
+										</div>
+										<div class="software-item group">
+											<div class="software-icon-wrapper">
+												<img src="/src/assets/icons/Tailwind.svg?v=1731340000" alt="Tailwind CSS" class="w-20 h-20 software-img" />
+											</div>
+											<span class="software-label">TAILWINDCSS</span>
+										</div>
+										<div class="software-item group">
+											<div class="software-icon-wrapper">
+												<img src="/src/assets/icons/astrojs.svg?v=1731340000" alt="Astro.js" class="w-20 h-20 software-img" />
+											</div>
+											<span class="software-label">ASTRO</span>
+										</div>
+										<div class="software-item group">
+											<div class="software-icon-wrapper">
+												<img src="/src/assets/icons/wordpress.svg?v=1731340000" alt="WordPress" class="w-20 h-20 software-img" />
+											</div>
+											<span class="software-label">WORDPRESS</span>
+										</div>
+									</div>
+								</div>
+
+								<!-- Catégorie Gestion de Projet -->
+								<div class="category-section">
+									<h3 class="category-title font-[family-name:var(--font-text)] text-sm text-[--color-purple] tracking-[0.2em] uppercase mb-4 text-center">
+										GESTION DE PROJET
+									</h3>
+									<div class="software-row flex justify-center gap-16">
+										<div class="software-item group">
+											<div class="software-icon-wrapper">
+												<img src="/src/assets/icons/notion.svg?v=1731340000" alt="Notion" class="w-20 h-20 software-img" />
+											</div>
+											<span class="software-label">NOTION</span>
+										</div>
+										<div class="software-item group">
+											<div class="software-icon-wrapper">
+												<img src="/src/assets/icons/miro.svg?v=1731340000" alt="Miro" class="w-20 h-20 software-img" />
+											</div>
+											<span class="software-label">MIRO</span>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -561,4 +679,298 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 			transform: translateY(0);
 		}
 	}
+
+	/* Styles pour la section Logiciels Maîtrisés */
+	
+	/* Animations des barres de compétences */
+	@keyframes skill-bar-1 {
+		0% {
+			width: 0%;
+			opacity: 0.5;
+		}
+		100% {
+			width: 95%;
+			opacity: 1;
+		}
+	}
+
+	@keyframes skill-bar-2 {
+		0% {
+			width: 0%;
+			opacity: 0.5;
+		}
+		100% {
+			width: 88%;
+			opacity: 1;
+		}
+	}
+
+	@keyframes skill-bar-3 {
+		0% {
+			width: 0%;
+			opacity: 0.5;
+		}
+		100% {
+			width: 82%;
+			opacity: 1;
+		}
+	}
+
+	@keyframes skill-bar-4 {
+		0% {
+			width: 0%;
+			opacity: 0.5;
+		}
+		100% {
+			width: 75%;
+			opacity: 1;
+		}
+	}
+
+	.animate-skill-bar-1 {
+		animation: skill-bar-1 2s ease-out 0.5s forwards;
+		width: 0%;
+	}
+
+	.animate-skill-bar-2 {
+		animation: skill-bar-2 2s ease-out 0.8s forwards;
+		width: 0%;
+	}
+
+	.animate-skill-bar-3 {
+		animation: skill-bar-3 2s ease-out 1.1s forwards;
+		width: 0%;
+	}
+
+	.animate-skill-bar-4 {
+		animation: skill-bar-4 2s ease-out 1.4s forwards;
+		width: 0%;
+	}
+
+	/* Styles pour les icônes de logiciels */
+	.software-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 12px;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		cursor: pointer;
+	}
+
+	.software-icon-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 12px;
+		transition: all 0.3s ease;
+	}
+
+	.software-item:hover .software-icon-wrapper {
+		transform: translateY(-4px) scale(1.1);
+	}
+
+	.software-img {
+		filter: brightness(0.9) saturate(0.95);
+		transition: all 0.3s ease;
+		drop-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	}
+
+	.software-item:hover .software-img {
+		filter: brightness(1.1) saturate(1.05);
+		drop-shadow: 0 8px 16px rgba(97, 84, 197, 0.4);
+	}
+
+	.software-label {
+		font-family: var(--font-text);
+		font-size: 12px;
+		font-weight: 600;
+		color: var(--color-purple);
+		text-align: center;
+		letter-spacing: 0.05em;
+		transition: all 0.3s ease;
+		white-space: nowrap;
+	}
+
+	.software-item:hover .software-label {
+		color: var(--color-pink);
+		transform: translateY(-2px);
+	}
+
+	/* Styles pour les catégories de logiciels */
+	.category-section {
+		margin-bottom: 32px;
+		padding: 16px 0;
+	}
+
+	.category-title {
+		position: relative;
+		padding-bottom: 8px;
+		margin-bottom: 20px;
+	}
+
+	.category-title::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 60px;
+		height: 1px;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			var(--color-purple),
+			transparent
+		);
+	}
+
+	.software-row {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 48px;
+		flex-wrap: wrap;
+	}
+
+	/* Ajustement pour la catégorie Gestion de Projet (seulement 2 icônes) */
+	.category-section:last-child .software-row {
+		gap: 64px;
+	}
+
+	/* Animation d'apparition pour les icônes */
+	.software-item {
+		opacity: 0;
+		transform: translateY(20px);
+		animation: software-item-reveal 0.6s ease-out forwards;
+	}
+
+	.software-item:nth-child(1) { animation-delay: 0.1s; }
+	.software-item:nth-child(2) { animation-delay: 0.2s; }
+	.software-item:nth-child(3) { animation-delay: 0.3s; }
+	.software-item:nth-child(4) { animation-delay: 0.4s; }
+
+	@keyframes software-item-reveal {
+		0% {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Effet de pulsation sur les barres de compétences */
+	.section-revealed .animate-skill-bar-1,
+	.section-revealed .animate-skill-bar-2,
+	.section-revealed .animate-skill-bar-3,
+	.section-revealed .animate-skill-bar-4 {
+		box-shadow: 
+			0 0 10px var(--color-purple),
+			0 0 20px rgba(184, 187, 240, 0.3);
+		animation-fill-mode: forwards;
+	}
+
+	/* Responsive pour la section logiciels */
+	@media (max-width: 768px) {
+		.software-icon-wrapper {
+			padding: 8px;
+		}
+
+		.software-img {
+			width: 56px;
+			height: 56px;
+		}
+
+		.software-label {
+			font-size: 10px;
+		}
+
+		.software-row {
+			gap: 24px;
+		}
+
+		.category-section:last-child .software-row {
+			gap: 32px;
+		}
+	}
+
+	/* Styles pour la section Skills avec animation */
+	.skills-section {
+		opacity: 0;
+		transform: translateY(50px);
+		transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	.skills-section.skills-revealed {
+		opacity: 1;
+		transform: translateY(0);
+		animation: skillsSectionReveal 1s ease-out forwards;
+	}
+
+	@keyframes skillsSectionReveal {
+		0% {
+			opacity: 0;
+			transform: translateY(50px) scale(0.95);
+		}
+		50% {
+			opacity: 0.7;
+			transform: translateY(-10px) scale(1.02);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	.skills-revealed .content-item {
+		animation: skillsContentReveal 0.6s ease-out forwards;
+		opacity: 0;
+		transform: translateY(30px);
+	}
+
+	.skills-revealed .content-item:nth-child(1) { animation-delay: 0.1s; }
+	.skills-revealed .content-item:nth-child(2) { animation-delay: 0.2s; }
+	.skills-revealed .content-item:nth-child(3) { animation-delay: 0.3s; }
+
+	@keyframes skillsContentReveal {
+		0% {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
 </style>
+
+<script>
+	// Gestion de l'animation de la section Skills au scroll
+	document.addEventListener('DOMContentLoaded', () => {
+		const skillsSection = document.querySelector('.skills-section');
+		let skillsAnimated = false;
+
+		if (skillsSection) {
+			const observerOptions = {
+				threshold: 0.3, // Déclencher quand 30% de la section est visible
+				rootMargin: '0px 0px -50px 0px'
+			};
+
+			const skillsObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting && !skillsAnimated) {
+						skillsSection.classList.add('skills-revealed');
+						skillsAnimated = true;
+						
+						// Déclencher l'événement personnalisé
+						const event = new CustomEvent('skillsSectionRevealed');
+						window.dispatchEvent(event);
+					}
+				});
+			}, observerOptions);
+
+			skillsObserver.observe(skillsSection);
+		}
+	});
+</script>
