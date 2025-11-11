@@ -4,6 +4,9 @@ import PocketBase from 'pocketbase';
 const POCKETBASE_URL = import.meta.env.POCKETBASE_URL || import.meta.env.PUBLIC_POCKETBASE_URL || 'http://127.0.0.1:8090';
 const pb = new PocketBase(POCKETBASE_URL);
 
+// Export de l'URL pour utilisation dans d'autres composants
+export { POCKETBASE_URL };
+
 // Interface TypeScript pour les projets
 export interface Project {
   id: string;
@@ -114,6 +117,61 @@ export function generateProjectId(project: Project): string {
   const index = project.id.substring(0, 2).toUpperCase();
   
   return `${initials}-${year}-${index}`;
+}
+
+// Interface TypeScript pour les contacts
+export interface Contact {
+  id: string;
+  prenom: string;
+  nom: string;
+  mail: string;
+  sujet: string;
+  message: string;
+  created: string;
+  updated: string;
+}
+
+// Fonction pour créer un nouveau contact
+export async function createContact(contactData: {
+  prenom: string;
+  nom: string;
+  mail: string;
+  sujet: string;
+  message: string;
+}): Promise<Contact | null> {
+  try {
+    console.log('Tentative de création du contact avec PocketBase...');
+    console.log('URL PocketBase:', POCKETBASE_URL);
+    console.log('Données à envoyer:', contactData);
+    
+    const record = await pb.collection('contact').create(contactData);
+    console.log('Enregistrement créé avec succès:', record);
+    return record as Contact;
+  } catch (error: any) {
+    console.error('Erreur complète:', error);
+    console.error('Type d\'erreur:', typeof error);
+    console.error('Status:', error.status);
+    console.error('Response:', error.response);
+    console.error('Data:', error.data);
+    console.error('Message:', error.message);
+    
+    // Gestion d'erreurs plus détaillée
+    if (error.status === 400) {
+      console.error('Erreur 400 - Détails:', error.data);
+      throw new Error(`Erreur de validation: ${JSON.stringify(error.data)}`);
+    } else if (error.status === 403) {
+      throw new Error('Accès refusé - Vérifiez les permissions de la collection contact');
+    } else if (error.status === 404) {
+      throw new Error('Collection "contact" introuvable');
+    } else if (error.status === 500) {
+      throw new Error('Erreur du serveur PocketBase');
+    } else if (error.message && error.message.includes('fetch')) {
+      throw new Error(`Impossible de se connecter à PocketBase sur ${POCKETBASE_URL}`);
+    } else {
+      // Afficher l'erreur complète pour debugging
+      throw new Error(`Erreur PocketBase (${error.status || 'unknown'}): ${error.message || 'Something went wrong'} - Détails: ${JSON.stringify(error.data || {})}`);
+    }
+  }
 }
 
 export default pb;
