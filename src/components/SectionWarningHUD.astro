@@ -597,10 +597,40 @@
 			this.hasBeenTriggered = true; // Marquer comme déclenché pour éviter les futurs déclenchements
 			this.overlay.classList.add('active');
 
+			// Bloquer le scroll
+			this.disableScroll();
+
 			// Animation du pourcentage
 			this.animateProgress();
 
 			// Ne plus masquer automatiquement - attendre le clic
+		}
+
+		private disableScroll(): void {
+			// Sauvegarder la position actuelle du scroll
+			const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+			
+			// Ajouter les styles pour bloquer le scroll
+			document.body.style.position = 'fixed';
+			document.body.style.top = `-${scrollTop}px`;
+			document.body.style.width = '100%';
+			document.body.style.overflow = 'hidden';
+		}
+
+		private enableScroll(): void {
+			// Récupérer la position sauvegardée
+			const scrollY = document.body.style.top;
+			
+			// Restaurer les styles
+			document.body.style.position = '';
+			document.body.style.top = '';
+			document.body.style.width = '';
+			document.body.style.overflow = '';
+			
+			// Restaurer la position du scroll
+			if (scrollY) {
+				window.scrollTo(0, parseInt(scrollY || '0') * -1);
+			}
 		}
 
 		private animateProgress(): void {
@@ -644,6 +674,9 @@
 
 			this.overlay.classList.remove('active');
 
+			// Réactiver le scroll
+			this.enableScroll();
+
 			// Révéler le contenu de la section après un délai
 			setTimeout(() => {
 				this.revealSectionContent();
@@ -677,6 +710,9 @@
 		public reset(): void {
 			this.isActive = false;
 			this.hasBeenTriggered = false; // Permettre un nouveau déclenchement
+			
+			// Réactiver le scroll si nécessaire
+			this.enableScroll();
 			
 			if (this.overlay) {
 				this.overlay.classList.remove('active');
