@@ -8,9 +8,8 @@ import GlobeCanvas from "../components/GlobeCanvas.astro";
 import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 import CardProject from "../components/CardProject.astro";
 import ProjectStatus from "../components/ProjectStatus.astro";
-import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId, getProjectImageUrl } from "../lib/pocketbase";
-
-// Récupération des projets depuis PocketBase
+import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId, 
+getProjectImageUrl } from "../lib/pocketbase";
 let projects = [];
 let hasError = false;
 
@@ -19,7 +18,7 @@ try {
   console.log('Projets récupérés:', projects.length);
   if (projects.length === 0) {
     console.log('Aucun projet trouvé, utilisation des données de test');
-    // Données de test pour Modulo
+  
     projects = [
       {
         id: 'f3owlbua4olvg0p',
@@ -39,7 +38,7 @@ try {
 } catch (error) {
   console.error('Erreur lors du chargement des projets:', error);
   hasError = true;
-  // En cas d'erreur, utiliser les données de test
+ 
   projects = [
     {
       id: 'f3owlbua4olvg0p',
@@ -55,7 +54,7 @@ try {
       updated: '2025-11-01T00:00:00.000Z'
     }
   ];
-  hasError = false; // Réinitialiser pour afficher les données de test
+  hasError = false; 
 }
 ---
 
@@ -66,11 +65,10 @@ try {
 	<main class="relative z-10">
 		<HeroSection>
 			<GlobeCanvas />
-			<h1
-				class="hero-name text-white text-center tracking-[0.15em] my-8 whitespace-nowrap relative z-[1] opacity-0 -translate-x-12"
-			>
+			<h1 class="hero-name text-white text-center tracking-[0.15em] my-8 whitespace-nowrap relative z-[1] opacity-0 -translate-x-12">
 				ANDREA MESTRE
 			</h1>
+
 			<div
 				class="hero-title-wrapper flex items-center gap-8 my-4 mb-12 relative opacity-0 z-[1]"
 			>
@@ -86,10 +84,10 @@ try {
 			</div>
 		</HeroSection>
 
-		<!-- Section À Propos de Moi - Interface Spatiale -->
+		
 		<section
-			class="section-hidden min-h-screen flex items-center justify-center py-50 px-4 border-t mt-50"
-		>
+			class="section-hidden min-h-screen flex items-center justify-center py-50 px-4 border-t mt-50">
+			
 			<div class="container max-w-full mx-auto">
 				<div
 					class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
