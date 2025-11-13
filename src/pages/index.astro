@@ -8,6 +8,7 @@ import GlobeCanvas from "../components/GlobeCanvas.astro";
 import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 import CardProject from "../components/CardProject.astro";
 import ProjectStatus from "../components/ProjectStatus.astro";
+import SkillsDecorative from "../components/SkillsDecorative.astro";
 import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId, 
 getProjectImageUrl } from "../lib/pocketbase";
 let projects = [];
@@ -16,28 +17,8 @@ let hasError = false;
 try {
   projects = await getProjects();
   console.log('Projets récupérés:', projects.length);
-  if (projects.length === 0) {
-    console.log('Aucun projet trouvé, utilisation des données de test');
-  
-    projects = [
-      {
-        id: 'f3owlbua4olvg0p',
-        titre: 'MODULO',
-        etude_annee: 'BUT MMI 2',
-        projet_annee: '2025-11-01',
-        categories: ['Design graphique', 'Développement web', 'Communication'],
-        resume: 'Interface de gestion modulaire pour la productivité numérique. Design système cohérent avec composants réutilisables.',
-        description: 'Modulo est une interface de gestion complète...',
-        outils: ['Figma', 'Illustrator', 'Javascript', 'TailwindCSS', 'Astro'],
-        images: ['modulo1.webp', 'modulo2.webp', 'modulo3.webp'],
-        image_projet: 'mockupmodulo1_mg6m9inyh1.webp',
-        created: '2025-11-01T00:00:00.000Z',
-        updated: '2025-11-01T00:00:00.000Z'
-      }
-    ];
-  }
 } catch (error) {
-  console.error('Erreur lors du chargement des projets:', error);
+  console.error('Erreur lors de la récupération des projets:', error);
   hasError = true;
 }
 ---
@@ -54,8 +35,7 @@ try {
 			</h1>
 
 			<div
-				class="hero-title-wrapper flex items-center gap-8 my-4 mb-12 relative opacity-0 z-[1]"
-			>
+				class="hero-title-wrapper flex items-center gap-8 my-4 mb-12 relative opacity-0 z-[1]">
 				<div
 					class="title-line w-16 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"
 				>
@@ -74,11 +54,9 @@ try {
 
 			<div class="container max-w-full mx-auto">
 				<div
-					class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
-				>
-					<!-- Cadre gauche - Informations personnelles -->
+					class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+	
 					<div class="relative p-4 min-h-[600px]">
-						<!-- SVG HUD Apropos en arrière-plan -->
 						<div class="absolute inset-0 pointer-events-none">
 							<img
 								src="/src/assets/svg/hud_apropos.svg?v=1731340000"
@@ -147,7 +125,7 @@ try {
 									<img
 										src="/src/assets/icons/behance.svg?v=1731340000"
 										alt="Behance"
-										class="w-11 h-11 brightness-0 invert group-hover:brightness-100"
+										class="w-14 h-14 opacity-80 group-hover:opacity-100 transition-opacity duration-300"
 									/>
 									<div
 										class="absolute inset-0 bg-gradient-to-r from-[--color-purple]/20 to-[--color-pink]/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"
@@ -161,7 +139,7 @@ try {
 									<img
 										src="/src/assets/icons/linkedin.svg?v=1731340000"
 										alt="LinkedIn"
-										class="w-12 h-12"
+										class="w-14 h-14"
 									/>
 									<div
 										class="absolute inset-0 bg-gradient-to-r from-[--color-purple]/20 to-[--color-pink]/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"
@@ -245,65 +223,7 @@ try {
 		>
 			<div class="container max-w-full mx-auto">
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-					<!-- Partie gauche - Section décorative avec éléments violets -->
-					<div class="relative p-4 min-h-[700px] flex flex-col">
-						<!-- SVG HUD Element Donut en arrière-plan -->
-						<div class="absolute inset-0 pointer-events-none">
-							<img
-								src="/src/assets/svg/hud_elementdonut.svg?v=1731340000"
-								alt="HUD Element Donut Frame"
-								class="w-full h-full object-fill scale-75"
-							/>
-						</div>
-
-						<!-- Éléments violets décoratifs positionnés à l'intérieur du HUD -->
-						<div class="relative z-10 flex-1 flex justify-center items-center px-8 py-16">
-							<div class="flex items-center justify-center gap-19">
-								<!-- Premier élément donut rond -->
-								<div class="decorative-element relative">
-									<img
-										src="/src/assets/svg/donutround_hud.svg?v=1731340000"
-										alt="Donut Round Element"
-										class="w-30 h-30 opacity-80"
-										style="animation: float 6s ease-in-out infinite;"
-									/>
-								</div>
-
-								<!-- Deuxième élément donut central (plus grand) -->
-								<div class="decorative-element relative">
-									<img
-										src="/src/assets/svg/donut_hud.svg?v=1731340000"
-										alt="Donut Central Element"
-										class="w-50 h-50 opacity-90"
-										style="animation: float 6s ease-in-out infinite 2s;"
-									/>
-								</div>
-
-								<!-- Troisième élément donut rond -->
-								<div class="decorative-element relative">
-									<img
-										src="/src/assets/svg/donutround2.svg?v=1731340000"
-										alt="Donut Round Element 2"
-										class="w-30 h-30 opacity-75"
-										style="animation: float 6s ease-in-out infinite 4s;"
-									/>
-								</div>
-							</div>
-						</div>
-						
-						<!-- Nouvelle barre de chargement juste en dessous du HUD -->
-						<div class="relative z-10 flex justify-center -mt-8">
-							<div class="progress-bar-container">
-								<ul class="progress-bar">
-									<li></li>
-									<li></li>
-									<li></li>
-									<li></li>
-									<li></li>
-								</ul>
-							</div>
-						</div>
-					</div>
+					<SkillsDecorative />
 
 					<!-- Partie droite - Logiciels maîtrisés -->
 					<div class="relative h-[700px] lg:h-full">
@@ -1057,71 +977,6 @@ try {
 		}
 	}
 
-	/* Styles pour les éléments décoratifs violets */
-	.decorative-element {
-		transition: all 0.3s ease;
-		filter: drop-shadow(0 0 10px rgba(184, 187, 240, 0.4));
-	}
-
-	/* Styles pour la nouvelle barre de chargement */
-	.progress-bar-container {
-		margin-top: 20px;
-	}
-
-	.progress-bar {
-		margin: auto;
-		height: 10px;
-		width: 500px;
-		position: relative;
-		list-style: none;
-		padding: 0;
-		display: flex;
-		align-items: center;
-	}
-
-	.progress-bar li {
-		display: block;
-		float: left;
-		width: 90px;
-		height: 10px;
-		margin-right: 10px;
-	}
-
-	.progress-bar li:nth-child(-n+3) {
-		background: rgba(184, 187, 240, 0.9);
-		box-shadow: inset 0px 0px 10px 2px rgba(184, 187, 240, 0.5),
-					0px 0px 20px rgba(184, 187, 240, 0.5);
-	}
-
-	.progress-bar li:nth-child(n+4) {
-		box-shadow: inset 0px 0px 10px 1px rgba(184, 187, 240, 0.4),
-					0px 0px 20px rgba(184, 187, 240, 0.1);
-		background: rgba(184, 187, 240, 0.2);
-	}
-
-	.progress-bar li:nth-child(3) {
-		animation: pulse 1s alternate infinite;
-	}
-
-	@keyframes pulse {
-		0% {
-			background: rgba(184, 187, 240, 1);
-			box-shadow: inset 0px 0px 10px 2px rgba(184, 187, 240, 0.5),
-						0px 0px 40px 2px var(--color-purple);
-		}
-		100% {
-			background: rgba(184, 187, 240, 0);
-			box-shadow: inset 0px 0px 10px 2px rgba(184, 187, 240, 0.5),
-						0px 0px 30px 2px rgba(184, 187, 240, 0.3);
-		}
-	}
-
-	/* Styles pour les éléments décoratifs violets */
-	.decorative-element {
-		transition: all 0.3s ease;
-		filter: drop-shadow(0 0 10px rgba(184, 187, 240, 0.4));
-	}
-
 	/* Styles pour la section Projets */
 	.projects-section {
 		opacity: 0;
@@ -1211,15 +1066,6 @@ try {
 		}
 		100% {
 			transform: rotate(360deg);
-		}
-	}
-
-	@keyframes float {
-		0%, 100% {
-			transform: translateY(0px);
-		}
-		50% {
-			transform: translateY(-10px);
 		}
 	}
 

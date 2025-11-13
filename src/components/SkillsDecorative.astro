@@ -1,0 +1,372 @@
+<!-- Partie gauche - Section décorative avec éléments violets -->
+<div class="relative p-4 min-h-[900px] flex flex-col transform -translate-y-40">
+    <!-- SVG HUD Element Donut en arrière-plan -->
+    <div class="absolute inset-0 pointer-events-none">
+        <img
+            src="/src/assets/svg/hud_elementdonut.svg?v=1731340000"
+            alt="HUD Element Donut Frame"
+            class="w-full h-full object-fill scale-75"
+        />
+    </div>
+
+    <!-- Éléments violets décoratifs positionnés à l'intérieur du HUD -->
+    <div
+        class="relative z-10 flex-1 flex justify-center items-center px-5 py-16 mt-8"
+    >
+        <div class="flex items-center justify-center gap-19">
+            <!-- Premier élément donut rond -->
+            <div class="decorative-element relative">
+                <img
+                    src="/src/assets/svg/donutround_hud.svg?v=1731340000"
+                    alt="Donut Round Element"
+                    class="w-30 h-30 opacity-80"
+                    style="animation: float 6s ease-in-out infinite;"
+                />
+            </div>
+
+            <!-- Deuxième élément donut central (plus grand) -->
+            <div class="decorative-element relative">
+                <img
+                    src="/src/assets/svg/donut_hud.svg?v=1731340000"
+                    alt="Donut Central Element"
+                    class="w-50 h-50 opacity-90"
+                    style="animation: float 6s ease-in-out infinite 2s;"
+                />
+            </div>
+
+            <!-- Troisième élément donut rond -->
+            <div class="decorative-element relative">
+                <img
+                    src="/src/assets/svg/donutround2.svg?v=1731340000"
+                    alt="Donut Round Element 2"
+                    class="w-30 h-30 opacity-75"
+                    style="animation: float 6s ease-in-out infinite 4s;"
+                />
+            </div>
+        </div>
+    </div>
+
+    <!-- Nouvelle barre de chargement juste en dessous du HUD -->
+    <div class="relative z-10 flex flex-col items-center -mt-16 space-y-8">
+        <!-- Troisième barre de chargement (nouvelle) -->
+        <div class="progress-bar-container">
+            <ul class="progress-bar">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+
+        <!-- Première barre de chargement (complète avec animation) -->
+        <div class="progress-bar-container">
+            <ul class="progress-bar">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+
+        <!-- Deuxième barre de chargement (partielle) -->
+        <div class="progress-bar-container">
+            <ul class="progress-bar">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    /* Styles pour les éléments décoratifs violets */
+    .decorative-element {
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 0 10px rgba(184, 187, 240, 0.4));
+    }
+
+    /* Styles pour la nouvelle barre de chargement */
+    .progress-bar-container {
+        margin-top: 0px;
+    }
+
+    .progress-bar {
+        margin: auto;
+        height: 10px;
+        width: 500px;
+        position: relative;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .progress-bar li {
+        display: block;
+        float: left;
+        width: 90px;
+        height: 10px;
+        margin-right: 10px;
+    }
+
+    /* Barre complète - toutes les sections chargées */
+    .progress-bar-complete li {
+        background: var(--color-white);
+        box-shadow:
+            inset 0px 0px 10px 2px rgba(255, 255, 255, 0.5),
+            0px 0px 20px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Troisième barre - effet différent */
+    .progress-bar-third li {
+        background: var(--color-darkpurple);
+        box-shadow:
+            inset 0px 0px 10px 2px rgba(97, 84, 197, 0.5),
+            0px 0px 20px rgba(97, 84, 197, 0.5);
+        position: relative;
+        overflow: hidden;
+        animation: thirdBarScan 4s ease-in-out infinite;
+    }
+
+    .progress-bar-third li::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.6),
+            transparent
+        );
+        animation: scanLine 3s ease-in-out infinite;
+    }
+
+    .progress-bar-third li::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            rgba(97, 84, 197, 0) 0%,
+            rgba(97, 84, 197, 0.4) 50%,
+            rgba(97, 84, 197, 0) 100%
+        );
+        opacity: 0;
+        animation: dataFlow 2s ease-in-out infinite;
+    }
+
+    .progress-bar-third li:nth-child(1) { 
+        animation-delay: 0s;
+    }
+    .progress-bar-third li:nth-child(1)::before { 
+        animation-delay: 0.2s;
+    }
+    .progress-bar-third li:nth-child(1)::after { 
+        animation-delay: 0.4s;
+    }
+    
+    .progress-bar-third li:nth-child(2) { 
+        animation-delay: 0.4s;
+    }
+    .progress-bar-third li:nth-child(2)::before { 
+        animation-delay: 0.6s;
+    }
+    .progress-bar-third li:nth-child(2)::after { 
+        animation-delay: 0.8s;
+    }
+    
+    .progress-bar-third li:nth-child(3) { 
+        animation-delay: 0.8s;
+    }
+    .progress-bar-third li:nth-child(3)::before { 
+        animation-delay: 1s;
+    }
+    .progress-bar-third li:nth-child(3)::after { 
+        animation-delay: 1.2s;
+    }
+    
+    .progress-bar-third li:nth-child(4) { 
+        animation-delay: 1.2s;
+    }
+    .progress-bar-third li:nth-child(4)::before { 
+        animation-delay: 1.4s;
+    }
+    .progress-bar-third li:nth-child(4)::after { 
+        animation-delay: 1.6s;
+    }
+    
+    .progress-bar-third li:nth-child(5) { 
+        animation-delay: 1.6s;
+    }
+    .progress-bar-third li:nth-child(5)::before { 
+        animation-delay: 1.8s;
+    }
+    .progress-bar-third li:nth-child(5)::after { 
+        animation-delay: 2s;
+    }
+
+    @keyframes thirdBarScan {
+        0%, 100% {
+            opacity: 0.8;
+            transform: scaleX(1);
+            background: rgba(97, 84, 197, 0.8);
+            box-shadow:
+                inset 0px 0px 10px 2px rgba(97, 84, 197, 0.5),
+                0px 0px 20px rgba(97, 84, 197, 0.5);
+        }
+        50% {
+            opacity: 1;
+            transform: scaleX(1.02);
+            background: var(--color-darkpurple);
+            box-shadow:
+                inset 0px 0px 20px 4px rgba(97, 84, 197, 0.8),
+                0px 0px 40px rgba(97, 84, 197, 1),
+                0px 0px 60px rgba(97, 84, 197, 0.6);
+        }
+    }
+
+    @keyframes scanLine {
+        0% {
+            left: -100%;
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            left: 100%;
+            opacity: 0;
+        }
+    }
+
+    @keyframes dataFlow {
+        0%, 100% {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        50% {
+            opacity: 1;
+            transform: translateX(20px);
+        }
+    }
+
+    /* Animation pour la barre complète */
+    .progress-bar-animated li {
+        opacity: 0;
+        transform: scaleX(0);
+        animation:
+            progressFill 2.5s ease-out forwards,
+            progressPulse 2s ease-in-out 3s infinite;
+    }
+
+    .progress-bar-animated li:nth-child(1) {
+        animation-delay: 0.3s, 3.3s;
+    }
+    .progress-bar-animated li:nth-child(2) {
+        animation-delay: 0.6s, 3.6s;
+    }
+    .progress-bar-animated li:nth-child(3) {
+        animation-delay: 0.9s, 3.9s;
+    }
+    .progress-bar-animated li:nth-child(4) {
+        animation-delay: 1.2s, 4.2s;
+    }
+    .progress-bar-animated li:nth-child(5) {
+        animation-delay: 1.5s, 4.5s;
+    }
+
+    @keyframes progressFill {
+        0% {
+            opacity: 0;
+            transform: scaleX(0);
+            background: var(--color-white);
+        }
+        50% {
+            opacity: 1;
+            transform: scaleX(1.1);
+            background: var(--color-white);
+        }
+        100% {
+            opacity: 1;
+            transform: scaleX(1);
+            background: var(--color-white);
+        }
+    }
+
+    @keyframes progressPulse {
+        0%,
+        100% {
+            opacity: 1;
+            transform: scaleX(1);
+            background: var(--color-white);
+            box-shadow:
+                inset 0px 0px 10px 2px rgba(255, 255, 255, 0.5),
+                0px 0px 20px rgba(255, 255, 255, 0.5);
+        }
+        50% {
+            opacity: 1;
+            transform: scaleX(1.05);
+            background: var(--color-white);
+            box-shadow:
+                inset 0px 0px 15px 3px rgba(255, 255, 255, 0.7),
+                0px 0px 30px rgba(255, 255, 255, 0.8);
+        }
+    }
+
+    /* Barre partielle - seulement 3 premières sections */
+    .progress-bar:not(.progress-bar-complete) li:nth-child(-n + 3) {
+        background: var(--color-pink);
+        box-shadow:
+            inset 0px 0px 10px 2px rgba(150, 46, 185, 0.5),
+            0px 0px 20px rgba(150, 46, 185, 0.5);
+    }
+
+    .progress-bar:not(.progress-bar-complete) li:nth-child(n + 4) {
+        box-shadow:
+            inset 0px 0px 10px 1px rgba(150, 46, 185, 0.4),
+            0px 0px 20px rgba(150, 46, 185, 0.1);
+        background: rgba(150, 46, 185, 0.2);
+    }
+
+    .progress-bar:not(.progress-bar-complete) li:nth-child(3) {
+        animation: pulse-pink 1s alternate infinite;
+    }
+
+    @keyframes pulse-pink {
+        0% {
+            background: var(--color-pink);
+            box-shadow:
+                inset 0px 0px 10px 2px rgba(150, 46, 185, 0.5),
+                0px 0px 40px 2px var(--color-pink);
+        }
+        100% {
+            background: rgba(150, 46, 185, 0);
+            box-shadow:
+                inset 0px 0px 10px 2px rgba(150, 46, 185, 0.5),
+                0px 0px 30px 2px rgba(150, 46, 185, 0.3);
+        }
+    }
+
+    /* Animation des éléments flottants */
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+</style>

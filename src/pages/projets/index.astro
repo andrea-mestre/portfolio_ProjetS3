@@ -1,8 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import HudHeader from "../../components/HudHeader.astro";
-import HudSidebar from "../../components/HudSidebar.astro";
-import HudClock from "../../components/HudClock.astro";
 import CardProject from "../../components/CardProject.astro";
 import ProjectStatus from "../../components/ProjectStatus.astro";
 import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId, 
@@ -14,7 +12,9 @@ let hasError = false;
 try {
   projects = await getProjects();
   console.log('Projets récupérés pour la page projets:', projects.length);
-  
+} catch (error) {
+  console.error('Erreur lors de la récupération des projets:', error);
+  hasError = true;
 }
 
 // Fonction pour générer le slug du projet
@@ -26,11 +26,10 @@ function generateProjectSlug(project: any): string {
 <Layout>
 	<HudHeader currentPage="projets" />
 	<main class="relative z-10 pt-24">
+
 		<div class="flex justify-center mb-0">
-			<h1
-				class="text-white tracking-wide whitespace-nowrap drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-				style="font-family: var(--font-title1); font-size: var(--size-title1);"
-			>
+			<h1 class="text-white tracking-wide whitespace-nowrap drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+				style="font-family: var(--font-title1); font-size: var(--size-title1);">
 				PROJETS
 			</h1>
 		</div>
@@ -39,19 +38,17 @@ function generateProjectSlug(project: any): string {
 			<div class="text-center max-w-4xl">
 				<h2
 					class="projects-hero-title font-[family-name:var(--font-title2)] text-5xl md:text-6xl font-bold mb-6 tracking-[0.15em] text-center section-neon mt-0"
-					style="color: var(--color-darkpurple);"
-				>
+					style="color: var(--color-darkpurple);">
 					MES PROJETS
 				</h2>
 
 				
 				<p
-					class="projects-hero-description font-[family-name:var(--font-text)] text-lg md:text-xl text-white/70 leading-relaxed mb-8 opacity-0"
-				>
+					class="projects-hero-description font-[family-name:var(--font-text)] text-lg md:text-xl text-white/70 leading-relaxed mb-8 opacity-0">
 					Découvrez une sélection de mes réalisations en design graphique, développement web et communication visuelle.
 				</p>
 				
-				<!-- Statistiques projets -->
+				
 				<div class="projects-stats flex justify-center gap-8 md:gap-12 mt-8 mb-4 opacity-0">
 					<div class="stat-item text-center">
 						<div class="stat-number font-[family-name:var(--font-title2)] text-4xl font-bold tracking-[0.15em] section-neon mb-2" style="color: var(--color-darkpurple);">{projects.length}</div>

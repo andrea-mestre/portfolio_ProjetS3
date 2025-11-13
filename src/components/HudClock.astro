@@ -1,24 +1,22 @@
 ---
 import hourHud from '../assets/svg/hour_hud.svg';
 import utcIcon from '../assets/svg/UTC.svg';
-import clockIcon from '../assets/svg/clock.svg';
 ---
 
 <div class="relative w-full max-w-[600px] md:max-w-[500px] sm:max-w-[400px] h-auto mx-auto p-6 md:p-4 sm:p-3 opacity-0 animate-[fadeInClock_1s_ease-out_2s_forwards]">
-  <!-- SVG hour_hud en haut (agrandi) -->
+  
   <div class="absolute top-0 left-0 right-0 w-[110%] -translate-x-[5%] z-10">
     <img src={hourHud.src} alt="" class="w-full h-auto block animate-[glowPulse_3s_ease-in-out_infinite]" style="filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));" />
   </div>
-  
-  <!-- Ligne avec l'heure et UTC -->
+
   <div class="relative flex items-center justify-center gap-[20px] mt-6 mb-[18px] z-20">
-    <!-- Affichage de l'heure avec effet de flou -->
+    
     <div class="relative min-w-[260px] flex-shrink-0">
       <div class="absolute left-1/2 -translate-x-1/2 text-[48px] md:text-[36px] sm:text-[28px] font-normal text-[var(--color-darkpurple)] blur-[15px] tracking-[0.05em] pointer-events-none font-variant-numeric-tabular animate-[neonBlurBreath_4s_ease-in-out_infinite] whitespace-nowrap" style="font-family: var(--font-title2);" id="time-blur">15:30:24</div>
       <div class="relative text-[48px] md:text-[36px] sm:text-[28px] font-normal text-[var(--color-darkpurple)] tracking-[0.05em] font-variant-numeric-tabular whitespace-nowrap transition-all duration-300 animate-[neonBreath_4s_ease-in-out_infinite]" id="time-main" style="text-shadow: 0 0 10px var(--color-darkpurple), 0 0 20px var(--color-darkpurple), 0 0 20px var(--color-darkpurple); font-family: var(--font-title2);">15:30:24</div>
     </div>
     
-    <!-- Boîte UTC -->
+    
     <div class="relative z-30">
       <img src={utcIcon.src} alt="UTC+2" class="w-[180px] md:w-[120px] sm:w-[120px] h-auto block animate-[badgePulse_3s_ease-in-out_infinite]" style="filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));" />
     </div>
