@@ -18,6 +18,7 @@ export interface Project {
   description: string;
   outils: string[]; // ["Illustrator", "Figma", etc.]
   images: string[]; // URLs des images
+  image_projet: string; // Image principale du projet
   created: string;
   updated: string;
 }
@@ -117,6 +118,12 @@ export function generateProjectId(project: Project): string {
   const index = project.id.substring(0, 2).toUpperCase();
   
   return `${initials}-${year}-${index}`;
+}
+
+// Fonction pour générer l'URL complète de l'image du projet
+export function getProjectImageUrl(project: Project): string | null {
+  if (!project.image_projet) return null;
+  return `${POCKETBASE_URL}/api/files/projet/${project.id}/${project.image_projet}`;
 }
 
 // Interface TypeScript pour les contacts

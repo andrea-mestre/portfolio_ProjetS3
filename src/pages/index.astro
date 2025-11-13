@@ -8,7 +8,7 @@ import GlobeCanvas from "../components/GlobeCanvas.astro";
 import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 import CardProject from "../components/CardProject.astro";
 import ProjectStatus from "../components/ProjectStatus.astro";
-import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId } from "../lib/pocketbase";
+import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId, getProjectImageUrl } from "../lib/pocketbase";
 
 // Récupération des projets depuis PocketBase
 let projects = [];
@@ -432,15 +432,6 @@ try {
 					<div class="projects-title-line w-24 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"></div>
 					<div class="projects-title-line w-24 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"></div>
 				</div>
-
-				<div class="content-item">
-					<p
-						class="font-[family-name:var(--font-text)] text-lg md:text-xl text-white/70 leading-relaxed mb-12"
-					>
-						Portfolio de projets innovants et d'expériences
-						digitales uniques.
-					</p>
-				</div>
 				
 				<!-- Grille de cartes projets -->
 				<div class="projects-grid flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
@@ -458,7 +449,8 @@ try {
 								stats={calculateProjectStats(project)}
 								id={generateProjectId(project)}
 								date={formatProjectDate(project.projet_annee)}
-								buttonText="Voir le projet"
+								imageUrl={getProjectImageUrl(project)}
+								categories={project.categories || []}
 							/>
 						))
 					) : (

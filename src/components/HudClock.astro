@@ -131,15 +131,16 @@ import clockIcon from '../assets/svg/clock.svg';
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 18px;
-    margin: 35px 0 18px 0;
+    gap: 35px;
+    margin: 40px 0 18px 0;
     z-index: 2;
   }
   
   /* Affichage de l'heure */
   .time-display {
     position: relative;
-    min-width: 240px;
+    min-width: 220px;
+    flex-shrink: 0;
   }
   
   .time-blur {
@@ -147,7 +148,7 @@ import clockIcon from '../assets/svg/clock.svg';
     left: 50%;
     transform: translateX(-50%);
     font-family: var(--font-title2);
-    font-size: 46px;
+    font-size: 40px;
     font-weight: 400;
     color: var(--color-darkpurple);
     filter: blur(15px);
@@ -174,7 +175,7 @@ import clockIcon from '../assets/svg/clock.svg';
   .time-main {
     position: relative;
     font-family: var(--font-title2);
-    font-size: 46px;
+    font-size: 40px;
     font-weight: 400;
     color: var(--color-darkpurple);
     letter-spacing: 0.05em;
@@ -212,7 +213,7 @@ import clockIcon from '../assets/svg/clock.svg';
   }
   
   .utc-badge {
-    width: 120px;
+    width: 160px;
     height: auto;
     display: block;
     filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
