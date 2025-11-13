@@ -1,0 +1,464 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HudHeader from "../components/HudHeader.astro";
+import HudSidebar from "../components/HudSidebar.astro";
+import HudClock from "../components/HudClock.astro";
+import CardProject from "../components/CardProject.astro";
+import ProjectStatus from "../components/ProjectStatus.astro";
+import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId, 
+getProjectImageUrl } from "../lib/pocketbase";
+
+let projects = [];
+let hasError = false;
+
+try {
+  projects = await getProjects();
+  console.log('Projets récupérés pour la page projets:', projects.length);
+  if (projects.length === 0) {
+    console.log('Aucun projet trouvé, utilisation des données de test');
+    
+    projects = [
+      {
+        id: 'f3owlbua4olvg0p',
+        titre: 'MODULO',
+        etude_annee: 'BUT MMI 2',
+        projet_annee: '2025-11-01',
+        categories: ['Design graphique', 'Développement web', 'Communication'],
+        resume: 'Interface de gestion modulaire pour la productivité numérique. Design système cohérent avec composants réutilisables.',
+        description: 'Modulo est une interface de gestion complète...',
+        outils: ['Figma', 'Illustrator', 'Javascript', 'TailwindCSS', 'Astro'],
+        images: ['modulo1.webp', 'modulo2.webp', 'modulo3.webp'],
+        image_projet: 'mockupmodulo1_mg6m9inyh1.webp',
+        created: '2025-11-01T00:00:00.000Z',
+        updated: '2025-11-01T00:00:00.000Z'
+      },
+      {
+        id: 'g4pwlbva5pmvh1q',
+        titre: 'PORTFOLIO WEB',
+        etude_annee: 'BUT MMI 2',
+        projet_annee: '2025-10-15',
+        categories: ['Développement web', 'Design UI/UX', 'Frontend'],
+        resume: 'Portfolio personnel moderne avec design spatial et animations interactives. Développé avec Astro et TailwindCSS.',
+        description: 'Portfolio personnel showcasing mes compétences en développement web et design...',
+        outils: ['Astro', 'TailwindCSS', 'TypeScript', 'Three.js', 'Figma'],
+        images: ['portfolio1.webp', 'portfolio2.webp', 'portfolio3.webp'],
+        image_projet: null,
+        created: '2025-10-15T00:00:00.000Z',
+        updated: '2025-10-15T00:00:00.000Z'
+      },
+      {
+        id: 'h5qxmcwb6qnwi2r',
+        titre: 'BRANDING STUDIO',
+        etude_annee: 'BUT MMI 1',
+        projet_annee: '2024-12-20',
+        categories: ['Branding', 'Design graphique', 'Identité visuelle'],
+        resume: 'Création d\'identité visuelle complète pour une startup tech. Logo, charte graphique et déclinaisons.',
+        description: 'Projet de branding complet pour une startup dans le domaine de la tech...',
+        outils: ['Illustrator', 'Photoshop', 'InDesign', 'Figma'],
+        images: ['branding1.webp', 'branding2.webp', 'branding3.webp'],
+        image_projet: null,
+        created: '2024-12-20T00:00:00.000Z',
+        updated: '2024-12-20T00:00:00.000Z'
+      },
+      {
+        id: 'i6ryndxc7roxj3s',
+        titre: 'APP MOBILE UX',
+        etude_annee: 'BUT MMI 2',
+        projet_annee: '2025-09-10',
+        categories: ['UX/UI Design', 'Mobile', 'Prototypage'],
+        resume: 'Application mobile de gestion de tâches avec interface intuitive et expérience utilisateur optimisée.',
+        description: 'Design et prototypage d\'une application mobile de productivité...',
+        outils: ['Figma', 'Principle', 'Adobe XD', 'Miro'],
+        images: ['mobile1.webp', 'mobile2.webp', 'mobile3.webp'],
+        image_projet: null,
+        created: '2025-09-10T00:00:00.000Z',
+        updated: '2025-09-10T00:00:00.000Z'
+      }
+    ];
+  }
+} catch (error) {
+  console.error('Erreur lors du chargement des projets:', error);
+  hasError = true;
+  
+  projects = [
+    {
+      id: 'f3owlbua4olvg0p',
+      titre: 'MODULO',
+      etude_annee: 'BUT MMI 2',
+      projet_annee: '2025-11-01',
+      categories: ['Design graphique', 'Développement web', 'Communication'],
+      resume: 'Interface de gestion modulaire pour la productivité numérique. Design système cohérent avec composants réutilisables.',
+      description: 'Modulo est une interface de gestion complète...',
+      outils: ['Figma', 'Illustrator', 'Javascript', 'TailwindCSS', 'Astro'],
+      images: ['modulo1.webp', 'modulo2.webp', 'modulo3.webp'],
+      image_projet: 'mockupmodulo1_mg6m9inyh1.webp',
+      created: '2025-11-01T00:00:00.000Z',
+      updated: '2025-11-01T00:00:00.000Z'
+    },
+  ];
+  hasError = false; 
+}
+---
+
+<Layout>
+	<HudHeader currentPage="projets" />
+	<main class="relative z-10 pt-24">
+		<div class="flex justify-center mb-0">
+			<h1
+				class="text-white tracking-wide whitespace-nowrap drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+				style="font-family: var(--font-title1); font-size: var(--size-title1);"
+			>
+				PROJETS
+			</h1>
+		</div>
+
+		<section class="hero-projects flex justify-center py-0 px-8 pt-4">
+			<div class="text-center max-w-4xl">
+				<h2
+					class="projects-hero-title font-[family-name:var(--font-title2)] text-5xl md:text-6xl font-bold mb-6 tracking-[0.15em] text-center section-neon mt-0"
+					style="color: var(--color-darkpurple);"
+				>
+					MES PROJETS
+				</h2>
+
+				
+				<p
+					class="projects-hero-description font-[family-name:var(--font-text)] text-lg md:text-xl text-white/70 leading-relaxed mb-8 opacity-0"
+				>
+					Découvrez une sélection de mes réalisations en design graphique, développement web et communication visuelle.
+				</p>
+				
+				<!-- Statistiques projets -->
+				<div class="projects-stats flex justify-center gap-8 md:gap-12 mt-12 opacity-0">
+					<div class="stat-item text-center">
+						<div class="stat-number font-[family-name:var(--font-title2)] text-4xl font-bold tracking-[0.15em] section-neon mb-2" style="color: var(--color-darkpurple);">{projects.length}</div>
+						<div class="stat-label font-[family-name:var(--font-text)] text-xs md:text-sm text-white/60 uppercase tracking-wide">Projets</div>
+					</div>
+					<div class="stat-item text-center">
+						<div class="stat-number font-[family-name:var(--font-title2)] text-4xl font-bold tracking-[0.15em] section-neon mb-2" style="color: var(--color-darkpurple);">3</div>
+						<div class="stat-label font-[family-name:var(--font-text)] text-xs md:text-sm text-white/60 uppercase tracking-wide">Catégories</div>
+					</div>
+					<div class="stat-item text-center">
+						<div class="stat-number font-[family-name:var(--font-title2)] text-4xl font-bold tracking-[0.15em] section-neon mb-2" style="color: var(--color-darkpurple);">2025</div>
+						<div class="stat-label font-[family-name:var(--font-text)] text-xs md:text-sm text-white/60 uppercase tracking-wide">Année</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Section grille de projets -->
+		<section class="projects-grid-section min-h-screen flex items-center justify-center py-16 px-8 border-t">
+			<div class="container max-w-7xl mx-auto">
+				{hasError ? (
+					<ProjectStatus 
+						type="error" 
+						message="Impossible de se connecter à la base de données. Vérifiez que PocketBase est en cours d'exécution sur le port 8090." 
+					/>
+				) : projects.length > 0 ? (
+					<div class="projects-grid flex flex-wrap justify-center gap-8 lg:gap-12">
+						{projects.map((project) => (
+							<CardProject 
+								title={project.titre}
+								subtitle={project.etude_annee}
+								description={project.resume}
+								stats={calculateProjectStats(project)}
+								id={generateProjectId(project)}
+								date={formatProjectDate(project.projet_annee)}
+								imageUrl={getProjectImageUrl(project) ?? undefined}
+								categories={project.categories || []}
+							/>
+						))}
+					</div>
+				) : (
+					<ProjectStatus 
+						type="empty" 
+						message="Aucun projet n'a été trouvé dans la base de données. Ajoutez des projets via l'interface d'administration PocketBase." 
+					/>
+				)}
+			</div>
+		</section>
+
+		<!-- Section Call to Action -->
+		<section class="projects-cta-section min-h-[40vh] flex items-center justify-center py-16 px-8 border-t">
+			<div class="text-center max-w-2xl">
+				<h2
+					class="cta-title font-[family-name:var(--font-title2)] text-3xl md:text-4xl font-bold mb-6 tracking-[0.15em] text-center section-neon"
+					style="color: var(--color-darkpurple);"
+				>
+					TRAVAILLONS ENSEMBLE
+				</h2>
+				
+				<p
+					class="cta-description font-[family-name:var(--font-text)] text-lg text-white/70 leading-relaxed mb-8"
+				>
+					Vous avez un projet en tête ? Contactez-moi pour discuter de vos besoins créatifs.
+				</p>
+				
+				<a
+					href="/contact"
+					class="cta-button group relative px-8 py-4 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink] inline-flex items-center gap-3"
+				>
+					<!-- Effet lumineux de fond -->
+					<div class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+					<!-- Texte et icône -->
+					<div class="relative z-10 flex items-center gap-3">
+						<svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+						</svg>
+						<span>ME CONTACTER</span>
+					</div>
+
+					<!-- Effet de scan -->
+					<div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"></div>
+				</a>
+			</div>
+		</section>
+	</main>
+</Layout>
+<style>
+	/* Animations pour la page projets */
+	.projects-hero-title {
+		opacity: 0;
+		transform: translateY(30px);
+		animation: titleSlideIn 1s ease-out 0.5s forwards;
+		text-shadow:
+			0 0 10px var(--color-darkpurple),
+			0 0 20px var(--color-darkpurple),
+			0 0 20px var(--color-darkpurple);
+		transition: all 0.3s ease;
+	}
+
+	@keyframes titleSlideIn {
+		0% {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Animation de la ligne sous le titre */
+	.projects-hero-line-wrapper {
+		animation: heroLineReveal 1s ease-out 1s forwards;
+	}
+
+	@keyframes heroLineReveal {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	.projects-hero-line {
+		animation: heroLineExpand 1.5s ease-out 1.2s backwards;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			var(--color-purple),
+			transparent
+		) !important;
+	}
+
+	@keyframes heroLineExpand {
+		from {
+			width: 0;
+		}
+		to {
+			width: 8rem;
+		}
+	}
+
+	/* Animation de la description */
+	.projects-hero-description {
+		animation: descriptionFadeIn 1s ease-out 1.5s forwards;
+	}
+
+	@keyframes descriptionFadeIn {
+		0% {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Animation des statistiques */
+	.projects-stats {
+		animation: statsFadeIn 1s ease-out 2s forwards;
+	}
+
+	@keyframes statsFadeIn {
+		0% {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.stat-item {
+		transition: all 0.3s ease;
+	}
+
+	.stat-item:hover {
+		transform: translateY(-5px);
+	}
+
+	.stat-item:hover .stat-number {
+		text-shadow: 0 0 15px rgba(184, 187, 240, 0.9);
+	}
+
+	/* Style neon pour les titres h1 et h2 */
+	.section-neon {
+		text-shadow:
+			0 0 10px var(--color-darkpurple),
+			0 0 20px var(--color-darkpurple),
+			0 0 20px var(--color-darkpurple);
+		animation: neonBreath 4s ease-in-out infinite;
+		transition: all 0.3s ease;
+	}
+
+	@keyframes neonBreath {
+		0%,
+		100% {
+			text-shadow:
+				0 0 10px var(--color-darkpurple),
+				0 0 20px var(--color-darkpurple),
+				0 0 30px var(--color-darkpurple);
+		}
+		50% {
+			text-shadow:
+				0 0 15px var(--color-darkpurple),
+				0 0 25px var(--color-darkpurple),
+				0 0 35px var(--color-darkpurple),
+				0 0 40px var(--color-purple);
+		}
+	}
+
+	.section-neon:hover {
+		text-shadow:
+			0 0 15px var(--color-darkpurple),
+			0 0 25px var(--color-darkpurple),
+			0 0 35px var(--color-darkpurple),
+			0 0 45px var(--color-purple);
+		transform: translateY(-2px);
+	}
+
+	/* Animations d'apparition des cartes projets */
+	.projects-grid {
+		animation: gridFadeIn 1s ease-out 0.5s forwards;
+		opacity: 0;
+	}
+
+	@keyframes gridFadeIn {
+		0% {
+			opacity: 0;
+			transform: translateY(50px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Section CTA animations */
+	.projects-cta-section {
+		opacity: 0;
+		transform: translateY(50px);
+		transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	.projects-cta-section.cta-revealed {
+		opacity: 1;
+		transform: translateY(0);
+		animation: ctaSectionReveal 1s ease-out forwards;
+	}
+
+	@keyframes ctaSectionReveal {
+		0% {
+			opacity: 0;
+			transform: translateY(50px) scale(0.95);
+		}
+		50% {
+			opacity: 0.7;
+			transform: translateY(-10px) scale(1.02);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	.cta-button {
+		box-shadow: 
+			0 0 20px rgba(184, 187, 240, 0.3),
+			inset 0 0 10px rgba(184, 187, 240, 0.1);
+		animation: buttonPulse 2s ease-in-out infinite;
+	}
+
+	@keyframes buttonPulse {
+		0%, 100% {
+			box-shadow: 
+				0 0 20px rgba(184, 187, 240, 0.3),
+				inset 0 0 10px rgba(184, 187, 240, 0.1);
+		}
+		50% {
+			box-shadow: 
+				0 0 30px rgba(184, 187, 240, 0.5),
+				inset 0 0 15px rgba(184, 187, 240, 0.2);
+		}
+	}
+
+	/* Responsive adjustments */
+	@media (max-width: 768px) {
+		.projects-hero-title {
+			font-size: 2.5rem;
+		}
+
+		.projects-stats {
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.projects-grid {
+			gap: 1rem;
+		}
+	}
+</style>
+
+<script>
+	// Gestion des animations au scroll pour la page projets
+	document.addEventListener('DOMContentLoaded', () => {
+		const ctaSection = document.querySelector('.projects-cta-section');
+		let ctaAnimated = false;
+
+		const observerOptions = {
+			threshold: 0.3,
+			rootMargin: '0px 0px -50px 0px'
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					if (entry.target.classList.contains('projects-cta-section') && !ctaAnimated) {
+						entry.target.classList.add('cta-revealed');
+						ctaAnimated = true;
+					}
+				}
+			});
+		}, observerOptions);
+
+		if (ctaSection) {
+			observer.observe(ctaSection);
+		}
+	});
+</script>

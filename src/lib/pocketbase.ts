@@ -18,7 +18,7 @@ export interface Project {
   description: string;
   outils: string[]; // ["Illustrator", "Figma", etc.]
   images: string[]; // URLs des images
-  image_projet: string; // Image principale du projet
+  image_projet: string | null; // Image principale du projet (peut être null)
   created: string;
   updated: string;
 }
@@ -121,8 +121,8 @@ export function generateProjectId(project: Project): string {
 }
 
 // Fonction pour générer l'URL complète de l'image du projet
-export function getProjectImageUrl(project: Project): string | null {
-  if (!project.image_projet) return null;
+export function getProjectImageUrl(project: Project): string | undefined {
+  if (!project.image_projet) return undefined;
   return `${POCKETBASE_URL}/api/files/projet/${project.id}/${project.image_projet}`;
 }
 

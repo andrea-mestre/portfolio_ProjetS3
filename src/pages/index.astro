@@ -87,7 +87,7 @@ try {
 		
 		<section
 			class="section-hidden min-h-screen flex items-center justify-center py-50 px-4 border-t mt-50">
-			
+
 			<div class="container max-w-full mx-auto">
 				<div
 					class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
@@ -439,7 +439,7 @@ try {
 							message="Impossible de se connecter à la base de données. Vérifiez que PocketBase est en cours d'exécution sur le port 8090." 
 						/>
 					) : projects.length > 0 ? (
-						projects.map((project) => (
+						projects.slice(0, 3).map((project) => (
 							<CardProject 
 								title={project.titre}
 								subtitle={project.etude_annee}
@@ -458,6 +458,30 @@ try {
 						/>
 					)}
 				</div>
+				
+				<!-- Bouton voir tous les projets -->
+				{projects.length > 3 && (
+					<div class="flex justify-center mt-12">
+						<a
+							href="/projets"
+							class="view-all-button group relative px-8 py-4 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink] inline-flex items-center gap-3"
+						>
+							<!-- Effet lumineux de fond -->
+							<div class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+							<!-- Texte et icône -->
+							<div class="relative z-10 flex items-center gap-3">
+								<span>VOIR TOUS LES PROJETS</span>
+								<svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+								</svg>
+							</div>
+
+							<!-- Effet de scan -->
+							<div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"></div>
+						</a>
+					</div>
+				)}
 			</div>
 		</section>
 
@@ -1152,6 +1176,48 @@ try {
 		50% {
 			opacity: 1;
 			filter: drop-shadow(0 0 25px rgba(184, 187, 240, 0.8));
+		}
+	}
+
+	/* Styles pour le bouton "Voir tous les projets" */
+	.view-all-button {
+		box-shadow: 
+			0 0 20px rgba(184, 187, 240, 0.3),
+			inset 0 0 10px rgba(184, 187, 240, 0.1);
+		animation: buttonPulse 2s ease-in-out infinite;
+		opacity: 0;
+		transform: translateY(30px);
+		animation-delay: 0.5s;
+		animation-fill-mode: both;
+	}
+
+	@keyframes buttonPulse {
+		0%, 100% {
+			box-shadow: 
+				0 0 20px rgba(184, 187, 240, 0.3),
+				inset 0 0 10px rgba(184, 187, 240, 0.1);
+		}
+		50% {
+			box-shadow: 
+				0 0 30px rgba(184, 187, 240, 0.5),
+				inset 0 0 15px rgba(184, 187, 240, 0.2);
+		}
+	}
+
+	.projects-revealed .view-all-button {
+		animation: 
+			buttonReveal 1s ease-out 1s forwards,
+			buttonPulse 2s ease-in-out 2s infinite;
+	}
+
+	@keyframes buttonReveal {
+		0% {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
 		}
 	}
 </style>
