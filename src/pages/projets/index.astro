@@ -77,7 +77,7 @@ function generateProjectSlug(project: any): string {
 				) : projects.length > 0 ? (
 					<div class="projects-grid flex flex-wrap justify-center gap-8 lg:gap-12">
 						{projects.map((project) => (
-							<a href={`/projets/${generateProjectSlug(project)}`} class="project-card-link block transition-transform duration-300 hover:scale-105">
+							<a href={`/projets/${generateProjectSlug(project)}`} class="project-card-link">
 								<CardProject 
 									title={project.titre}
 									subtitle={project.etude_annee}
@@ -85,7 +85,7 @@ function generateProjectSlug(project: any): string {
 									stats={calculateProjectStats(project)}
 									id={generateProjectId(project)}
 									date={formatProjectDate(project.projet_annee)}
-									imageUrl={getProjectImageUrl(project) ?? undefined}
+									imageUrl={getProjectImageUrl(project)}
 									categories={project.categories || []}
 								/>
 							</a>

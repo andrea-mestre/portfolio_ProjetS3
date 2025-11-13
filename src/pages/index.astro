@@ -21,6 +21,11 @@ try {
   console.error('Erreur lors de la récupération des projets:', error);
   hasError = true;
 }
+
+// Fonction pour générer le slug du projet
+function generateProjectSlug(project: any): string {
+  return project.titre.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
 ---
 
 <Layout>
@@ -357,16 +362,18 @@ try {
 						/>
 					) : projects.length > 0 ? (
 						projects.slice(0, 3).map((project) => (
-							<CardProject 
-								title={project.titre}
-								subtitle={project.etude_annee}
-								description={project.resume}
-								stats={calculateProjectStats(project)}
-								id={generateProjectId(project)}
-								date={formatProjectDate(project.projet_annee)}
-								imageUrl={getProjectImageUrl(project)}
-								categories={project.categories || []}
-							/>
+							<a href={`/projets/${generateProjectSlug(project)}`} class="project-card-link">
+								<CardProject 
+									title={project.titre}
+									subtitle={project.etude_annee}
+									description={project.resume}
+									stats={calculateProjectStats(project)}
+									id={generateProjectId(project)}
+									date={formatProjectDate(project.projet_annee)}
+									imageUrl={getProjectImageUrl(project)}
+									categories={project.categories || []}
+								/>
+							</a>
 						))
 					) : (
 						<ProjectStatus 

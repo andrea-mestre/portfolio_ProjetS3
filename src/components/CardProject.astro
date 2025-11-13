@@ -31,13 +31,13 @@ const { title, subtitle, description, stats, id, date, imageUrl, categories } = 
 						</div>
 					)}
 					
-					<h3 class="font-[family-name:var(--font-title2)] text-xl font-bold uppercase text-[var(--color-purple)] mb-2 tracking-wide" style="text-shadow: 0 0 10px rgba(184, 187, 240, 0.7);">{title}</h3>
-					<div class="font-[family-name:var(--font-text)] text-xs text-[var(--color-pink)] mb-1 uppercase tracking-wider">{categories && categories.length > 0 ? categories[0] : subtitle}</div>
+					<h3 class="font-[family-name:var(--font-title2)] text-xl font-bold uppercase text-[var(--color-purple)] mb-2 tracking-wide text-center" style="text-shadow: 0 0 10px rgba(184, 187, 240, 0.7);">{title}</h3>
+					<div class="font-[family-name:var(--font-text)] text-xs text-[var(--color-pink)] mb-1 uppercase tracking-wider text-center">{categories && categories.length > 0 ? categories[0] : subtitle}</div>
 					<div class="font-[family-name:var(--font-smalltext)] text-xs text-[rgba(184,187,240,0.6)] uppercase tracking-wide absolute top-6 right-6">{date}</div>
 				</div>
 
 				<div class="card-content relative z-[2] px-6 flex-1">
-					<p class="font-[family-name:var(--font-text)] text-sm text-[#b3b3cc] leading-relaxed tracking-wide mb-6">{description}</p>
+					<p class="font-[family-name:var(--font-text)] text-sm text-[#b3b3cc] leading-relaxed tracking-wide mb-6 text-center">{description}</p>
 
 					<div class="card-stats flex justify-between mb-5">
 						{stats.map((stat) => (
