@@ -1,12 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import HudHeader from "../components/HudHeader.astro";
-import HudSidebar from "../components/HudSidebar.astro";
-import HudClock from "../components/HudClock.astro";
-import CardProject from "../components/CardProject.astro";
-import ProjectStatus from "../components/ProjectStatus.astro";
+import Layout from "../../layouts/Layout.astro";
+import HudHeader from "../../components/HudHeader.astro";
+import HudSidebar from "../../components/HudSidebar.astro";
+import HudClock from "../../components/HudClock.astro";
+import CardProject from "../../components/CardProject.astro";
+import ProjectStatus from "../../components/ProjectStatus.astro";
 import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId, 
-getProjectImageUrl } from "../lib/pocketbase";
+getProjectImageUrl } from "../../lib/pocketbase";
 
 let projects = [];
 let hasError = false;
@@ -98,6 +98,11 @@ try {
   ];
   hasError = false; 
 }
+
+// Fonction pour générer le slug du projet
+function generateProjectSlug(project: any): string {
+  return project.titre.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
 ---
 
 <Layout>
@@ -112,7 +117,7 @@ try {
 			</h1>
 		</div>
 
-		<section class="hero-projects flex justify-center py-0 px-8 pt-4">
+		<section class="hero-projects flex justify-center py-0 px-8 pt-0">
 			<div class="text-center max-w-4xl">
 				<h2
 					class="projects-hero-title font-[family-name:var(--font-title2)] text-5xl md:text-6xl font-bold mb-6 tracking-[0.15em] text-center section-neon mt-0"
@@ -129,7 +134,7 @@ try {
 				</p>
 				
 				<!-- Statistiques projets -->
-				<div class="projects-stats flex justify-center gap-8 md:gap-12 mt-12 opacity-0">
+				<div class="projects-stats flex justify-center gap-8 md:gap-12 mt-8 mb-4 opacity-0">
 					<div class="stat-item text-center">
 						<div class="stat-number font-[family-name:var(--font-title2)] text-4xl font-bold tracking-[0.15em] section-neon mb-2" style="color: var(--color-darkpurple);">{projects.length}</div>
 						<div class="stat-label font-[family-name:var(--font-text)] text-xs md:text-sm text-white/60 uppercase tracking-wide">Projets</div>
@@ -147,7 +152,7 @@ try {
 		</section>
 
 		<!-- Section grille de projets -->
-		<section class="projects-grid-section min-h-screen flex items-center justify-center py-16 px-8 border-t">
+		<section class="projects-grid-section flex items-center justify-center py-4 px-8">
 			<div class="container max-w-7xl mx-auto">
 				{hasError ? (
 					<ProjectStatus 
@@ -157,16 +162,18 @@ try {
 				) : projects.length > 0 ? (
 					<div class="projects-grid flex flex-wrap justify-center gap-8 lg:gap-12">
 						{projects.map((project) => (
-							<CardProject 
-								title={project.titre}
-								subtitle={project.etude_annee}
-								description={project.resume}
-								stats={calculateProjectStats(project)}
-								id={generateProjectId(project)}
-								date={formatProjectDate(project.projet_annee)}
-								imageUrl={getProjectImageUrl(project) ?? undefined}
-								categories={project.categories || []}
-							/>
+							<a href={`/projets/${generateProjectSlug(project)}`} class="project-card-link block transition-transform duration-300 hover:scale-105">
+								<CardProject 
+									title={project.titre}
+									subtitle={project.etude_annee}
+									description={project.resume}
+									stats={calculateProjectStats(project)}
+									id={generateProjectId(project)}
+									date={formatProjectDate(project.projet_annee)}
+									imageUrl={getProjectImageUrl(project) ?? undefined}
+									categories={project.categories || []}
+								/>
+							</a>
 						))}
 					</div>
 				) : (
@@ -368,6 +375,16 @@ try {
 			opacity: 1;
 			transform: translateY(0);
 		}
+	}
+
+	/* Style pour les liens de cartes projets */
+	.project-card-link {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.project-card-link:hover {
+		transform: scale(1.05);
 	}
 
 	/* Section CTA animations */

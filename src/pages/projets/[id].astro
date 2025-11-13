@@ -1,0 +1,350 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import HudHeader from "../../components/HudHeader.astro";
+import { getProjects, getProjectImageUrl } from "../../lib/pocketbase";
+
+export async function getStaticPaths() {
+  let projects = [];
+  
+  try {
+    projects = await getProjects();
+    console.log('Projets récupérés pour les routes statiques:', projects.length);
+    
+    if (projects.length === 0) {
+      console.log('Aucun projet trouvé, utilisation des données de test pour les routes');
+      
+      projects = [
+        {
+          id: 'f3owlbua4olvg0p',
+          titre: 'MODULO',
+          etude_annee: 'BUT MMI 2',
+          projet_annee: '2025-11-01',
+          categories: ['Design graphique', 'Développement web', 'Communication'],
+          resume: 'Interface de gestion modulaire pour la productivité numérique. Design système cohérent avec composants réutilisables.',
+          description: 'Modulo est une interface de gestion complète pour optimiser la productivité numérique. Ce projet propose un design système cohérent avec des composants réutilisables, permettant une expérience utilisateur fluide et moderne. L\'interface modulaire s\'adapte aux besoins spécifiques de chaque utilisateur.',
+          outils: ['Figma', 'Illustrator', 'Javascript', 'TailwindCSS', 'Astro'],
+          images: ['modulo1.webp', 'modulo2.webp', 'modulo3.webp'],
+          image_projet: 'mockupmodulo1_mg6m9inyh1.webp',
+          created: '2025-11-01T00:00:00.000Z',
+          updated: '2025-11-01T00:00:00.000Z'
+        },
+        {
+          id: 'g4pwlbva5pmvh1q',
+          titre: 'PORTFOLIO WEB',
+          etude_annee: 'BUT MMI 2',
+          projet_annee: '2025-10-15',
+          categories: ['Développement web', 'Design UI/UX', 'Frontend'],
+          resume: 'Portfolio personnel moderne avec design spatial et animations interactives.',
+          description: 'Portfolio personnel moderne alliant design spatial et animations interactives. Développé avec Astro et TailwindCSS, il présente mes compétences en développement web et design d\'interface. L\'expérience utilisateur est optimisée avec des effets visuels immersifs.',
+          outils: ['Astro', 'TailwindCSS', 'TypeScript', 'Three.js', 'Figma'],
+          images: ['portfolio1.webp', 'portfolio2.webp', 'portfolio3.webp'],
+          image_projet: null,
+          created: '2025-10-15T00:00:00.000Z',
+          updated: '2025-10-15T00:00:00.000Z'
+        }
+      ];
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des projets pour les routes:', error);
+    projects = [];
+  }
+
+  return projects.map((project) => {
+    const slug = project.titre.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    return {
+      params: { id: slug },
+      props: { project }
+    };
+  });
+}
+
+const { project } = Astro.props;
+
+// Fonction pour formater la date
+function formatProjectDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('fr-FR', { 
+    year: 'numeric', 
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<Layout title={`${project.titre} - Andrea Mestre`}>
+  <HudHeader currentPage="projets" />
+  
+  <main class="relative z-10 pt-24 min-h-screen">
+    <!-- En-tête du projet -->
+    <div class="flex justify-center mb-8">
+      <h1
+        class="text-white tracking-wide whitespace-nowrap drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+        style="font-family: var(--font-title1); font-size: var(--size-title1);"
+      >
+        MISSION : {project.titre}
+      </h1>
+    </div>
+
+    <!-- Section principale du projet -->
+    <section class="project-hero flex justify-center py-8 px-8">
+      <div class="w-full max-w-7xl">
+        
+        <!-- Informations du projet -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          
+          <!-- Colonne gauche - Informations -->
+          <div class="lg:col-span-1 space-y-8">
+            
+            <!-- Bloc année et type -->
+            <div class="project-info-block p-6 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
+              <div class="flex flex-wrap gap-4 mb-4">
+                <div class="px-3 py-1 bg-[--color-purple]/20 border border-[--color-purple]/50 rounded text-sm">
+                  <span class="text-[--color-purple] font-bold">{project.etude_annee}</span>
+                </div>
+                <div class="px-3 py-1 bg-[--color-darkpurple]/20 border border-[--color-darkpurple]/50 rounded text-sm">
+                  <span class="text-[--color-darkpurple] font-bold">{formatProjectDate(project.projet_annee)}</span>
+                </div>
+              </div>
+              
+              <h2 class="font-[family-name:var(--font-title2)] text-2xl font-bold tracking-[0.15em] section-neon mb-4" style="color: var(--color-darkpurple);">
+                RÉSUMÉ
+              </h2>
+              
+              <p class="text-white/70 text-sm leading-relaxed font-[family-name:var(--font-text)]">
+                {project.resume}
+              </p>
+            </div>
+
+            <!-- Bloc catégories -->
+            <div class="project-info-block p-6 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
+              <h3 class="font-[family-name:var(--font-title2)] text-lg font-bold tracking-[0.15em] section-neon mb-4" style="color: var(--color-darkpurple);">
+                CATÉGORIES
+              </h3>
+              
+              <div class="flex flex-wrap gap-2">
+                {project.categories.map((category: string) => (
+                  <span class="px-2 py-1 bg-[--color-pink]/20 border border-[--color-pink]/50 rounded text-xs text-[--color-pink] font-medium">
+                    {category}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Bloc outils -->
+            <div class="project-info-block p-6 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
+              <h3 class="font-[family-name:var(--font-title2)] text-lg font-bold tracking-[0.15em] section-neon mb-4" style="color: var(--color-darkpurple);">
+                OUTILS UTILISÉS
+              </h3>
+              
+              <div class="grid grid-cols-2 gap-2">
+                {project.outils.map((outil: string) => (
+                  <div class="flex items-center gap-2 p-2 bg-black/30 rounded border border-white/10">
+                    <div class="w-2 h-2 bg-[--color-purple] rounded-full"></div>
+                    <span class="text-white/80 text-xs font-[family-name:var(--font-text)]">{outil}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Colonne droite - Contenu principal -->
+          <div class="lg:col-span-2">
+            
+            <!-- Image principale -->
+            {getProjectImageUrl(project) && (
+              <div class="project-image-main mb-8 rounded-lg overflow-hidden border border-[--color-purple]/30">
+                <img 
+                  src={getProjectImageUrl(project)} 
+                  alt={project.titre} 
+                  class="w-full h-auto object-cover"
+                />
+              </div>
+            )}
+
+            <!-- Description détaillée -->
+            <div class="project-description p-8 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
+              <h2 class="font-[family-name:var(--font-title2)] text-3xl font-bold tracking-[0.15em] section-neon mb-6" style="color: var(--color-darkpurple);">
+                LE PROJET
+              </h2>
+              
+              <div class="prose prose-invert max-w-none">
+                <p class="text-white/80 text-lg leading-relaxed font-[family-name:var(--font-text)] mb-6">
+                  {project.description}
+                </p>
+              </div>
+
+              <!-- Hiérarchie du projet (inspirée de Modulo) -->
+              <div class="project-hierarchy mt-8">
+                <h3 class="font-[family-name:var(--font-title2)] text-xl font-bold tracking-[0.15em] section-neon mb-4" style="color: var(--color-darkpurple);">
+                  HIÉRARCHIE DU PROJET
+                </h3>
+                
+                <div class="hierarchy-container relative">
+                  <!-- Ligne principale -->
+                  <div class="w-full h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent mb-8"></div>
+                  
+                  <!-- Étapes du projet -->
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="hierarchy-step text-center">
+                      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-[--color-purple] bg-[--color-purple]/20 flex items-center justify-center">
+                        <span class="text-[--color-purple] font-bold">01</span>
+                      </div>
+                      <h4 class="text-[--color-purple] font-bold text-sm mb-2">CONCEPTION</h4>
+                      <p class="text-white/60 text-xs">Analyse des besoins et définition du concept</p>
+                    </div>
+                    
+                    <div class="hierarchy-step text-center">
+                      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-[--color-darkpurple] bg-[--color-darkpurple]/20 flex items-center justify-center">
+                        <span class="text-[--color-darkpurple] font-bold">02</span>
+                      </div>
+                      <h4 class="text-[--color-darkpurple] font-bold text-sm mb-2">DÉVELOPPEMENT</h4>
+                      <p class="text-white/60 text-xs">Réalisation et implémentation technique</p>
+                    </div>
+                    
+                    <div class="hierarchy-step text-center">
+                      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-[--color-pink] bg-[--color-pink]/20 flex items-center justify-center">
+                        <span class="text-[--color-pink] font-bold">03</span>
+                      </div>
+                      <h4 class="text-[--color-pink] font-bold text-sm mb-2">FINALISATION</h4>
+                      <p class="text-white/60 text-xs">Tests, optimisation et livraison</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section navigation -->
+        <div class="project-navigation flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t border-white/20">
+          <a 
+            href="/projets" 
+            class="group relative px-6 py-3 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink] inline-flex items-center gap-3"
+          >
+            <svg class="w-4 h-4 group-hover:-rotate-12 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span>RETOUR AUX PROJETS</span>
+            
+            <!-- Effet de scan -->
+            <div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"></div>
+          </a>
+
+          <div class="text-center">
+            <p class="text-white/60 text-sm font-[family-name:var(--font-text)]">
+              Projet réalisé en <span class="text-[--color-purple] font-bold">{project.etude_annee}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  /* Animations pour la page projet */
+  .section-neon {
+    text-shadow:
+      0 0 10px var(--color-darkpurple),
+      0 0 20px var(--color-darkpurple),
+      0 0 20px var(--color-darkpurple);
+    animation: neonBreath 4s ease-in-out infinite;
+    transition: all 0.3s ease;
+  }
+
+  @keyframes neonBreath {
+    0%, 100% {
+      text-shadow:
+        0 0 10px var(--color-darkpurple),
+        0 0 20px var(--color-darkpurple),
+        0 0 30px var(--color-darkpurple);
+    }
+    50% {
+      text-shadow:
+        0 0 15px var(--color-darkpurple),
+        0 0 25px var(--color-darkpurple),
+        0 0 35px var(--color-darkpurple),
+        0 0 40px var(--color-purple);
+    }
+  }
+
+  .section-neon:hover {
+    text-shadow:
+      0 0 15px var(--color-darkpurple),
+      0 0 25px var(--color-darkpurple),
+      0 0 35px var(--color-darkpurple),
+      0 0 45px var(--color-purple);
+    transform: translateY(-2px);
+  }
+
+  .project-info-block {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .project-info-block:nth-child(1) { animation-delay: 0.2s; }
+  .project-info-block:nth-child(2) { animation-delay: 0.4s; }
+  .project-info-block:nth-child(3) { animation-delay: 0.6s; }
+
+  .project-description {
+    animation: fadeInUp 0.8s ease-out 0.8s forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .project-image-main {
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hierarchy-step {
+    transition: all 0.3s ease;
+  }
+
+  .hierarchy-step:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .project-info-block {
+      margin-bottom: 1rem;
+    }
+    
+    .hierarchy-container .grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  // Animation d'apparition au scroll
+  document.addEventListener('DOMContentLoaded', () => {
+    const elements = document.querySelectorAll('.project-info-block, .project-description, .project-image-main');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    elements.forEach(el => observer.observe(el));
+  });
+</script>

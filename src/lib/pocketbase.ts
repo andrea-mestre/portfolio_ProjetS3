@@ -35,7 +35,7 @@ export async function getProjects(): Promise<Project[]> {
     const records = await pb.collection('projet').getFullList({
       sort: '-created',
     });
-    return records as Project[];
+    return records as unknown as Project[];
   } catch (error) {
     console.error('Erreur lors de la récupération des projets:', error);
     return [];
@@ -46,7 +46,7 @@ export async function getProjects(): Promise<Project[]> {
 export async function getProject(id: string): Promise<Project | null> {
   try {
     const record = await pb.collection('projet').getOne(id);
-    return record as Project;
+    return record as unknown as Project;
   } catch (error) {
     console.error('Erreur lors de la récupération du projet:', error);
     return null;
@@ -153,7 +153,7 @@ export async function createContact(contactData: {
     
     const record = await pb.collection('contact').create(contactData);
     console.log('Enregistrement créé avec succès:', record);
-    return record as Contact;
+    return record as unknown as Contact;
   } catch (error: any) {
     console.error('Erreur complète:', error);
     console.error('Type d\'erreur:', typeof error);
