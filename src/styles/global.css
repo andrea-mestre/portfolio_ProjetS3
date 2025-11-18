@@ -32,7 +32,8 @@
   --font-smalltext: 'Share Tech Mono', sans-serif;
   
   /* Tailles de police */
-  --size-title1: clamp(64px, 10vw, 100px);
+  --size-title1: clamp(32px, 7vw, 80px);
+  --size-title2: clamp(17px, 5vw, 33px);
 }
 
 /* Styles pour les sections avec révélation animée */

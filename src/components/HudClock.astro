@@ -3,34 +3,34 @@ import hourHud from '../assets/svg/hour_hud.svg';
 import utcIcon from '../assets/svg/UTC.svg';
 ---
 
-<div class="relative w-full max-w-[600px] md:max-w-[500px] sm:max-w-[400px] h-auto mx-auto p-6 md:p-4 sm:p-3 opacity-0 animate-[fadeInClock_1s_ease-out_2s_forwards]">
+<div class="relative w-full max-w-[600px] md:max-w-[500px] sm:max-w-[280px] h-auto mx-auto p-6 md:p-4 sm:p-1 opacity-0 animate-[fadeInClock_1s_ease-out_2s_forwards]">
   
   <div class="absolute top-0 left-0 right-0 w-[110%] -translate-x-[5%] z-10">
     <img src={hourHud.src} alt="" class="w-full h-auto block animate-[glowPulse_3s_ease-in-out_infinite]" style="filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));" />
   </div>
 
-  <div class="relative flex items-center justify-center gap-[20px] mt-6 mb-[18px] z-20">
+  <div class="relative flex items-center justify-center gap-[20px] sm:gap-[6px] mt-6 sm:mt-3 mb-[18px] sm:mb-[8px] z-20">
     
-    <div class="relative min-w-[260px] flex-shrink-0">
-      <div class="absolute left-1/2 -translate-x-1/2 text-[48px] md:text-[36px] sm:text-[28px] font-normal text-[var(--color-darkpurple)] blur-[15px] tracking-[0.05em] pointer-events-none font-variant-numeric-tabular animate-[neonBlurBreath_4s_ease-in-out_infinite] whitespace-nowrap" style="font-family: var(--font-title2);" id="time-blur">15:30:24</div>
-      <div class="relative text-[48px] md:text-[36px] sm:text-[28px] font-normal text-[var(--color-darkpurple)] tracking-[0.05em] font-variant-numeric-tabular whitespace-nowrap transition-all duration-300 animate-[neonBreath_4s_ease-in-out_infinite]" id="time-main" style="text-shadow: 0 0 10px var(--color-darkpurple), 0 0 20px var(--color-darkpurple), 0 0 20px var(--color-darkpurple); font-family: var(--font-title2);">15:30:24</div>
+    <div class="relative min-w-[260px] sm:min-w-[110px] flex-shrink-0">
+      <div class="absolute left-1/2 -translate-x-1/2 text-[48px] md:text-[36px] sm:text-[18px] font-normal text-[var(--color-darkpurple)] blur-[15px] sm:blur-[8px] tracking-[0.05em] pointer-events-none font-variant-numeric-tabular animate-[neonBlurBreath_4s_ease-in-out_infinite] whitespace-nowrap" style="font-family: var(--font-title2);" id="time-blur">15:30:24</div>
+      <div class="relative text-[48px] md:text-[36px] sm:text-[18px] font-normal text-[var(--color-darkpurple)] tracking-[0.05em] font-variant-numeric-tabular whitespace-nowrap transition-all duration-300 animate-[neonBreath_4s_ease-in-out_infinite]" id="time-main" style="text-shadow: 0 0 10px var(--color-darkpurple), 0 0 20px var(--color-darkpurple), 0 0 20px var(--color-darkpurple); font-family: var(--font-title2);">15:30:24</div>
     </div>
     
     
     <div class="relative z-30">
-      <img src={utcIcon.src} alt="UTC+2" class="w-[180px] md:w-[120px] sm:w-[120px] h-auto block animate-[badgePulse_3s_ease-in-out_infinite]" style="filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));" />
+      <img src={utcIcon.src} alt="UTC+2" class="w-[180px] md:w-[120px] sm:w-[70px] h-auto block animate-[badgePulse_3s_ease-in-out_infinite]" style="filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));" />
     </div>
   </div>
   
   <!-- Textes de localisation -->
-  <div class="absolute bottom-[3px] left-[12px] text-left z-20">
-    <div class="text-[12px] sm:text-[10px] font-normal text-white tracking-[0.15em] mb-[2px]" style="font-family: var(--font-title2);">LOCATION :</div>
-    <div class="text-[12px] sm:text-[10px] font-normal text-white tracking-[0.15em]" style="font-family: var(--font-title2);">POSITION IN FRANCE</div>
+  <div class="absolute bottom-[3px] left-[12px] sm:left-[4px] text-left z-20">
+    <div class="text-[12px] sm:text-[7px] font-normal text-white tracking-[0.15em] sm:tracking-[0.08em] mb-[2px] sm:mb-[1px]" style="font-family: var(--font-title2);">LOCATION :</div>
+    <div class="text-[12px] sm:text-[7px] font-normal text-white tracking-[0.15em] sm:tracking-[0.08em]" style="font-family: var(--font-title2);">POSITION IN FRANCE</div>
   </div>
   
   <!-- Icône clock en bas à droite -->
-  <div class="absolute bottom-[3px] right-[12px] z-30">
-    <svg class="w-[40px] h-[40px] md:w-[32px] md:h-[32px] sm:w-6 sm:h-6 block brightness-0 invert" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.5));" width="40" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="absolute bottom-[3px] right-[12px] sm:right-[4px] z-30">
+    <svg class="w-[40px] h-[40px] md:w-[32px] md:h-[32px] sm:w-4 sm:h-4 block brightness-0 invert" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.5));" width="40" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <!-- Coins statiques -->
       <path d="M31.5507 1H40V9.36" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
       <path d="M1 9.36V1H9.4493" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
