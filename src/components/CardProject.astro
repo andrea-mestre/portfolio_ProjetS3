@@ -16,7 +16,7 @@ interface Props {
 const { title, subtitle, description, stats, id, date, imageUrl, categories } = Astro.props;
 ---
 
-<div class="card-container relative w-[350px] h-[505px] m-5 z-10 opacity-0 translate-y-8 animate-[card-reveal_0.8s_ease-out_forwards]" style="perspective: 1000px;">
+<div class="card-container relative w-[350px] h-[505px] m-5 z-10" style="perspective: 1000px; animation: card-reveal 0.8s ease-out forwards;">
 	<div class="card relative w-full h-full cursor-pointer transition-transform duration-700 ease-out hover:[transform:rotateY(10deg)_rotateX(5deg)]" style="transform-style: preserve-3d;">
 		<div class="card-face absolute w-full h-full rounded-[20px] overflow-hidden border border-[var(--color-purple)] shadow-[0_0_30px_rgba(184,187,240,0.5)] bg-gradient-to-br from-[#12121e] to-[#1c1c2d] flex flex-col">
 			<div class="absolute inset-5 rounded-xl overflow-hidden bg-gradient-to-br from-[#191927] to-[#13131d] border border-[rgba(184,187,240,0.3)] z-[1]" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDIwIDAgTCAwIDAgTCAwIDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMGMzZmYiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjIiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4='); background-blend-mode: overlay; background-opacity: 0.3;">
@@ -65,8 +65,19 @@ const { title, subtitle, description, stats, id, date, imageUrl, categories } = 
 
 <style>
 	@keyframes card-reveal {
-		0% { opacity: 0; transform: translateY(30px); }
-		100% { opacity: 1; transform: translateY(0); }
+		0% { 
+			opacity: 0; 
+			transform: translateY(30px); 
+		}
+		100% { 
+			opacity: 1; 
+			transform: translateY(0); 
+		}
+	}
+	
+	.card-container {
+		opacity: 0;
+		animation: card-reveal 0.8s ease-out forwards;
 	}
 	
 	@keyframes scanline {
@@ -92,7 +103,6 @@ const { title, subtitle, description, stats, id, date, imageUrl, categories } = 
 	.card-container:nth-child(3) { animation-delay: 0.6s; }
 </style>
 
-<script>
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
 		const cardContainers = document.querySelectorAll<HTMLElement>('.card-container');

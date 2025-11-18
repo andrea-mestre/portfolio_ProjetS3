@@ -4,14 +4,13 @@ import HudHeader from "../../components/HudHeader.astro";
 import CardProject from "../../components/CardProject.astro";
 import ProjectStatus from "../../components/ProjectStatus.astro";
 import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId, 
-getProjectImageUrl } from "../../lib/pocketbase";
+getProjectImageUrl, type Project } from "../../lib/pocketbase";
 
-let projects = [];
+let projects: Project[] = [];
 let hasError = false;
 
 try {
   projects = await getProjects();
-  console.log('Projets récupérés pour la page projets:', projects.length);
 } catch (error) {
   console.error('Erreur lors de la récupération des projets:', error);
   hasError = true;
@@ -296,10 +295,12 @@ function generateProjectSlug(project: any): string {
 	.project-card-link {
 		text-decoration: none;
 		color: inherit;
+		display: inline-block;
 	}
 
 	.project-card-link:hover {
-		transform: scale(1.05);
+		/* Désactivé pour éviter conflit avec animation de la carte */
+		/* transform: scale(1.05); */
 	}
 
 	/* Section CTA animations */

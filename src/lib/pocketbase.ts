@@ -58,7 +58,7 @@ export function calculateProjectStats(project: Project): ProjectStats[] {
   const stats: ProjectStats[] = [];
   
   // Stat 1: Complexité basée sur le nombre d'outils
-  const toolsCount = project.outils.length;
+  const toolsCount = Array.isArray(project.outils) ? project.outils.length : 0;
   let complexityValue = '75%';
   if (toolsCount >= 5) complexityValue = '95%';
   else if (toolsCount >= 3) complexityValue = '85%';
@@ -69,7 +69,7 @@ export function calculateProjectStats(project: Project): ProjectStats[] {
   });
   
   // Stat 2: Note basée sur les catégories
-  const categoriesCount = project.categories.length;
+  const categoriesCount = Array.isArray(project.categories) ? project.categories.length : 0;
   let grade = 'B+';
   if (categoriesCount >= 3) grade = 'A+';
   else if (categoriesCount >= 2) grade = 'A';
@@ -81,8 +81,9 @@ export function calculateProjectStats(project: Project): ProjectStats[] {
   
   // Stat 3: Version basée sur l'année d'études
   let version = '1.0';
-  if (project.etude_annee.includes('BUT MMI 2')) version = '2.0';
-  else if (project.etude_annee.includes('BUT MMI 3')) version = '3.0';
+  const etude = project.etude_annee || '';
+  if (etude.includes('BUT MMI 2')) version = '2.0';
+  else if (etude.includes('BUT MMI 3')) version = '3.0';
   
   stats.push({
     value: version,
@@ -107,23 +108,27 @@ export function formatProjectDate(dateString: string): string {
 
 // Fonction pour générer l'ID unique du projet
 export function generateProjectId(project: Project): string {
-  const initials = project.titre
+  const title = project.titre || 'PRJ';
+  const initials = title
     .split(' ')
-    .map(word => word.charAt(0))
+    .map(word => (word && word.charAt(0)) || '')
     .join('')
     .toUpperCase()
-    .substring(0, 3);
-  
+    .substring(0, 3) || 'PRJ';
+
   const year = new Date().getFullYear();
-  const index = project.id.substring(0, 2).toUpperCase();
-  
+  const index = (project.id || '00').substring(0, 2).toUpperCase();
+
   return `${initials}-${year}-${index}`;
 }
 
 // Fonction pour générer l'URL complète de l'image du projet
 export function getProjectImageUrl(project: Project): string | undefined {
-  if (!project.image_projet) return undefined;
-  return `${POCKETBASE_URL}/api/files/projet/${project.id}/${project.image_projet}`;
+  // PocketBase migration uses `images` (file) field. Prefer `image_projet` if present,
+  // otherwise try the first item of `images` if available.
+  const imageFile = project.image_projet || (Array.isArray((project as any).images) && (project as any).images[0]);
+  if (!imageFile) return undefined;
+  return `${POCKETBASE_URL}/api/files/projet/${project.id}/${imageFile}`;
 }
 
 // Interface TypeScript pour les contacts
