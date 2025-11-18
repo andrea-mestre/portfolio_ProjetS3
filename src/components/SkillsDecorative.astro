@@ -1,25 +1,25 @@
 <!-- Partie gauche - Section décorative avec éléments violets -->
-<div class="relative p-4 min-h-[900px] flex flex-col transform -translate-y-40">
+<div class="relative p-4 min-h-[900px] md:min-h-[700px] sm:min-h-[500px] flex flex-col transform -translate-y-40 md:-translate-y-32 sm:-translate-y-20">
     <!-- SVG HUD Element Donut en arrière-plan -->
     <div class="absolute inset-0 pointer-events-none">
         <img
             src="/src/assets/svg/hud_elementdonut.svg?v=1731340000"
             alt="HUD Element Donut Frame"
-            class="w-full h-full object-fill scale-75"
+            class="w-full h-full object-fill scale-75 md:scale-65 sm:scale-50"
         />
     </div>
 
     <!-- Éléments violets décoratifs positionnés à l'intérieur du HUD -->
     <div
-        class="relative z-10 flex-1 flex justify-center items-center px-5 py-16 mt-8"
+        class="relative z-10 flex-1 flex justify-center items-center px-5 py-16 md:py-12 sm:py-8 mt-8 md:mt-6 sm:mt-4"
     >
-        <div class="flex items-center justify-center gap-19">
+        <div class="flex items-center justify-center gap-19 md:gap-12 sm:gap-6">
             <!-- Premier élément donut rond -->
             <div class="decorative-element relative">
                 <img
                     src="/src/assets/svg/donutround_hud.svg?v=1731340000"
                     alt="Donut Round Element"
-                    class="w-30 h-30 opacity-80"
+                    class="w-30 h-30 md:w-20 md:h-20 sm:w-16 sm:h-16 opacity-80"
                     style="animation: float 6s ease-in-out infinite;"
                 />
             </div>
@@ -29,7 +29,7 @@
                 <img
                     src="/src/assets/svg/donut_hud.svg?v=1731340000"
                     alt="Donut Central Element"
-                    class="w-50 h-50 opacity-90"
+                    class="w-50 h-50 md:w-36 md:h-36 sm:w-24 sm:h-24 opacity-90"
                     style="animation: float 6s ease-in-out infinite 2s;"
                 />
             </div>
@@ -39,7 +39,7 @@
                 <img
                     src="/src/assets/svg/donutround2.svg?v=1731340000"
                     alt="Donut Round Element 2"
-                    class="w-30 h-30 opacity-75"
+                    class="w-30 h-30 md:w-20 md:h-20 sm:w-16 sm:h-16 opacity-75"
                     style="animation: float 6s ease-in-out infinite 4s;"
                 />
             </div>
@@ -47,7 +47,7 @@
     </div>
 
     <!-- Nouvelle barre de chargement juste en dessous du HUD -->
-    <div class="relative z-10 flex flex-col items-center -mt-16 space-y-8">
+    <div class="relative z-10 flex flex-col items-center -mt-16 md:-mt-12 sm:-mt-8 space-y-8 md:space-y-6 sm:space-y-4">
         <!-- Troisième barre de chargement (nouvelle) -->
         <div class="progress-bar-container">
             <ul class="progress-bar">
@@ -107,12 +107,57 @@
         align-items: center;
     }
 
+    @media (max-width: 768px) {
+        .progress-bar {
+            width: 350px;
+            height: 8px;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .progress-bar {
+            width: 280px;
+            height: 6px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .progress-bar {
+            width: 220px;
+            height: 5px;
+        }
+    }
+
     .progress-bar li {
         display: block;
         float: left;
         width: 90px;
         height: 10px;
         margin-right: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .progress-bar li {
+            width: 63px;
+            height: 8px;
+            margin-right: 7px;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .progress-bar li {
+            width: 50px;
+            height: 6px;
+            margin-right: 5px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .progress-bar li {
+            width: 40px;
+            height: 5px;
+            margin-right: 4px;
+        }
     }
 
     /* Barre complète - toutes les sections chargées */
