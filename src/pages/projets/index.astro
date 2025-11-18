@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import Layout from "../../layouts/Layout.astro";
 import HudHeader from "../../components/HudHeader.astro";
 import CardProject from "../../components/CardProject.astro";
@@ -11,6 +13,7 @@ let hasError = false;
 
 try {
   projects = await getProjects();
+  console.log('Projets récupérés:', projects.length);
 } catch (error) {
   console.error('Erreur lors de la récupération des projets:', error);
   hasError = true;

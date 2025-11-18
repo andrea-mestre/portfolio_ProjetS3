@@ -1,64 +1,36 @@
 ---
+export const prerender = false;
+
 import Layout from "../../layouts/Layout.astro";
 import HudHeader from "../../components/HudHeader.astro";
-import { getProjects, getProjectImageUrl } from "../../lib/pocketbase";
+import { getProjects, getProjectImageUrl, type Project } from "../../lib/pocketbase";
 
-export async function getStaticPaths() {
-  let projects = [];
+// Récupérer le slug depuis l'URL
+const { id } = Astro.params;
+
+// Récupérer tous les projets
+let projects: Project[] = [];
+let project: Project | null = null;
+
+try {
+  projects = await getProjects();
+  console.log('Projets récupérés:', projects.length);
   
-  try {
-    projects = await getProjects();
-    console.log('Projets récupérés pour les routes statiques:', projects.length);
-    
-    if (projects.length === 0) {
-      console.log('Aucun projet trouvé, utilisation des données de test pour les routes');
-      
-      projects = [
-        {
-          id: 'f3owlbua4olvg0p',
-          titre: 'MODULO',
-          etude_annee: 'BUT MMI 2',
-          projet_annee: '2025-11-01',
-          categories: ['Design graphique', 'Développement web', 'Communication'],
-          resume: 'Interface de gestion modulaire pour la productivité numérique. Design système cohérent avec composants réutilisables.',
-          description: 'Modulo est une interface de gestion complète pour optimiser la productivité numérique. Ce projet propose un design système cohérent avec des composants réutilisables, permettant une expérience utilisateur fluide et moderne. L\'interface modulaire s\'adapte aux besoins spécifiques de chaque utilisateur.',
-          outils: ['Figma', 'Illustrator', 'Javascript', 'TailwindCSS', 'Astro'],
-          images: ['modulo1.webp', 'modulo2.webp', 'modulo3.webp'],
-          image_projet: 'mockupmodulo1_mg6m9inyh1.webp',
-          created: '2025-11-01T00:00:00.000Z',
-          updated: '2025-11-01T00:00:00.000Z'
-        },
-        {
-          id: 'g4pwlbva5pmvh1q',
-          titre: 'PORTFOLIO WEB',
-          etude_annee: 'BUT MMI 2',
-          projet_annee: '2025-10-15',
-          categories: ['Développement web', 'Design UI/UX', 'Frontend'],
-          resume: 'Portfolio personnel moderne avec design spatial et animations interactives.',
-          description: 'Portfolio personnel moderne alliant design spatial et animations interactives. Développé avec Astro et TailwindCSS, il présente mes compétences en développement web et design d\'interface. L\'expérience utilisateur est optimisée avec des effets visuels immersifs.',
-          outils: ['Astro', 'TailwindCSS', 'TypeScript', 'Three.js', 'Figma'],
-          images: ['portfolio1.webp', 'portfolio2.webp', 'portfolio3.webp'],
-          image_projet: null,
-          created: '2025-10-15T00:00:00.000Z',
-          updated: '2025-10-15T00:00:00.000Z'
-        }
-      ];
-    }
-  } catch (error) {
-    console.error('Erreur lors de la récupération des projets pour les routes:', error);
-    projects = [];
-  }
-
-  return projects.map((project) => {
-    const slug = project.titre.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-    return {
-      params: { id: slug },
-      props: { project }
-    };
-  });
+  // Trouver le projet correspondant au slug
+  project = projects.find((p) => {
+    const slug = p.titre.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    return slug === id;
+  }) || null;
+  
+  console.log('Projet trouvé:', project?.titre || 'Aucun');
+} catch (error) {
+  console.error('Erreur lors de la récupération du projet:', error);
 }
 
-const { project } = Astro.props;
+// Si aucun projet n'est trouvé, rediriger vers la page des projets
+if (!project) {
+  return Astro.redirect('/projets');
+}
 
 // Fonction pour formater la date
 function formatProjectDate(dateString: string): string {
