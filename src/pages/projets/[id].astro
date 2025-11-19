@@ -56,22 +56,22 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
   const tool = toolName.toLowerCase();
 
   if (tool.includes("figma")) {
-    return { src: figmaIcon.src, alt: "Figma" };
+    return { src: figmaIcon, alt: "Figma" };
   }
   if (tool.includes("illustrator") || tool.includes("ai")) {
-    return { src: illustratorIcon.src, alt: "Illustrator" };
+    return { src: illustratorIcon, alt: "Illustrator" };
   }
   if (tool.includes("photoshop") || tool.includes("ps")) {
-    return { src: photoshopIcon.src, alt: "Photoshop" };
+    return { src: photoshopIcon, alt: "Photoshop" };
   }
   if (tool.includes("krita")) {
-    return { src: krittaIcon.src, alt: "Krita" };
+    return { src: krittaIcon, alt: "Krita" };
   }
   if (tool.includes("miro")) {
-    return { src: miroIcon.src, alt: "Miro" };
+    return { src: miroIcon, alt: "Miro" };
   }
   if (tool.includes("notion")) {
-    return { src: notionIcon.src, alt: "Notion" };
+    return { src: notionIcon, alt: "Notion" };
   }
 
   return { src: "", alt: toolName };
