@@ -114,18 +114,6 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
               {formatProjectDate(project.projet_annee)}
             </span>
           </div>
-
-          <div class="flex-1 text-center">
-            <span
-              class="text-white text-sm tracking-wider font-[family-name:var(--font-smalltext)] uppercase"
-            >
-              {
-                project.categories && project.categories.length > 0
-                  ? project.categories[0]
-                  : "DESIGN GRAPHIQUE"
-              }
-            </span>
-          </div>
         </div>
       </div>
     </div>
