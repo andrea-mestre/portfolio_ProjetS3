@@ -453,7 +453,7 @@ function generateProjectSlug(project: any): string {
 
 				<!-- Grille de cartes projets -->
 				<div
-					class="projects-grid flex flex-wrap justify-center gap-8 max-w-6xl mx-auto"
+					class="projects-grid flex justify-center gap-8 lg:gap-12 max-w-full mx-auto"
 				>
 					{
 						hasError ? (
@@ -1069,114 +1069,45 @@ function generateProjectSlug(project: any): string {
 		}
 	}
 
-	/* Styles pour la section Skills avec animation */
-	.skills-section {
+	/* Styles unifiés pour les sections avec animation (Skills, Projects, Contact) */
+	.skills-section,
+	.projects-section,
+	.contact-section {
 		opacity: 0;
 		transform: translateY(50px);
 		transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	}
 
-	.skills-section.skills-revealed {
+	.skills-section.skills-revealed,
+	.projects-section.projects-revealed,
+	.contact-section.contact-revealed {
 		opacity: 1;
 		transform: translateY(0);
-		animation: skillsSectionReveal 1s ease-out forwards;
+		animation: sectionReveal 1s ease-out forwards;
 	}
 
-	@keyframes skillsSectionReveal {
-		0% {
-			opacity: 0;
-			transform: translateY(50px) scale(0.95);
-		}
-		50% {
-			opacity: 0.7;
-			transform: translateY(-10px) scale(1.02);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0) scale(1);
-		}
-	}
-
-	.skills-revealed .content-item {
-		animation: skillsContentReveal 0.6s ease-out forwards;
+	.skills-revealed .content-item,
+	.projects-revealed .content-item,
+	.contact-revealed .content-item {
+		animation: contentItemReveal 0.6s ease-out forwards;
 		opacity: 0;
 		transform: translateY(30px);
 	}
 
-	.skills-revealed .content-item:nth-child(1) {
+	.skills-revealed .content-item:nth-child(1),
+	.projects-revealed .content-item:nth-child(1),
+	.contact-revealed .content-item:nth-child(1) {
 		animation-delay: 0.1s;
 	}
-	.skills-revealed .content-item:nth-child(2) {
+	.skills-revealed .content-item:nth-child(2),
+	.projects-revealed .content-item:nth-child(2),
+	.contact-revealed .content-item:nth-child(2) {
 		animation-delay: 0.2s;
 	}
-	.skills-revealed .content-item:nth-child(3) {
+	.skills-revealed .content-item:nth-child(3),
+	.projects-revealed .content-item:nth-child(3),
+	.contact-revealed .content-item:nth-child(3) {
 		animation-delay: 0.3s;
-	}
-
-	@keyframes skillsContentReveal {
-		0% {
-			opacity: 0;
-			transform: translateY(30px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	/* Styles pour la section Projets */
-	.projects-section {
-		opacity: 0;
-		transform: translateY(50px);
-		transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-	}
-
-	.projects-section.projects-revealed {
-		opacity: 1;
-		transform: translateY(0);
-		animation: projectsSectionReveal 1s ease-out forwards;
-	}
-
-	@keyframes projectsSectionReveal {
-		0% {
-			opacity: 0;
-			transform: translateY(50px) scale(0.95);
-		}
-		50% {
-			opacity: 0.7;
-			transform: translateY(-10px) scale(1.02);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0) scale(1);
-		}
-	}
-
-	.projects-revealed .content-item {
-		animation: projectsContentReveal 0.6s ease-out forwards;
-		opacity: 0;
-		transform: translateY(30px);
-	}
-
-	.projects-revealed .content-item:nth-child(1) {
-		animation-delay: 0.1s;
-	}
-	.projects-revealed .content-item:nth-child(2) {
-		animation-delay: 0.2s;
-	}
-	.projects-revealed .content-item:nth-child(3) {
-		animation-delay: 0.3s;
-	}
-
-	@keyframes projectsContentReveal {
-		0% {
-			opacity: 0;
-			transform: translateY(30px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
 	}
 
 	/* Animation de la ligne sous le titre des projets */
@@ -1235,12 +1166,16 @@ function generateProjectSlug(project: any): string {
 		}
 	}
 
-	/* Styles pour le bouton "Voir tous les projets" */
-	.view-all-button {
+	/* Styles unifiés pour les boutons animés */
+	.view-all-button,
+	.contact-button {
 		box-shadow:
 			0 0 20px rgba(184, 187, 240, 0.3),
 			inset 0 0 10px rgba(184, 187, 240, 0.1);
 		animation: buttonPulse 2s ease-in-out infinite;
+	}
+
+	.view-all-button {
 		opacity: 0;
 		transform: translateY(30px);
 		animation-delay: 0.5s;
@@ -1278,82 +1213,6 @@ function generateProjectSlug(project: any): string {
 		}
 	}
 
-	/* Styles pour la section Contact */
-	.contact-section {
-		opacity: 0;
-		transform: translateY(50px);
-		transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-	}
-
-	.contact-section.contact-revealed {
-		opacity: 1;
-		transform: translateY(0);
-		animation: contactSectionReveal 1s ease-out forwards;
-	}
-
-	@keyframes contactSectionReveal {
-		0% {
-			opacity: 0;
-			transform: translateY(50px) scale(0.95);
-		}
-		50% {
-			opacity: 0.7;
-			transform: translateY(-10px) scale(1.02);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0) scale(1);
-		}
-	}
-
-	.contact-revealed .content-item {
-		animation: contactContentReveal 0.6s ease-out forwards;
-		opacity: 0;
-		transform: translateY(30px);
-	}
-
-	.contact-revealed .content-item:nth-child(1) {
-		animation-delay: 0.1s;
-	}
-	.contact-revealed .content-item:nth-child(2) {
-		animation-delay: 0.2s;
-	}
-	.contact-revealed .content-item:nth-child(3) {
-		animation-delay: 0.3s;
-	}
-
-	@keyframes contactContentReveal {
-		0% {
-			opacity: 0;
-			transform: translateY(30px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	/* Bouton de contact */
-	.contact-button {
-		box-shadow:
-			0 0 20px rgba(184, 187, 240, 0.3),
-			inset 0 0 10px rgba(184, 187, 240, 0.1);
-		animation: contactButtonPulse 2s ease-in-out infinite;
-	}
-
-	@keyframes contactButtonPulse {
-		0%,
-		100% {
-			box-shadow:
-				0 0 20px rgba(184, 187, 240, 0.3),
-				inset 0 0 10px rgba(184, 187, 240, 0.1);
-		}
-		50% {
-			box-shadow:
-				0 0 30px rgba(184, 187, 240, 0.5),
-				inset 0 0 15px rgba(184, 187, 240, 0.2);
-		}
-	}
 </style>
 
 <script>

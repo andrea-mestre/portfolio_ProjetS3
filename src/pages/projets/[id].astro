@@ -16,10 +16,8 @@ import krittaIcon from "../../assets/icons/krita.svg";
 import miroIcon from "../../assets/icons/miro.svg";
 import notionIcon from "../../assets/icons/notion.svg";
 
-// Récupérer le slug depuis l'URL
 const { id } = Astro.params;
 
-// Récupérer tous les projets
 let projects: Project[] = [];
 let project: Project | null = null;
 
@@ -27,7 +25,6 @@ try {
   projects = await getProjects();
   console.log("Projets récupérés:", projects.length);
 
-  // Trouver le projet correspondant au slug
   project =
     projects.find((p) => {
       const slug = p.titre
@@ -42,22 +39,18 @@ try {
   console.error("Erreur lors de la récupération du projet:", error);
 }
 
-// Si aucun projet n'est trouvé, rediriger vers la page des projets
 if (!project) {
   return Astro.redirect("/projets");
 }
 
-// Fonction pour formater la date
 function formatProjectDate(dateString: string): string {
   const date = new Date(dateString);
   return date.toLocaleDateString("fr-FR", {
     year: "numeric",
     month: "long",
-    day: "numeric",
   });
 }
 
-// Fonction pour obtenir le chemin de l'icône correspondant à un outil
 function getToolIcon(toolName: string): { src: string; alt: string } {
   const tool = toolName.toLowerCase();
 
@@ -80,7 +73,6 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
     return { src: notionIcon.src, alt: "Notion" };
   }
 
-  // Icône par défaut
   return { src: "", alt: toolName };
 }
 ---
@@ -89,7 +81,6 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
   <HudHeader currentPage="projets" />
 
   <main class="relative z-10 pt-24 min-h-screen">
-    <!-- En-tête du projet -->
     <div class="flex justify-center mb-8 px-8">
       <h1
         class="text-white tracking-wide text-center drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] max-w-6xl"
@@ -99,7 +90,6 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
       </h1>
     </div>
 
-    <!-- Barre d'informations sous le titre -->
     <div class="flex justify-center mb-8 px-8">
       <div
         class="w-full max-w-6xl py-5 px-16"
@@ -108,7 +98,6 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
         <div
           class="flex flex-col md:flex-row justify-between items-center gap-70 text-center"
         >
-          <!-- Année d'étude -->
           <div class="flex-1 text-center">
             <span
               class="text-white --size-smalltext tracking-wider font-[family-name:var(--font-smalltext)]"
@@ -117,7 +106,6 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
             </span>
           </div>
 
-          <!-- Date du projet (centre) -->
           <div class="flex-1 text-center">
             <span
               class="text-white text-sm tracking-wider font-[family-name:var(--font-smalltext)]"
@@ -126,7 +114,6 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
             </span>
           </div>
 
-          <!-- Catégorie -->
           <div class="flex-1 text-center">
             <span
               class="text-white text-sm tracking-wider font-[family-name:var(--font-smalltext)] uppercase"
@@ -142,13 +129,10 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
       </div>
     </div>
 
-    <!-- Bloc résumé  -->
     <div class="flex justify-center mb-8 px-8">
       <div
         class="w-full max-w-6xl p-8 rounded-lg border-2 border-[--color-purple] bg-gradient-to-br from-[--color-purple]/40 to-[--color-darkpurple]/40 backdrop-blur-sm relative overflow-hidden"
       >
-        <!-- Effet de brillance -->
-
         <h2
           class="relative font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-6 text-center"
           style="color: var(--color-darkpurple); font-size: var(--size-h2);"
@@ -157,24 +141,19 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
         </h2>
 
         <p
-          class="relative text-white text-sm leading-relaxed font-[family-name:var(--font-text)] text-center"
+          class="relative text-white --size-text leading-relaxed font-[family-name:var(--font-text)] text-center"
         >
           {project.resume}
         </p>
       </div>
     </div>
 
-    <!-- Section principale du projet -->
     <section class="project-hero flex justify-center py-8 px-8">
       <div class="w-full max-w-7xl">
-        <!-- Grille principale : Description à gauche, Image à droite -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-35 mb-12">
-          <!-- Colonne gauche - Description du projet -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-55 mb-40">
           <div class="space-y-8">
-            <!-- Description détaillée -->
             <div
-              class="project-description p-8 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm"
-            >
+              class="project-description border borderbackdrop-blur-sm">
               <h2
                 class="font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-6"
                 style="color: var(--color-darkpurple); font-size: var(--size-title2);"
@@ -198,13 +177,11 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
               </div>
             </div>
 
-            <!-- Bloc catégories et outils -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <!-- Bloc outils -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div
-                class="project-info-block p-6 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm"
+                class="project-info-block p-6 backdrop-blur-sm"
               >
-                <div class="flex gap-5">
+                <div class="flex gap-10">
                   {
                     project.outils.map((outil: string) => {
                       const icon = getToolIcon(outil);
@@ -225,9 +202,8 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
                 </div>
               </div>
 
-              <!-- Bloc catégories -->
               <div
-                class="project-info-block p-6 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm"
+                class="project-info-block backdrop-blur-sm"
               >
                 <div class="flex flex-wrap gap-2">
                   {
@@ -242,11 +218,10 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
             </div>
           </div>
 
-          <!-- Colonne droite - Image -->
           <div class="flex items-start">
             {
               getProjectImageUrl(project) && (
-                <div class="project-image-main w-100 py-50 overflow-hidden">
+                <div class="project-image-main w-100 py-50 overflow-hidden" style="animation: float 6s ease-in-out infinite;">
                   <img
                     src={getProjectImageUrl(project)}
                     alt={project.titre}
@@ -259,41 +234,46 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
         </div>
 
 
-        <!-- Hiérarchie du projet en pleine largeur -->
+       
         {project.hierarchie_descrip && (
           <div class="project-hierarchy mb-12">
             <div
               class="p-8 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm"
             >
               <h2
-                class="font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-8 text-center"
+                class="font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-15 text-center"
                 style="color: var(--color-darkpurple); font-size: var(--size-h2);"
               >
                 HIÉRARCHIE DU PROJET
               </h2>
 
-              <div class="hierarchy-container relative">
-                <!-- Description de la hiérarchie -->
-                <div class="mb-8">
-                  <div 
-                    class="text-white leading-relaxed font-[family-name:var(--font-text)]" 
-                    style="font-size: var(--size-text);"
-                    set:html={project.hierarchie_descrip}
-                  />
-                </div>
-
-                <!-- Images de la hiérarchie -->
+                <div class="hierarchy-container relative">
                 {project.images && project.images.length > 0 && (
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {project.images.map((image: string, index: number) => {
                       const imageUrl = `${POCKETBASE_URL}/api/files/projet/${project.id}/${image}`;
+                      
+                      const liMatches = project.hierarchie_descrip.match(/<li>(.*?)<\/li>/gs);
+                      const paragraphContent = liMatches && liMatches[index] 
+                        ? liMatches[index].replace(/<\/?li>/g, '').trim() 
+                        : '';
+                      
                       return (
-                        <div class={`hierarchy-image-container overflow-hidden rounded-lg border border-[--color-purple]/30 ${index === 0 ? 'md:col-span-1' : ''}`}>
+                        <div class={`hierarchy-image-wrapper group relative overflow-hidden rounded-lg border border-[--color-purple]/30 ${index === 0 ? 'md:col-span-1' : ''}`}>
                           <img 
                             src={imageUrl}
                             alt={`Hiérarchie du projet - étape ${index + 1}`}
-                            class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105"
+                            class="w-full h-auto object-cover transition-transform duration-300"
                           />
+                          {paragraphContent && (
+                            <div class="hierarchy-overlay absolute inset-0 bg-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 pointer-events-none">
+                              <div 
+                                class="text-white leading-relaxed font-[family-name:var(--font-text)] text-center"
+                                style="font-size: var(--size-text);"
+                                set:html={paragraphContent}
+                              />
+                            </div>
+                          )}
                         </div>
                       );
                     })}
@@ -304,14 +284,14 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
           </div>
         )}
 
-        <!-- Résultat final -->
+       
         {project.image_resultat && project.image_resultat.length > 0 && (
-          <div class="project-result mb-12">
+          <div class="project-result mb-40">
             <div
-              class="p-8 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm"
+              class="p-8 backdrop-blur-sm"
             >
               <h2
-                class="font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-8 text-center"
+                class="font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-15 text-center"
                 style="color: var(--color-darkpurple); font-size: var(--size-h2);"
               >
                 RÉSULTAT FINAL
@@ -497,6 +477,16 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
 
   .hierarchy-step:hover {
     transform: translateY(-5px);
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
   }
 
   /* Responsive adjustments */

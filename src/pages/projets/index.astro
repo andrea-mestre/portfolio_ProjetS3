@@ -95,10 +95,8 @@ function generateProjectSlug(project: any): string {
 			</div>
 		</section>
 
-		<!-- Section Filtres -->
 		<FilterSystem projects={projects} />
 
-		<!-- Section grille de projets -->
 		<section
 			class="projects-grid-section flex items-center justify-center py-10 px-8"
 		>
@@ -159,7 +157,6 @@ function generateProjectSlug(project: any): string {
 			</div>
 		</section>
 
-		<!-- Section Call to Action -->
 		<section
 			class="projects-cta-section min-h-[90vh] flex items-center justify-center py-16 px-8 border-t"
 		>
@@ -182,13 +179,11 @@ function generateProjectSlug(project: any): string {
 					href="/contact"
 					class="cta-button group relative px-8 py-4 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink] inline-flex items-center gap-3"
 				>
-					<!-- Effet lumineux de fond -->
 					<div
 						class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"
 					>
 					</div>
 
-					<!-- Texte et icône -->
 					<div class="relative z-10 flex items-center gap-3">
 						<svg
 							class="w-5 h-5"
@@ -205,7 +200,6 @@ function generateProjectSlug(project: any): string {
 						<span>ME CONTACTER</span>
 					</div>
 
-					<!-- Effet de scan -->
 					<div
 						class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"
 					>
@@ -214,12 +208,11 @@ function generateProjectSlug(project: any): string {
 			</div>
 		</section>
 	</main>
-	<style>
-		/* Animations pour la page projets */
+		<style>
 		.projects-hero-title {
 			opacity: 0;
 			transform: translateY(30px);
-			animation: titleSlideIn 1s ease-out 0.5s forwards;
+			animation: titleSlideIn 0.2s ease-out 0.1s forwards;
 			text-shadow:
 				0 0 10px var(--color-darkpurple),
 				0 0 20px var(--color-darkpurple),
@@ -238,9 +231,8 @@ function generateProjectSlug(project: any): string {
 			}
 		}
 
-		/* Animation de la ligne sous le titre */
 		.projects-hero-line-wrapper {
-			animation: heroLineReveal 1s ease-out 1s forwards;
+			animation: heroLineReveal 0.6s ease-out 0.5s forwards;
 		}
 
 		@keyframes heroLineReveal {
@@ -253,7 +245,7 @@ function generateProjectSlug(project: any): string {
 		}
 
 		.projects-hero-line {
-			animation: heroLineExpand 1.5s ease-out 1.2s backwards;
+			animation: heroLineExpand 0.8s ease-out 0.6s backwards;
 			background: linear-gradient(
 				90deg,
 				transparent,
@@ -271,9 +263,8 @@ function generateProjectSlug(project: any): string {
 			}
 		}
 
-		/* Animation de la description */
 		.projects-hero-description {
-			animation: descriptionFadeIn 1s ease-out 1.5s forwards;
+			animation: descriptionFadeIn 0.6s ease-out 0.9s forwards;
 		}
 
 		@keyframes descriptionFadeIn {
@@ -287,9 +278,8 @@ function generateProjectSlug(project: any): string {
 			}
 		}
 
-		/* Animation des statistiques */
 		.projects-stats {
-			animation: statsFadeIn 1s ease-out 2s forwards;
+			animation: statsFadeIn 0.6s ease-out 1.2s forwards;
 		}
 
 		@keyframes statsFadeIn {
@@ -315,7 +305,6 @@ function generateProjectSlug(project: any): string {
 			text-shadow: 0 0 15px rgba(184, 187, 240, 0.9);
 		}
 
-		/* Style neon pour les titres h1 et h2 */
 		.section-neon {
 			text-shadow:
 				0 0 10px var(--color-darkpurple),
@@ -342,9 +331,8 @@ function generateProjectSlug(project: any): string {
 			}
 		}
 
-		/* Animations d'apparition des cartes projets */
 		.projects-grid {
-			animation: gridFadeIn 1s ease-out 0.5s forwards;
+			animation: gridFadeIn 0.7s ease-out 1.6s forwards;
 			opacity: 0;
 		}
 
@@ -359,7 +347,6 @@ function generateProjectSlug(project: any): string {
 			}
 		}
 
-		/* Style pour les liens de cartes projets */
 		.project-card-link {
 			text-decoration: none;
 			color: inherit;
@@ -367,11 +354,8 @@ function generateProjectSlug(project: any): string {
 		}
 
 		.project-card-link:hover {
-			/* Désactivé pour éviter conflit avec animation de la carte */
-			/* transform: scale(1.05); */
 		}
 
-		/* Section CTA animations */
 		.projects-cta-section {
 			opacity: 0;
 			transform: translateY(50px);
@@ -420,7 +404,6 @@ function generateProjectSlug(project: any): string {
 			}
 		}
 
-		/* Animation de masquage des cartes filtrées */
 		.project-card-link.hidden-by-filter {
 			display: none;
 		}
@@ -429,7 +412,6 @@ function generateProjectSlug(project: any): string {
 			transition: all 0.3s ease;
 		}
 
-		/* Responsive adjustments */
 		@media (max-width: 768px) {
 			.projects-hero-title {
 				font-size: 2.5rem;
@@ -451,7 +433,6 @@ function generateProjectSlug(project: any): string {
 	</style>
 
 	<script>
-		// Gestion des animations au scroll pour la page projets
 		document.addEventListener("DOMContentLoaded", () => {
 			const ctaSection = document.querySelector(".projects-cta-section");
 			let ctaAnimated = false;
