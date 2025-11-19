@@ -114,13 +114,21 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
               {formatProjectDate(project.projet_annee)}
             </span>
           </div>
+
+          <div class="flex-1 text-center">
+            <span
+              class="text-white text-sm tracking-wider font-[family-name:var(--font-smalltext)] uppercase"
+            >
+              {project.categories && project.categories.length > 0 ? project.categories[0] : ''}
+            </span>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="flex justify-center mb-8 px-8">
       <div
-        class="w-full max-w-6xl p-8 rounded-lg border-2 border-[--color-purple] bg-gradient-to-br from-[--color-purple]/40 to-[--color-darkpurple]/40 backdrop-blur-sm relative overflow-hidden"
+        class="w-full max-w-6xl p-8 backdrop-blur-sm relative overflow-hidden"
       >
         <h2
           class="relative font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-6 text-center"
@@ -142,7 +150,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-55 mb-40">
           <div class="space-y-8">
             <div
-              class="project-description border borderbackdrop-blur-sm">
+              class="project-description">
               <h2
                 class="font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-6"
                 style="color: var(--color-darkpurple); font-size: var(--size-title2);"
@@ -181,11 +189,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
                           title={outil}
                           class="w-15 h-15 object-contain"
                         />
-                      ) : (
-                        <span class="text-white text-xs" title={outil}>
-                          {outil}
-                        </span>
-                      );
+                      ) : null;
                     })
                   }
                 </div>
@@ -227,7 +231,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
         {project.hierarchie_descrip && (
           <div class="project-hierarchy mb-12">
             <div
-              class="p-8 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm"
+              class="p-8"
             >
               <h2
                 class="font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-15 text-center"
@@ -248,7 +252,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
                         : '';
                       
                       return (
-                        <div class={`hierarchy-image-wrapper group relative overflow-hidden rounded-lg border border-[--color-purple]/30 ${index === 0 ? 'md:col-span-1' : ''}`}>
+                        <div class={`hierarchy-image-wrapper group relative overflow-hidden  ${index === 0 ? 'md:col-span-1' : ''}`}>
                           <img 
                             src={imageUrl}
                             alt={`Hiérarchie du projet - étape ${index + 1}`}
@@ -291,7 +295,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
                   {project.image_resultat.map((image: string, index: number) => {
                     const imageUrl = `${POCKETBASE_URL}/api/files/projet/${project.id}/${image}`;
                     return (
-                      <div class="result-image-container overflow-hidden rounded-lg border border-[--color-purple]/30">
+                      <div class="result-image-container overflow-hidden rounded-lg">
                         <img 
                           src={imageUrl}
                           alt={`Résultat final - ${index + 1}`}
