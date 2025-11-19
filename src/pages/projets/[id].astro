@@ -4,6 +4,12 @@ export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
 import HudHeader from "../../components/HudHeader.astro";
 import { getProjects, getProjectImageUrl, type Project } from "../../lib/pocketbase";
+import figmaIcon from "../../assets/icons/figma.svg";
+import illustratorIcon from "../../assets/icons/illustrator.svg";
+import photoshopIcon from "../../assets/icons/photoshop.svg";
+import krittaIcon from "../../assets/icons/krita.svg";
+import miroIcon from "../../assets/icons/miro.svg";
+import notionIcon from "../../assets/icons/notion.svg";
 
 // Récupérer le slug depuis l'URL
 const { id } = Astro.params;
@@ -41,6 +47,33 @@ function formatProjectDate(dateString: string): string {
     day: 'numeric'
   });
 }
+
+// Fonction pour obtenir le chemin de l'icône correspondant à un outil
+function getToolIcon(toolName: string): { src: string; alt: string } {
+  const tool = toolName.toLowerCase();
+  
+  if (tool.includes('figma')) {
+    return { src: figmaIcon.src, alt: 'Figma' };
+  }
+  if (tool.includes('illustrator') || tool.includes('ai')) {
+    return { src: illustratorIcon.src, alt: 'Illustrator' };
+  }
+  if (tool.includes('photoshop') || tool.includes('ps')) {
+    return { src: photoshopIcon.src, alt: 'Photoshop' };
+  }
+  if (tool.includes('krita')) {
+    return { src: krittaIcon.src, alt: 'Krita' };
+  }
+  if (tool.includes('miro')) {
+    return { src: miroIcon.src, alt: 'Miro' };
+  }
+  if (tool.includes('notion')) {
+    return { src: notionIcon.src, alt: 'Notion' };
+  }
+  
+  // Icône par défaut
+  return { src: '', alt: toolName };
+}
 ---
 
 <Layout title={`${project.titre} - Andrea Mestre`}>
@@ -48,83 +81,117 @@ function formatProjectDate(dateString: string): string {
   
   <main class="relative z-10 pt-24 min-h-screen">
     <!-- En-tête du projet -->
-    <div class="flex justify-center mb-8">
+    <div class="flex justify-center mb-8 px-8">
       <h1
-        class="text-white tracking-wide whitespace-nowrap drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-        style="font-family: var(--font-title1); font-size: var(--size-title1);"
+        class="text-white tracking-wide text-center drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] max-w-6xl"
+        style="font-family: var(--font-title1); font-size: clamp(1.5rem, 4vw, var(--size-title1)); word-wrap: break-word;"
       >
         MISSION : {project.titre}
       </h1>
+    </div>
+
+    <!-- Barre d'informations sous le titre -->
+    <div class="flex justify-center mb-8 px-8">
+      <div class="w-full max-w-6xl py-5 px-16" style="background-color: #200A27;">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-70 text-center">
+          <!-- Année d'étude -->
+          <div class="flex-1 text-center">
+            <span class="text-white --size-smalltext tracking-wider font-[family-name:var(--font-smalltext)]">
+              {project.etude_annee}
+            </span>
+          </div>
+          
+          <!-- Date du projet (centre) -->
+          <div class="flex-1 text-center">
+            <span class="text-white text-sm tracking-wider font-[family-name:var(--font-smalltext)]">
+              {formatProjectDate(project.projet_annee)}
+            </span>
+          </div>
+          
+          <!-- Catégorie -->
+          <div class="flex-1 text-center">
+            <span class="text-white text-sm tracking-wider font-[family-name:var(--font-smalltext)] uppercase">
+              {project.categories && project.categories.length > 0 ? project.categories[0] : 'DESIGN GRAPHIQUE'}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloc résumé  -->
+    <div class="flex justify-center mb-8 px-8">
+      <div class="w-full max-w-6xl p-8 rounded-lg border-2 border-[--color-purple] bg-gradient-to-br from-[--color-purple]/40 to-[--color-darkpurple]/40 backdrop-blur-sm relative overflow-hidden">
+        <!-- Effet de brillance -->
+        
+        <h2 class="relative font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-6 text-center" style="color: var(--color-darkpurple); font-size: var(--size-h2);">
+          RÉSUMÉ
+        </h2>
+        
+        <p class="relative text-white text-sm leading-relaxed font-[family-name:var(--font-text)] text-center">
+          {project.resume}
+        </p>
+      </div>
     </div>
 
     <!-- Section principale du projet -->
     <section class="project-hero flex justify-center py-8 px-8">
       <div class="w-full max-w-7xl">
         
-        <!-- Informations du projet -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Grille principale : Description à gauche, Image à droite -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           
-          <!-- Colonne gauche - Informations -->
-          <div class="lg:col-span-1 space-y-8">
-            
-            <!-- Bloc année et type -->
-            <div class="project-info-block p-6 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
-              <div class="flex flex-wrap gap-4 mb-4">
-                <div class="px-3 py-1 bg-[--color-purple]/20 border border-[--color-purple]/50 rounded text-sm">
-                  <span class="text-[--color-purple] font-bold">{project.etude_annee}</span>
-                </div>
-                <div class="px-3 py-1 bg-[--color-darkpurple]/20 border border-[--color-darkpurple]/50 rounded text-sm">
-                  <span class="text-[--color-darkpurple] font-bold">{formatProjectDate(project.projet_annee)}</span>
-                </div>
-              </div>
-              
-              <h2 class="font-[family-name:var(--font-title2)] text-2xl font-bold tracking-[0.15em] section-neon mb-4" style="color: var(--color-darkpurple);">
-                RÉSUMÉ
+          <!-- Colonne gauche - Description du projet -->
+          <div class="space-y-8">
+            <!-- Description détaillée -->
+            <div class="project-description p-8 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
+              <h2 class="font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-6" style="color: var(--color-darkpurple); font-size: var(--size-title2);">
+                LE PROJET
               </h2>
               
-              <p class="text-white/70 text-sm leading-relaxed font-[family-name:var(--font-text)]">
-                {project.resume}
-              </p>
-            </div>
-
-            <!-- Bloc catégories -->
-            <div class="project-info-block p-6 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
-              <h3 class="font-[family-name:var(--font-title2)] text-lg font-bold tracking-[0.15em] section-neon mb-4" style="color: var(--color-darkpurple);">
-                CATÉGORIES
-              </h3>
-              
-              <div class="flex flex-wrap gap-2">
-                {project.categories.map((category: string) => (
-                  <span class="px-2 py-1 bg-[--color-pink]/20 border border-[--color-pink]/50 rounded text-xs text-[--color-pink] font-medium">
-                    {category}
-                  </span>
-                ))}
+              <div class="text-white leading-relaxed font-[family-name:var(--font-text)] space-y-4" style="font-size: var(--size-text);">
+                {project.description
+                  .replace(/<\/?p>/g, '')
+                  .split('\n')
+                  .map((paragraph: string) => 
+                    paragraph.trim() && <div>{paragraph}</div>
+                  )
+                }
               </div>
             </div>
 
-            <!-- Bloc outils -->
-            <div class="project-info-block p-6 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
-              <h3 class="font-[family-name:var(--font-title2)] text-lg font-bold tracking-[0.15em] section-neon mb-4" style="color: var(--color-darkpurple);">
-                OUTILS UTILISÉS
-              </h3>
-              
-              <div class="grid grid-cols-2 gap-2">
-                {project.outils.map((outil: string) => (
-                  <div class="flex items-center gap-2 p-2 bg-black/30 rounded border border-white/10">
-                    <div class="w-2 h-2 bg-[--color-purple] rounded-full"></div>
-                    <span class="text-white/80 text-xs font-[family-name:var(--font-text)]">{outil}</span>
-                  </div>
-                ))}
+            <!-- Bloc catégories et outils -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Bloc outils -->
+              <div class="project-info-block p-6 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
+                <div class="flex  gap-5">
+                  {project.outils.map((outil: string) => {
+                    const icon = getToolIcon(outil);
+                    return icon.src ? (
+                      <img src={icon.src} alt={icon.alt} title={outil} class="w-15 h-15 object-contain" />
+                    ) : (
+                      <span class="text-white text-xs" title={outil}>{outil}</span>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <!-- Bloc catégories -->
+              <div class="project-info-block p-6 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
+          <div class="flex flex-wrap gap-2">
+                  {project.categories.map((category: string) => (
+                    <span class="px-2 py-1 bg-[--color-pink]/20 border border-[--color-pink]/50 rounded text-xs text-[--color-pink] font-medium">
+                      {category}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Colonne droite - Contenu principal -->
-          <div class="lg:col-span-2">
-            
-            <!-- Image principale -->
+          <!-- Colonne droite - Image -->
+          <div class="flex items-start">
             {getProjectImageUrl(project) && (
-              <div class="project-image-main mb-8 rounded-lg overflow-hidden border border-[--color-purple]/30">
+              <div class="project-image-main w-120 py-100 overflow-hidden">
                 <img 
                   src={getProjectImageUrl(project)} 
                   alt={project.titre} 
@@ -132,55 +199,44 @@ function formatProjectDate(dateString: string): string {
                 />
               </div>
             )}
+          </div>
+        </div>
 
-            <!-- Description détaillée -->
-            <div class="project-description p-8 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
-              <h2 class="font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-6" style="color: var(--color-darkpurple); font-size: var(--size-title2);">
-                LE PROJET
-              </h2>
+        <!-- Hiérarchie du projet en pleine largeur -->
+        <div class="project-hierarchy mb-12">
+          <div class="p-8 rounded-lg border border-[--color-purple]/30 bg-black/20 backdrop-blur-sm">
+            <h3 class="font-[family-name:var(--font-title2)] text-xl font-bold tracking-[0.15em] section-neon mb-4 text-center" style="color: var(--color-darkpurple);">
+              HIÉRARCHIE DU PROJET
+            </h3>
+            
+            <div class="hierarchy-container relative">
+              <!-- Ligne principale -->
+              <div class="w-full h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent mb-8"></div>
               
-              <div class="prose prose-invert max-w-none">
-                <p class="text-white/80 text-lg leading-relaxed font-[family-name:var(--font-text)] mb-6">
-                  {project.description}
-                </p>
-              </div>
-
-              <!-- Hiérarchie du projet (inspirée de Modulo) -->
-              <div class="project-hierarchy mt-8">
-                <h3 class="font-[family-name:var(--font-title2)] text-xl font-bold tracking-[0.15em] section-neon mb-4" style="color: var(--color-darkpurple);">
-                  HIÉRARCHIE DU PROJET
-                </h3>
-                
-                <div class="hierarchy-container relative">
-                  <!-- Ligne principale -->
-                  <div class="w-full h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent mb-8"></div>
-                  
-                  <!-- Étapes du projet -->
-                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="hierarchy-step text-center">
-                      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-[--color-purple] bg-[--color-purple]/20 flex items-center justify-center">
-                        <span class="text-[--color-purple] font-bold">01</span>
-                      </div>
-                      <h4 class="text-[--color-purple] font-bold text-sm mb-2">CONCEPTION</h4>
-                      <p class="text-white/60 text-xs">Analyse des besoins et définition du concept</p>
-                    </div>
-                    
-                    <div class="hierarchy-step text-center">
-                      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-[--color-darkpurple] bg-[--color-darkpurple]/20 flex items-center justify-center">
-                        <span class="text-[--color-darkpurple] font-bold">02</span>
-                      </div>
-                      <h4 class="text-[--color-darkpurple] font-bold text-sm mb-2">DÉVELOPPEMENT</h4>
-                      <p class="text-white/60 text-xs">Réalisation et implémentation technique</p>
-                    </div>
-                    
-                    <div class="hierarchy-step text-center">
-                      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-[--color-pink] bg-[--color-pink]/20 flex items-center justify-center">
-                        <span class="text-[--color-pink] font-bold">03</span>
-                      </div>
-                      <h4 class="text-[--color-pink] font-bold text-sm mb-2">FINALISATION</h4>
-                      <p class="text-white/60 text-xs">Tests, optimisation et livraison</p>
-                    </div>
+              <!-- Étapes du projet -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="hierarchy-step text-center">
+                  <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-[--color-purple] bg-[--color-purple]/20 flex items-center justify-center">
+                    <span class="text-[--color-purple] font-bold">01</span>
                   </div>
+                  <h4 class="text-[--color-purple] font-bold text-sm mb-2">CONCEPTION</h4>
+                  <p class="text-white/60 text-xs">Analyse des besoins et définition du concept</p>
+                </div>
+                
+                <div class="hierarchy-step text-center">
+                  <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-[--color-darkpurple] bg-[--color-darkpurple]/20 flex items-center justify-center">
+                    <span class="text-[--color-darkpurple] font-bold">02</span>
+                  </div>
+                  <h4 class="text-[--color-darkpurple] font-bold text-sm mb-2">DÉVELOPPEMENT</h4>
+                  <p class="text-white/60 text-xs">Réalisation et implémentation technique</p>
+                </div>
+                
+                <div class="hierarchy-step text-center">
+                  <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-[--color-pink] bg-[--color-pink]/20 flex items-center justify-center">
+                    <span class="text-[--color-pink] font-bold">03</span>
+                  </div>
+                  <h4 class="text-[--color-pink] font-bold text-sm mb-2">FINALISATION</h4>
+                  <p class="text-white/60 text-xs">Tests, optimisation et livraison</p>
                 </div>
               </div>
             </div>
@@ -238,15 +294,6 @@ function formatProjectDate(dateString: string): string {
         0 0 35px var(--color-darkpurple),
         0 0 40px var(--color-purple);
     }
-  }
-
-  .section-neon:hover {
-    text-shadow:
-      0 0 15px var(--color-darkpurple),
-      0 0 25px var(--color-darkpurple),
-      0 0 35px var(--color-darkpurple),
-      0 0 45px var(--color-purple);
-    transform: translateY(-2px);
   }
 
   .project-info-block {

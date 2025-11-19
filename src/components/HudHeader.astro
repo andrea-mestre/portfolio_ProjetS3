@@ -4,10 +4,12 @@ export interface Props {
 }
 
 const { currentPage = 'home' } = Astro.props;
+const headerClass = currentPage === 'home' ? 'header-slide' : '';
+const navClass = currentPage === 'home' ? 'nav-fade' : '';
 ---
 
-<header class="fixed top-0 left-0 right-0 h-14 flex justify-center items-center px-6 z-[100] bg-gradient-to-b from-black/80 to-transparent border-b border-white/10 header-slide">
-  <nav class="flex gap-5 nav-fade">
+<header class={`fixed top-0 left-0 right-0 h-14 flex justify-center items-center px-6 z-[100] bg-gradient-to-b from-black/80 to-transparent border-b border-white/10 ${headerClass}`}>
+  <nav class={`flex gap-5 ${navClass}`}>
     {currentPage !== 'home' && (
       <a href="/" class="nav-button relative px-5 py-2 font-mono text-xs tracking-[0.15em] text-white no-underline bg-white/5 border border-white/30 overflow-hidden transition-all duration-300 hover:border-[--color-purple] hover:shadow-[0_0_20px_rgba(184,187,240,0.4)] hover:-translate-y-0.5">
         <span class="relative">ACCUEIL</span>

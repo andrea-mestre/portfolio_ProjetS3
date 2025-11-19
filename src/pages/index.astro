@@ -9,21 +9,30 @@ import SectionWarningHUD from "../components/SectionWarningHUD.astro";
 import CardProject from "../components/CardProject.astro";
 import ProjectStatus from "../components/ProjectStatus.astro";
 import SkillsDecorative from "../components/SkillsDecorative.astro";
-import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId, 
-getProjectImageUrl, type Project } from "../lib/pocketbase";
+import {
+	getProjects,
+	calculateProjectStats,
+	formatProjectDate,
+	generateProjectId,
+	getProjectImageUrl,
+	type Project,
+} from "../lib/pocketbase";
 let projects: Project[] = [];
 let hasError = false;
 
 try {
-  projects = await getProjects();
+	projects = await getProjects();
 } catch (error) {
-  console.error('Erreur lors de la récupération des projets:', error);
-  hasError = true;
+	console.error("Erreur lors de la récupération des projets:", error);
+	hasError = true;
 }
 
 // Fonction pour générer le slug du projet
 function generateProjectSlug(project: any): string {
-  return project.titre.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+	return project.titre
+		.toLowerCase()
+		.replace(/\s+/g, "-")
+		.replace(/[^a-z0-9-]/g, "");
 }
 ---
 
@@ -32,13 +41,17 @@ function generateProjectSlug(project: any): string {
 	<HudSidebar />
 
 	<main class="relative z-10">
-	<HeroSection>
-		<GlobeCanvas />
-		<h1 class="hero-name text-white text-center tracking-[0.15em] my-8 whitespace-nowrap relative z-[1] opacity-0 -translate-x-12"
-			style="font-family: var(--font-title1); font-size: var(--size-title1);">
-			ANDREA MESTRE
-		</h1>			<div
-				class="hero-title-wrapper flex items-center gap-8 my-4 mb-12 relative opacity-0 z-[1]">
+		<HeroSection>
+			<GlobeCanvas />
+			<h1
+				class="hero-name text-white text-center tracking-[0.15em] my-8 whitespace-nowrap relative z-[1] opacity-0 -translate-x-12"
+				style="font-family: var(--font-title1); font-size: var(--size-title1);"
+			>
+				ANDREA MESTRE
+			</h1>
+			<div
+				class="hero-title-wrapper flex items-center gap-8 my-4 mb-12 relative opacity-0 z-[1]"
+			>
 				<div
 					class="title-line w-16 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"
 				>
@@ -51,14 +64,13 @@ function generateProjectSlug(project: any): string {
 			</div>
 		</HeroSection>
 
-		
 		<section
-			class="section-hidden min-h-screen flex items-center justify-center py-50 px-4 border-t mt-50">
-
+			class="section-hidden min-h-screen flex items-center justify-center py-50 px-4 border-t mt-50"
+		>
 			<div class="container max-w-full mx-auto">
 				<div
-					class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-	
+					class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
+				>
 					<div class="relative p-4 min-h-[600px]">
 						<div class="absolute inset-0 pointer-events-none">
 							<img
@@ -82,7 +94,7 @@ function generateProjectSlug(project: any): string {
 							<!-- Texte de présentation repositionné -->
 							<div class="content-item space-y-5 max-w-lg">
 								<p
-									class="font-[family-name:var(--font-text)] text-l text-[#E5E5E5] leading-relaxed text-left"
+									class="font-[family-name:var(--font-text)] --size-text text-[#E5E5E5] leading-relaxed text-left"
 									style="line-height: 1.5;"
 								>
 									Bonjour, je m'appelle
@@ -97,7 +109,7 @@ function generateProjectSlug(project: any): string {
 									>,
 									<span style="color: var(--color-pink);"
 										>L'AUDIOVISUEL</span
-									> et le 
+									> et le
 									<span style="color: var(--color-pink);"
 										>WEB DESIGN</span
 									>, j'aime combiner créativité, technique et
@@ -105,7 +117,7 @@ function generateProjectSlug(project: any): string {
 									projets variés et innovants.
 								</p>
 								<p
-									class="font-[family-name:var(--font-text)] text-l text-[#E5E5E5] leading-relaxed text-left"
+									class="font-[family-name:var(--font-text)] --size-text text-[#E5E5E5] leading-relaxed text-left"
 									style="line-height: 1.5;"
 								>
 									Spécialisée en création graphique, j'ai
@@ -128,7 +140,7 @@ function generateProjectSlug(project: any): string {
 									<img
 										src="/src/assets/icons/behance.svg?v=1731340000"
 										alt="Behance"
-										class="w-14 h-14 opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+										class="w-14 h-14 group-hover:opacity-100 transition-opacity duration-300"
 									/>
 									<div
 										class="absolute inset-0 bg-gradient-to-r from-[--color-purple]/20 to-[--color-pink]/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"
@@ -227,13 +239,17 @@ function generateProjectSlug(project: any): string {
 			class="skills-section min-h-screen flex items-center justify-center py-50 px-4 border-t"
 		>
 			<div class="container max-w-full mx-auto">
-				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+				<div
+					class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
+				>
 					<SkillsDecorative />
 
 					<!-- Partie droite - Logiciels maîtrisés -->
 					<div class="relative h-[700px] lg:h-full">
 						<!-- Contenu logiciels -->
-						<div class="relative z-10 h-full flex flex-col justify-center items-center p-8">
+						<div
+							class="relative z-10 h-full flex flex-col justify-center items-center p-8"
+						>
 							<h2
 								class="content-item font-[family-name:var(--font-title2)] font-bold mb-8 tracking-[0.15em] text-center section-neon"
 								style="color: var(--color-darkpurple); font-size: var(--size-title2);"
@@ -242,90 +258,164 @@ function generateProjectSlug(project: any): string {
 							</h2>
 
 							<!-- Grille de logiciels organisée par catégorie -->
-							<div class="content-item space-y-6 w-full max-w-2xl mt-8">
+							<div
+								class="content-item space-y-6 w-full max-w-2xl mt-8"
+							>
 								<!-- Catégorie Design -->
 								<div class="category-section">
-									<h3 class="category-title font-[family-name:var(--font-text)] text-sm text-[--color-purple] tracking-[0.2em] uppercase mb-4 text-center">
+									<h3
+										class="category-title font-[family-name:var(--font-text)] text-sm text-[--color-purple] tracking-[0.2em] uppercase mb-4 text-center"
+									>
 										DESIGN
 									</h3>
-									<div class="software-row flex justify-center gap-12">
+									<div
+										class="software-row flex justify-center gap-12"
+									>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/figma.svg?v=1731340000" alt="Figma" class="w-15 h-15 software-img" />
+												<img
+													src="/src/assets/icons/figma.svg?v=1731340000"
+													alt="Figma"
+													class="w-15 h-15 software-img"
+												/>
 											</div>
-											<span class="software-label">FIGMA</span>
+											<span class="software-label"
+												>FIGMA</span
+											>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/illustrator.svg?v=1731340000" alt="Adobe Illustrator" class="w-15 h-15 software-img" />
+												<img
+													src="/src/assets/icons/illustrator.svg?v=1731340000"
+													alt="Adobe Illustrator"
+													class="w-15 h-15 software-img"
+												/>
 											</div>
-											<span class="software-label">ILLUSTRATOR</span>
+											<span class="software-label"
+												>ILLUSTRATOR</span
+											>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/photoshop.svg?v=1731340000" alt="Adobe Photoshop" class="w-15 h-15 software-img" />
+												<img
+													src="/src/assets/icons/photoshop.svg?v=1731340000"
+													alt="Adobe Photoshop"
+													class="w-15 h-15 software-img"
+												/>
 											</div>
-											<span class="software-label">PHOTOSHOP</span>
+											<span class="software-label"
+												>PHOTOSHOP</span
+											>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/krita.svg?v=1731340000" alt="Krita" class="w-15 h-15 software-img" />
+												<img
+													src="/src/assets/icons/krita.svg?v=1731340000"
+													alt="Krita"
+													class="w-15 h-15 software-img"
+												/>
 											</div>
-											<span class="software-label">KRITA</span>
+											<span class="software-label"
+												>KRITA</span
+											>
 										</div>
 									</div>
 								</div>
 
 								<!-- Catégorie Développement Web -->
 								<div class="category-section">
-									<h3 class="category-title font-[family-name:var(--font-text)] text-sm text-[--color-purple] tracking-[0.2em] uppercase mb-4 text-center">
+									<h3
+										class="category-title font-[family-name:var(--font-text)] text-sm text-[--color-purple] tracking-[0.2em] uppercase mb-4 text-center"
+									>
 										DÉVELOPPEMENT WEB
 									</h3>
-									<div class="software-row flex justify-center gap-12">
+									<div
+										class="software-row flex justify-center gap-12"
+									>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/javascrip.svg?v=1731340000" alt="JavaScript" class="w-15 h-15 software-img" />
+												<img
+													src="/src/assets/icons/javascrip.svg?v=1731340000"
+													alt="JavaScript"
+													class="w-15 h-15 software-img"
+												/>
 											</div>
-											<span class="software-label">JAVASCRIPT</span>
+											<span class="software-label"
+												>JAVASCRIPT</span
+											>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/Tailwind.svg?v=1731340000" alt="Tailwind CSS" class="w-16 h-16 software-img" />
+												<img
+													src="/src/assets/icons/Tailwind.svg?v=1731340000"
+													alt="Tailwind CSS"
+													class="w-16 h-16 software-img"
+												/>
 											</div>
-											<span class="software-label">TAILWINDCSS</span>
+											<span class="software-label"
+												>TAILWINDCSS</span
+											>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/astrojs.svg?v=1731340000" alt="Astro.js" class="w-15 h-15 software-img" />
+												<img
+													src="/src/assets/icons/astrojs.svg?v=1731340000"
+													alt="Astro.js"
+													class="w-15 h-15 software-img"
+												/>
 											</div>
-											<span class="software-label">ASTRO</span>
+											<span class="software-label"
+												>ASTRO</span
+											>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/wordpress.svg?v=1731340000" alt="WordPress" class="w-15 h-15 software-img" />
+												<img
+													src="/src/assets/icons/wordpress.svg?v=1731340000"
+													alt="WordPress"
+													class="w-15 h-15 software-img"
+												/>
 											</div>
-											<span class="software-label">WORDPRESS</span>
+											<span class="software-label"
+												>WORDPRESS</span
+											>
 										</div>
 									</div>
 								</div>
 
 								<!-- Catégorie Gestion de Projet -->
 								<div class="category-section">
-									<h3 class="category-title font-[family-name:var(--font-text)] text-sm text-[--color-purple] tracking-[0.2em] uppercase mb-4 text-center">
+									<h3
+										class="category-title font-[family-name:var(--font-text)] text-sm text-[--color-purple] tracking-[0.2em] uppercase mb-4 text-center"
+									>
 										GESTION DE PROJET
 									</h3>
-									<div class="software-row flex justify-center gap-16">
+									<div
+										class="software-row flex justify-center gap-16"
+									>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/notion.svg?v=1731340000" alt="Notion" class="w-15 h-15 software-img" />
+												<img
+													src="/src/assets/icons/notion.svg?v=1731340000"
+													alt="Notion"
+													class="w-15 h-15 software-img"
+												/>
 											</div>
-											<span class="software-label">NOTION</span>
+											<span class="software-label"
+												>NOTION</span
+											>
 										</div>
 										<div class="software-item group">
 											<div class="software-icon-wrapper">
-												<img src="/src/assets/icons/miro.svg?v=1731340000" alt="Miro" class="w-15 h-15 software-img" />
+												<img
+													src="/src/assets/icons/miro.svg?v=1731340000"
+													alt="Miro"
+													class="w-15 h-15 software-img"
+												/>
 											</div>
-											<span class="software-label">MIRO</span>
+											<span class="software-label"
+												>MIRO</span
+											>
 										</div>
 									</div>
 								</div>
@@ -346,62 +436,90 @@ function generateProjectSlug(project: any): string {
 				>
 					MES MEILLEURS PROJETS
 				</h2>
-				
+
 				<!-- Ligne animée sous le titre -->
-				<div class="projects-title-line-wrapper flex items-center justify-center gap-8 mb-12 relative opacity-0">
-					<div class="projects-title-line w-24 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"></div>
-					<div class="projects-title-line w-24 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"></div>
+				<div
+					class="projects-title-line-wrapper flex items-center justify-center gap-8 mb-12 relative opacity-0"
+				>
+					<div
+						class="projects-title-line w-24 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"
+					>
+					</div>
+					<div
+						class="projects-title-line w-24 h-px bg-gradient-to-r from-transparent via-[--color-purple] to-transparent"
+					>
+					</div>
 				</div>
-				
+
 				<!-- Grille de cartes projets -->
-				<div class="projects-grid flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
-					{hasError ? (
-						<ProjectStatus 
-							type="error" 
-							message="Impossible de se connecter à la base de données. Vérifiez que PocketBase est en cours d'exécution sur le port 8090." 
-						/>
-					) : projects.length > 0 ? (
-						projects.slice(0, 3).map((project) => (
-							<a href={`/projets/${generateProjectSlug(project)}`} class="project-card-link">
-								<CardProject 
-									title={project.titre}
-									subtitle={project.etude_annee}
-									description={project.resume}
-									stats={calculateProjectStats(project)}
-									id={generateProjectId(project)}
-									date={formatProjectDate(project.projet_annee)}
-									imageUrl={getProjectImageUrl(project)}
-									categories={project.categories || []}
-								/>
-							</a>
-						))
-					) : (
-						<ProjectStatus 
-							type="empty" 
-							message="Aucun projet n'a été trouvé dans la base de données. Ajoutez des projets via l'interface d'administration PocketBase." 
-						/>
-					)}
+				<div
+					class="projects-grid flex flex-wrap justify-center gap-8 max-w-6xl mx-auto"
+				>
+					{
+						hasError ? (
+							<ProjectStatus
+								type="error"
+								message="Impossible de se connecter à la base de données. Vérifiez que PocketBase est en cours d'exécution sur le port 8090."
+							/>
+						) : projects.length > 0 ? (
+							projects.slice(0, 3).map((project) => (
+								<a
+									href={`/projets/${generateProjectSlug(project)}`}
+									class="project-card-link"
+								>
+									<CardProject
+										title={project.titre}
+										subtitle={project.etude_annee}
+										description={project.resume}
+										stats={calculateProjectStats(project)}
+										id={generateProjectId(project)}
+										date={formatProjectDate(
+											project.projet_annee,
+										)}
+										imageUrl={getProjectImageUrl(project)}
+										categories={project.categories || []}
+									/>
+								</a>
+							))
+						) : (
+							<ProjectStatus
+								type="empty"
+								message="Aucun projet n'a été trouvé dans la base de données. Ajoutez des projets via l'interface d'administration PocketBase."
+							/>
+						)
+					}
 				</div>
-				
+
 				<!-- Bouton voir tous les projets -->
 				<div class="flex justify-center mt-12">
 					<a
 						href="/projets"
 						class="view-all-button group relative px-8 py-4 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink] inline-flex items-center gap-3"
 					>
-						
-						<div class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+						<div
+							class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"
+						>
+						</div>
 
-						
 						<div class="relative z-10 flex items-center gap-3">
 							<span>VOIR TOUS LES PROJETS</span>
-							<svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+							<svg
+								class="w-5 h-5 group-hover:rotate-12 transition-transform"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+									clip-rule="evenodd"></path>
 							</svg>
 						</div>
 
 						<!-- Effet de scan -->
-						<div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"></div>
+						<div
+							class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"
+						>
+						</div>
 					</a>
 				</div>
 			</div>
@@ -420,7 +538,7 @@ function generateProjectSlug(project: any): string {
 				</h2>
 				<div class="content-item">
 					<p
-						class="font-[family-name:var(--font-text)] text-lg md:text-xl text-white/70 leading-relaxed mb-8"
+						class="font-[family-name:var(--font-text)] --size-text md:text-xl text-white/70 leading-relaxed mb-8"
 					>
 						Entrons en contact pour vos projets...
 					</p>
@@ -431,19 +549,33 @@ function generateProjectSlug(project: any): string {
 						class="contact-button group relative px-8 py-4 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink] inline-flex items-center gap-3"
 					>
 						<!-- Effet lumineux de fond -->
-						<div class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+						<div
+							class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"
+						>
+						</div>
 
 						<!-- Texte et icône -->
 						<div class="relative z-10 flex items-center gap-3">
-							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-								<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-								<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+							<svg
+								class="w-5 h-5"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+							>
+								<path
+									d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+								></path>
+								<path
+									d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+								></path>
 							</svg>
 							<span>ME CONTACTER</span>
 						</div>
 
 						<!-- Effet de scan -->
-						<div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"></div>
+						<div
+							class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"
+						>
+						</div>
 					</a>
 				</div>
 			</div>
@@ -693,9 +825,15 @@ function generateProjectSlug(project: any): string {
 		transform: translateY(30px);
 	}
 
-	.section-revealed .content-item:nth-child(1) { animation-delay: 0.1s; }
-	.section-revealed .content-item:nth-child(2) { animation-delay: 0.2s; }
-	.section-revealed .content-item:nth-child(3) { animation-delay: 0.3s; }
+	.section-revealed .content-item:nth-child(1) {
+		animation-delay: 0.1s;
+	}
+	.section-revealed .content-item:nth-child(2) {
+		animation-delay: 0.2s;
+	}
+	.section-revealed .content-item:nth-child(3) {
+		animation-delay: 0.3s;
+	}
 
 	@keyframes contentItemReveal {
 		0% {
@@ -709,7 +847,7 @@ function generateProjectSlug(project: any): string {
 	}
 
 	/* Styles pour la section Logiciels Maîtrisés */
-	
+
 	/* Animations des barres de compétences */
 	@keyframes skill-bar-1 {
 		0% {
@@ -837,7 +975,7 @@ function generateProjectSlug(project: any): string {
 	}
 
 	.category-title::after {
-		content: '';
+		content: "";
 		position: absolute;
 		bottom: 0;
 		left: 50%;
@@ -872,10 +1010,18 @@ function generateProjectSlug(project: any): string {
 		animation: software-item-reveal 0.6s ease-out forwards;
 	}
 
-	.software-item:nth-child(1) { animation-delay: 0.1s; }
-	.software-item:nth-child(2) { animation-delay: 0.2s; }
-	.software-item:nth-child(3) { animation-delay: 0.3s; }
-	.software-item:nth-child(4) { animation-delay: 0.4s; }
+	.software-item:nth-child(1) {
+		animation-delay: 0.1s;
+	}
+	.software-item:nth-child(2) {
+		animation-delay: 0.2s;
+	}
+	.software-item:nth-child(3) {
+		animation-delay: 0.3s;
+	}
+	.software-item:nth-child(4) {
+		animation-delay: 0.4s;
+	}
 
 	@keyframes software-item-reveal {
 		0% {
@@ -893,7 +1039,7 @@ function generateProjectSlug(project: any): string {
 	.section-revealed .animate-skill-bar-2,
 	.section-revealed .animate-skill-bar-3,
 	.section-revealed .animate-skill-bar-4 {
-		box-shadow: 
+		box-shadow:
 			0 0 10px var(--color-purple),
 			0 0 20px rgba(184, 187, 240, 0.3);
 		animation-fill-mode: forwards;
@@ -957,9 +1103,15 @@ function generateProjectSlug(project: any): string {
 		transform: translateY(30px);
 	}
 
-	.skills-revealed .content-item:nth-child(1) { animation-delay: 0.1s; }
-	.skills-revealed .content-item:nth-child(2) { animation-delay: 0.2s; }
-	.skills-revealed .content-item:nth-child(3) { animation-delay: 0.3s; }
+	.skills-revealed .content-item:nth-child(1) {
+		animation-delay: 0.1s;
+	}
+	.skills-revealed .content-item:nth-child(2) {
+		animation-delay: 0.2s;
+	}
+	.skills-revealed .content-item:nth-child(3) {
+		animation-delay: 0.3s;
+	}
 
 	@keyframes skillsContentReveal {
 		0% {
@@ -1006,9 +1158,15 @@ function generateProjectSlug(project: any): string {
 		transform: translateY(30px);
 	}
 
-	.projects-revealed .content-item:nth-child(1) { animation-delay: 0.1s; }
-	.projects-revealed .content-item:nth-child(2) { animation-delay: 0.2s; }
-	.projects-revealed .content-item:nth-child(3) { animation-delay: 0.3s; }
+	.projects-revealed .content-item:nth-child(1) {
+		animation-delay: 0.1s;
+	}
+	.projects-revealed .content-item:nth-child(2) {
+		animation-delay: 0.2s;
+	}
+	.projects-revealed .content-item:nth-child(3) {
+		animation-delay: 0.3s;
+	}
 
 	@keyframes projectsContentReveal {
 		0% {
@@ -1066,7 +1224,8 @@ function generateProjectSlug(project: any): string {
 
 	/* Animation pulsante avec variation de luminosité */
 	@keyframes pulse-glow {
-		0%, 100% {
+		0%,
+		100% {
 			opacity: 0.7;
 			filter: drop-shadow(0 0 10px rgba(184, 187, 240, 0.4));
 		}
@@ -1078,7 +1237,7 @@ function generateProjectSlug(project: any): string {
 
 	/* Styles pour le bouton "Voir tous les projets" */
 	.view-all-button {
-		box-shadow: 
+		box-shadow:
 			0 0 20px rgba(184, 187, 240, 0.3),
 			inset 0 0 10px rgba(184, 187, 240, 0.1);
 		animation: buttonPulse 2s ease-in-out infinite;
@@ -1089,20 +1248,21 @@ function generateProjectSlug(project: any): string {
 	}
 
 	@keyframes buttonPulse {
-		0%, 100% {
-			box-shadow: 
+		0%,
+		100% {
+			box-shadow:
 				0 0 20px rgba(184, 187, 240, 0.3),
 				inset 0 0 10px rgba(184, 187, 240, 0.1);
 		}
 		50% {
-			box-shadow: 
+			box-shadow:
 				0 0 30px rgba(184, 187, 240, 0.5),
 				inset 0 0 15px rgba(184, 187, 240, 0.2);
 		}
 	}
 
 	.projects-revealed .view-all-button {
-		animation: 
+		animation:
 			buttonReveal 1s ease-out 1s forwards,
 			buttonPulse 2s ease-in-out 2s infinite;
 	}
@@ -1152,9 +1312,15 @@ function generateProjectSlug(project: any): string {
 		transform: translateY(30px);
 	}
 
-	.contact-revealed .content-item:nth-child(1) { animation-delay: 0.1s; }
-	.contact-revealed .content-item:nth-child(2) { animation-delay: 0.2s; }
-	.contact-revealed .content-item:nth-child(3) { animation-delay: 0.3s; }
+	.contact-revealed .content-item:nth-child(1) {
+		animation-delay: 0.1s;
+	}
+	.contact-revealed .content-item:nth-child(2) {
+		animation-delay: 0.2s;
+	}
+	.contact-revealed .content-item:nth-child(3) {
+		animation-delay: 0.3s;
+	}
 
 	@keyframes contactContentReveal {
 		0% {
@@ -1169,20 +1335,21 @@ function generateProjectSlug(project: any): string {
 
 	/* Bouton de contact */
 	.contact-button {
-		box-shadow: 
+		box-shadow:
 			0 0 20px rgba(184, 187, 240, 0.3),
 			inset 0 0 10px rgba(184, 187, 240, 0.1);
 		animation: contactButtonPulse 2s ease-in-out infinite;
 	}
 
 	@keyframes contactButtonPulse {
-		0%, 100% {
-			box-shadow: 
+		0%,
+		100% {
+			box-shadow:
 				0 0 20px rgba(184, 187, 240, 0.3),
 				inset 0 0 10px rgba(184, 187, 240, 0.1);
 		}
 		50% {
-			box-shadow: 
+			box-shadow:
 				0 0 30px rgba(184, 187, 240, 0.5),
 				inset 0 0 15px rgba(184, 187, 240, 0.2);
 		}
@@ -1191,46 +1358,57 @@ function generateProjectSlug(project: any): string {
 
 <script>
 	// Gestion de l'animation de la section Skills au scroll
-	document.addEventListener('DOMContentLoaded', () => {
-		const skillsSection = document.querySelector('.skills-section');
-		const projectsSection = document.querySelector('.projects-section');
-		const contactSection = document.querySelector('.contact-section');
+	document.addEventListener("DOMContentLoaded", () => {
+		const skillsSection = document.querySelector(".skills-section");
+		const projectsSection = document.querySelector(".projects-section");
+		const contactSection = document.querySelector(".contact-section");
 		let skillsAnimated = false;
 		let projectsAnimated = false;
 		let contactAnimated = false;
 
 		const observerOptions = {
 			threshold: 0.3, // Déclencher quand 30% de la section est visible
-			rootMargin: '0px 0px -50px 0px'
+			rootMargin: "0px 0px -50px 0px",
 		};
 
 		const observer = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
+			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
-					if (entry.target.classList.contains('skills-section') && !skillsAnimated) {
-						entry.target.classList.add('skills-revealed');
+					if (
+						entry.target.classList.contains("skills-section") &&
+						!skillsAnimated
+					) {
+						entry.target.classList.add("skills-revealed");
 						skillsAnimated = true;
-						
+
 						// Déclencher l'événement personnalisé
-						const event = new CustomEvent('skillsSectionRevealed');
+						const event = new CustomEvent("skillsSectionRevealed");
 						window.dispatchEvent(event);
 					}
-					
-					if (entry.target.classList.contains('projects-section') && !projectsAnimated) {
-						entry.target.classList.add('projects-revealed');
+
+					if (
+						entry.target.classList.contains("projects-section") &&
+						!projectsAnimated
+					) {
+						entry.target.classList.add("projects-revealed");
 						projectsAnimated = true;
-						
+
 						// Déclencher l'événement personnalisé
-						const event = new CustomEvent('projectsSectionRevealed');
+						const event = new CustomEvent(
+							"projectsSectionRevealed",
+						);
 						window.dispatchEvent(event);
 					}
-					
-					if (entry.target.classList.contains('contact-section') && !contactAnimated) {
-						entry.target.classList.add('contact-revealed');
+
+					if (
+						entry.target.classList.contains("contact-section") &&
+						!contactAnimated
+					) {
+						entry.target.classList.add("contact-revealed");
 						contactAnimated = true;
-						
+
 						// Déclencher l'événement personnalisé
-						const event = new CustomEvent('contactSectionRevealed');
+						const event = new CustomEvent("contactSectionRevealed");
 						window.dispatchEvent(event);
 					}
 				}
@@ -1240,11 +1418,11 @@ function generateProjectSlug(project: any): string {
 		if (skillsSection) {
 			observer.observe(skillsSection);
 		}
-		
+
 		if (projectsSection) {
 			observer.observe(projectsSection);
 		}
-		
+
 		if (contactSection) {
 			observer.observe(contactSection);
 		}

@@ -34,6 +34,8 @@
   /* Tailles de police */
   --size-title1: clamp(32px, 7vw, 80px);
   --size-title2: clamp(17px, 5vw, 33px);
+  --size-h2: clamp(1.4rem, 3.6vw, 2.5rem);
+  --size-text: 1 rem;
 }
 
 /* Styles pour les sections avec révélation animée */
