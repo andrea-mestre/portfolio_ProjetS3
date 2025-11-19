@@ -19,6 +19,8 @@ export interface Project {
   outils: string[]; // ["Illustrator", "Figma", etc.]
   images: string[]; // URLs des images
   image_projet: string | null; // Image principale du projet (peut être null)
+  hierarchie_descrip: string; // Description de la hiérarchie du projet
+  image_resultat: string[]; // Images du résultat final
   created: string;
   updated: string;
 }
