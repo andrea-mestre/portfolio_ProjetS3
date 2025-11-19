@@ -5,32 +5,43 @@ import Layout from "../../layouts/Layout.astro";
 import HudHeader from "../../components/HudHeader.astro";
 import CardProject from "../../components/CardProject.astro";
 import ProjectStatus from "../../components/ProjectStatus.astro";
-import { getProjects, calculateProjectStats, formatProjectDate, generateProjectId, 
-getProjectImageUrl, type Project } from "../../lib/pocketbase";
+import FilterSystem from "../../components/FilterSystem.astro";
+import {
+	getProjects,
+	calculateProjectStats,
+	formatProjectDate,
+	generateProjectId,
+	getProjectImageUrl,
+	type Project,
+} from "../../lib/pocketbase";
 
 let projects: Project[] = [];
 let hasError = false;
 
 try {
-  projects = await getProjects();
-  console.log('Projets récupérés:', projects.length);
+	projects = await getProjects();
+	console.log("Projets récupérés:", projects.length);
 } catch (error) {
-  console.error('Erreur lors de la récupération des projets:', error);
-  hasError = true;
+	console.error("Erreur lors de la récupération des projets:", error);
+	hasError = true;
 }
 
 function generateProjectSlug(project: any): string {
-  return project.titre.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+	return project.titre
+		.toLowerCase()
+		.replace(/\s+/g, "-")
+		.replace(/[^a-z0-9-]/g, "");
 }
 ---
 
 <Layout>
 	<HudHeader currentPage="projets" />
 	<main class="relative z-10 pt-24">
-
 		<div class="flex justify-center mb-0">
-			<h1 class="text-white tracking-wide whitespace-nowrap drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-				style="font-family: var(--font-title1); font-size: var(--size-title1);">
+			<h1
+				class="text-white tracking-wide whitespace-nowrap drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+				style="font-family: var(--font-title1); font-size: var(--size-title1);"
+			>
 				MES PROJETS
 			</h1>
 		</div>
@@ -39,175 +50,119 @@ function generateProjectSlug(project: any): string {
 			<div class="text-center max-w-4xl">
 				<h2
 					class="projects-hero-title font-[family-name:var(--font-title2)] text-5xl md:text-6xl font-bold mb-6 tracking-[0.15em] text-center section-neon mt-0"
-					style="color: var(--color-darkpurple);">
+					style="color: var(--color-darkpurple);"
+				>
 					MES PROJETS
 				</h2>
 
-				
 				<p
-					class="projects-hero-description font-[family-name:var(--font-text)] text-lg md:text-xl text-white/70 leading-relaxed mb-8 opacity-0">
-					Découvrez une sélection de mes réalisations en design graphique, développement web et communication visuelle.
+					class="projects-hero-description font-[family-name:var(--font-text)] text-lg md:text-xl text-white/70 leading-relaxed mb-8 opacity-0"
+				>
+					Découvrez une sélection de mes réalisations en design
+					graphique, développement web et communication visuelle.
 				</p>
-				
-				
-				<div class="projects-stats flex justify-center gap-8 md:gap-12 mt-8 mb-4 opacity-0">
+
+				<div
+					class="projects-stats flex justify-center gap-8 md:gap-12 mt-8 mb-4 opacity-0"
+				>
 					<div class="stat-item text-center">
-						<div class="stat-number font-[family-name:var(--font-title2)] text-4xl font-bold tracking-[0.15em] section-neon mb-2" style="color: var(--color-darkpurple);">{projects.length}</div>
-						<div class="stat-label font-[family-name:var(--font-text)] text-xs md:text-sm text-white/60 uppercase tracking-wide">Projets</div>
-					</div>	
+						<div
+							class="stat-number font-[family-name:var(--font-title2)] text-4xl font-bold tracking-[0.15em] section-neon mb-2"
+							style="color: var(--color-darkpurple);"
+						>
+							{projects.length}
+						</div>
+						<div
+							class="stat-label font-[family-name:var(--font-text)] text-xs md:text-sm text-white/60 uppercase tracking-wide"
+						>
+							Projets
+						</div>
+					</div>
 					<div class="stat-item text-center">
-						<div class="stat-number font-[family-name:var(--font-title2)] text-4xl font-bold tracking-[0.15em] section-neon mb-2" style="color: var(--color-darkpurple);">2025</div>
-						<div class="stat-label font-[family-name:var(--font-text)] text-xs md:text-sm text-white/60 uppercase tracking-wide">Année</div>
+						<div
+							class="stat-number font-[family-name:var(--font-title2)] text-4xl font-bold tracking-[0.15em] section-neon mb-2"
+							style="color: var(--color-darkpurple);"
+						>
+							2025
+						</div>
+						<div
+							class="stat-label font-[family-name:var(--font-text)] text-xs md:text-sm text-white/60 uppercase tracking-wide"
+						>
+							Année
+						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Section Filtres -->
-		<section class="filters-section flex justify-center py-8 px-8 opacity-0">
-			<div class="filters-container max-w-7xl w-full relative">
-				<!-- Coins décoratifs HUD -->
-				<div class="hud-corner hud-corner-tl"></div>
-				<div class="hud-corner hud-corner-tr"></div>
-				<div class="hud-corner hud-corner-bl"></div>
-				<div class="hud-corner hud-corner-br"></div>
-				
-				<div class="filters-wrapper border border-[--color-purple]/50 rounded-lg p-8 backdrop-blur-md bg-gradient-to-br from-black/40 via-black/30 to-black/40 relative overflow-hidden">
-					<!-- Effet de grille de fond -->
-					<div class="filters-grid-bg"></div>
-					
-					<!-- Ligne de scan animée -->
-					<div class="scan-line"></div>
-					
-					<!-- Titre des filtres -->
-					<div class="filters-header flex items-center justify-between mb-8 relative z-10">
-						<div class="flex items-center gap-4">
-							<div class="filter-icon-wrapper">
-								<svg class="w-6 h-6 text-[--color-purple] filter-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-								</svg>
-							</div>
-							<h3 class="font-[family-name:var(--font-title2)] text-2xl tracking-[0.2em] text-[--color-purple] filter-title">SYSTÈME DE FILTRAGE</h3>
-						</div>
-						<div class="status-indicator"></div>
-					</div>
-
-					<!-- Grille de filtres -->
-					<div class="filters-grid grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-						<!-- Filtre par catégorie -->
-						<div class="filter-group">
-							<label class="filter-label font-[family-name:var(--font-text)] text-xs text-[--color-purple] uppercase tracking-[0.2em] mb-3 block flex items-center gap-2">
-								<span class="label-indicator"></span>
-								CATÉGORIE
-							</label>
-							<div class="select-wrapper">
-								<select 
-									id="filter-category" 
-									class="filter-select w-full bg-black/60 border border-[--color-purple]/50 rounded px-4 py-3 text-white font-[family-name:var(--font-text)] text-sm focus:outline-none focus:border-[--color-pink] transition-all cursor-pointer"
-								>
-									<option value="">// Toutes les catégories</option>
-								</select>
-							</div>
-						</div>
-
-						<!-- Filtre par année d'étude -->
-						<div class="filter-group">
-							<label class="filter-label font-[family-name:var(--font-text)] text-xs text-[--color-purple] uppercase tracking-[0.2em] mb-3 block flex items-center gap-2">
-								<span class="label-indicator"></span>
-								ANNÉE D'ÉTUDE
-							</label>
-							<div class="select-wrapper">
-								<select 
-									id="filter-study-year" 
-									class="filter-select w-full bg-black/60 border border-[--color-purple]/50 rounded px-4 py-3 text-white font-[family-name:var(--font-text)] text-sm focus:outline-none focus:border-[--color-pink] transition-all cursor-pointer"
-								>
-									<option value="">// Toutes les années</option>
-								</select>
-							</div>
-						</div>
-
-						<!-- Filtre par année de projet -->
-						<div class="filter-group">
-							<label class="filter-label font-[family-name:var(--font-text)] text-xs text-[--color-purple] uppercase tracking-[0.2em] mb-3 block flex items-center gap-2">
-								<span class="label-indicator"></span>
-								ANNÉE DE PROJET
-							</label>
-							<div class="select-wrapper">
-								<select 
-									id="filter-project-year" 
-									class="filter-select w-full bg-black/60 border border-[--color-purple]/50 rounded px-4 py-3 text-white font-[family-name:var(--font-text)] text-sm focus:outline-none focus:border-[--color-pink] transition-all cursor-pointer"
-								>
-									<option value="">// Toutes les années</option>
-								</select>
-							</div>
-						</div>
-					</div>
-
-					<!-- Séparateur -->
-					<div class="filter-separator my-6"></div>
-					
-					<!-- Bouton reset -->
-					<div class="filters-actions flex justify-end items-center relative z-10">
-						<button 
-							id="reset-filters"
-							class="reset-button group relative px-6 py-3 border-2 border-[--color-purple]/50 rounded font-[family-name:var(--font-text)] text-xs text-[--color-purple] hover:text-white hover:border-[--color-pink] transition-all duration-300 flex items-center gap-3 tracking-[0.15em] uppercase overflow-hidden"
-						>
-							<div class="reset-button-bg"></div>
-							<svg class="w-4 h-4 relative z-10 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-							</svg>
-							<span class="relative z-10">Réinitialiser</span>
-						</button>
-					</div>
-				</div>
-			</div>
-		</section>
+		<FilterSystem projects={projects} />
 
 		<!-- Section grille de projets -->
-		<section class="projects-grid-section flex items-center justify-center py-4 px-8">
+		<section
+			class="projects-grid-section flex items-center justify-center py-4 px-8"
+		>
 			<div class="container max-w-7xl mx-auto">
-				{hasError ? (
-					<ProjectStatus 
-						type="error" 
-						message="Impossible de se connecter à la base de données. Vérifiez que PocketBase est en cours d'exécution sur le port 8090." 
-					/>
-				) : projects.length > 0 ? (
-					<div class="projects-grid flex flex-wrap justify-center gap-8 lg:gap-12">
-						{projects.map((project) => {
-							const projectYear = new Date(project.projet_annee).getFullYear().toString();
-							return (
-								<a 
-									href={`/projets/${generateProjectSlug(project)}`} 
-									class="project-card-link"
-									data-categories={(project.categories || []).join(',')}
-									data-study-year={project.etude_annee}
-									data-project-year={projectYear}
-								>
-									<CardProject 
-										title={project.titre}
-										subtitle={project.etude_annee}
-										description={project.resume}
-										stats={calculateProjectStats(project)}
-										id={generateProjectId(project)}
-										date={formatProjectDate(project.projet_annee)}
-										imageUrl={getProjectImageUrl(project)}
-										categories={project.categories || []}
-									/>
-								</a>
-							);
-						})}
-					</div>
-				) : (
-					<ProjectStatus 
-						type="empty" 
-						message="Aucun projet n'a été trouvé dans la base de données. Ajoutez des projets via l'interface d'administration PocketBase." 
-					/>
-				)}
+				{
+					hasError ? (
+						<ProjectStatus
+							type="error"
+							message="Impossible de se connecter à la base de données. Vérifiez que PocketBase est en cours d'exécution sur le port 8090."
+						/>
+					) : projects.length > 0 ? (
+						<div class="projects-grid flex flex-wrap justify-center gap-8 lg:gap-12">
+							{projects.map((project) => {
+								const projectYear = new Date(
+									project.projet_annee,
+								)
+									.getFullYear()
+									.toString();
+								return (
+									<a
+										href={`/projets/${generateProjectSlug(project)}`}
+										class="project-card-link"
+										data-categories={(
+											project.categories || []
+										).join(",")}
+										data-study-year={project.etude_annee}
+										data-project-year={projectYear}
+									>
+										<CardProject
+											title={project.titre}
+											subtitle={project.etude_annee}
+											description={project.resume}
+											stats={calculateProjectStats(
+												project,
+											)}
+											id={generateProjectId(project)}
+											date={formatProjectDate(
+												project.projet_annee,
+											)}
+											imageUrl={getProjectImageUrl(
+												project,
+											)}
+											categories={
+												project.categories || []
+											}
+										/>
+									</a>
+								);
+							})}
+						</div>
+					) : (
+						<ProjectStatus
+							type="empty"
+							message="Aucun projet n'a été trouvé dans la base de données. Ajoutez des projets via l'interface d'administration PocketBase."
+						/>
+					)
+				}
 			</div>
 		</section>
 
 		<!-- Section Call to Action -->
-		<section class="projects-cta-section min-h-[40vh] flex items-center justify-center py-16 px-8 border-t">
+		<section
+			class="projects-cta-section min-h-[40vh] flex items-center justify-center py-16 px-8 border-t"
+		>
 			<div class="text-center max-w-2xl">
 				<h2
 					class="cta-title font-[family-name:var(--font-title2)] text-3xl md:text-4xl font-bold mb-6 tracking-[0.15em] text-center section-neon"
@@ -215,784 +170,325 @@ function generateProjectSlug(project: any): string {
 				>
 					TRAVAILLONS ENSEMBLE
 				</h2>
-				
+
 				<p
 					class="cta-description font-[family-name:var(--font-text)] text-lg text-white/70 leading-relaxed mb-8"
 				>
-					Vous avez un projet en tête ? Contactez-moi pour discuter de vos besoins créatifs.
+					Vous avez un projet en tête ? Contactez-moi pour discuter de
+					vos besoins créatifs.
 				</p>
-				
+
 				<a
 					href="/contact"
 					class="cta-button group relative px-8 py-4 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink] inline-flex items-center gap-3"
 				>
 					<!-- Effet lumineux de fond -->
-					<div class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+					<div
+						class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"
+					>
+					</div>
 
 					<!-- Texte et icône -->
 					<div class="relative z-10 flex items-center gap-3">
-							<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+						<svg
+							class="w-5 h-5"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+						>
+							<path
+								d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+							></path>
+							<path
+								d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+							></path>
 						</svg>
 						<span>ME CONTACTER</span>
 					</div>
 
 					<!-- Effet de scan -->
-					<div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"></div>
+					<div
+						class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"
+					>
+					</div>
 				</a>
 			</div>
 		</section>
 	</main>
-</Layout>
-<style>
-	/* Animations pour la page projets */
-	.projects-hero-title {
-		opacity: 0;
-		transform: translateY(30px);
-		animation: titleSlideIn 1s ease-out 0.5s forwards;
-		text-shadow:
-			0 0 10px var(--color-darkpurple),
-			0 0 20px var(--color-darkpurple),
-			0 0 20px var(--color-darkpurple);
-		transition: all 0.3s ease;
-	}
-
-	@keyframes titleSlideIn {
-		0% {
+	<style>
+		/* Animations pour la page projets */
+		.projects-hero-title {
 			opacity: 0;
 			transform: translateY(30px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	/* Animation de la ligne sous le titre */
-	.projects-hero-line-wrapper {
-		animation: heroLineReveal 1s ease-out 1s forwards;
-	}
-
-	@keyframes heroLineReveal {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-
-	.projects-hero-line {
-		animation: heroLineExpand 1.5s ease-out 1.2s backwards;
-		background: linear-gradient(
-			90deg,
-			transparent,
-			var(--color-purple),
-			transparent
-		) !important;
-	}
-
-	@keyframes heroLineExpand {
-		from {
-			width: 0;
-		}
-		to {
-			width: 8rem;
-		}
-	}
-
-	/* Animation de la description */
-	.projects-hero-description {
-		animation: descriptionFadeIn 1s ease-out 1.5s forwards;
-	}
-
-	@keyframes descriptionFadeIn {
-		0% {
-			opacity: 0;
-			transform: translateY(20px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	/* Animation des statistiques */
-	.projects-stats {
-		animation: statsFadeIn 1s ease-out 2s forwards;
-	}
-
-	@keyframes statsFadeIn {
-		0% {
-			opacity: 0;
-			transform: translateY(30px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	.stat-item {
-		transition: all 0.3s ease;
-	}
-
-	.stat-item:hover {
-		transform: translateY(-5px);
-	}
-
-	.stat-item:hover .stat-number {
-		text-shadow: 0 0 15px rgba(184, 187, 240, 0.9);
-	}
-
-	/* Style neon pour les titres h1 et h2 */
-	.section-neon {
-		text-shadow:
-			0 0 10px var(--color-darkpurple),
-			0 0 20px var(--color-darkpurple),
-			0 0 20px var(--color-darkpurple);
-		animation: neonBreath 4s ease-in-out infinite;
-		transition: all 0.3s ease;
-	}
-
-	@keyframes neonBreath {
-		0%,
-		100% {
+			animation: titleSlideIn 1s ease-out 0.5s forwards;
 			text-shadow:
 				0 0 10px var(--color-darkpurple),
 				0 0 20px var(--color-darkpurple),
-				0 0 30px var(--color-darkpurple);
+				0 0 20px var(--color-darkpurple);
+			transition: all 0.3s ease;
 		}
-		50% {
+
+		@keyframes titleSlideIn {
+			0% {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+			100% {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* Animation de la ligne sous le titre */
+		.projects-hero-line-wrapper {
+			animation: heroLineReveal 1s ease-out 1s forwards;
+		}
+
+		@keyframes heroLineReveal {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
+
+		.projects-hero-line {
+			animation: heroLineExpand 1.5s ease-out 1.2s backwards;
+			background: linear-gradient(
+				90deg,
+				transparent,
+				var(--color-purple),
+				transparent
+			) !important;
+		}
+
+		@keyframes heroLineExpand {
+			from {
+				width: 0;
+			}
+			to {
+				width: 8rem;
+			}
+		}
+
+		/* Animation de la description */
+		.projects-hero-description {
+			animation: descriptionFadeIn 1s ease-out 1.5s forwards;
+		}
+
+		@keyframes descriptionFadeIn {
+			0% {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			100% {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* Animation des statistiques */
+		.projects-stats {
+			animation: statsFadeIn 1s ease-out 2s forwards;
+		}
+
+		@keyframes statsFadeIn {
+			0% {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+			100% {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.stat-item {
+			transition: all 0.3s ease;
+		}
+
+		.stat-item:hover {
+			transform: translateY(-5px);
+		}
+
+		.stat-item:hover .stat-number {
+			text-shadow: 0 0 15px rgba(184, 187, 240, 0.9);
+		}
+
+		/* Style neon pour les titres h1 et h2 */
+		.section-neon {
+			text-shadow:
+				0 0 10px var(--color-darkpurple),
+				0 0 20px var(--color-darkpurple),
+				0 0 20px var(--color-darkpurple);
+			animation: neonBreath 4s ease-in-out infinite;
+			transition: all 0.3s ease;
+		}
+
+		@keyframes neonBreath {
+			0%,
+			100% {
+				text-shadow:
+					0 0 10px var(--color-darkpurple),
+					0 0 20px var(--color-darkpurple),
+					0 0 30px var(--color-darkpurple);
+			}
+			50% {
+				text-shadow:
+					0 0 15px var(--color-darkpurple),
+					0 0 25px var(--color-darkpurple),
+					0 0 35px var(--color-darkpurple),
+					0 0 40px var(--color-purple);
+			}
+		}
+
+		.section-neon:hover {
 			text-shadow:
 				0 0 15px var(--color-darkpurple),
 				0 0 25px var(--color-darkpurple),
 				0 0 35px var(--color-darkpurple),
-				0 0 40px var(--color-purple);
-		}
-	}
-
-	.section-neon:hover {
-		text-shadow:
-			0 0 15px var(--color-darkpurple),
-			0 0 25px var(--color-darkpurple),
-			0 0 35px var(--color-darkpurple),
-			0 0 45px var(--color-purple);
-		transform: translateY(-2px);
-	}
-
-	/* Animations d'apparition des cartes projets */
-	.projects-grid {
-		animation: gridFadeIn 1s ease-out 0.5s forwards;
-		opacity: 0;
-	}
-
-	@keyframes gridFadeIn {
-		0% {
-			opacity: 0;
-			transform: translateY(50px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	/* Style pour les liens de cartes projets */
-	.project-card-link {
-		text-decoration: none;
-		color: inherit;
-		display: inline-block;
-	}
-
-	.project-card-link:hover {
-		/* Désactivé pour éviter conflit avec animation de la carte */
-		/* transform: scale(1.05); */
-	}
-
-	/* Section CTA animations */
-	.projects-cta-section {
-		opacity: 0;
-		transform: translateY(50px);
-		transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-	}
-
-	.projects-cta-section.cta-revealed {
-		opacity: 1;
-		transform: translateY(0);
-		animation: ctaSectionReveal 1s ease-out forwards;
-	}
-
-	@keyframes ctaSectionReveal {
-		0% {
-			opacity: 0;
-			transform: translateY(50px) scale(0.95);
-		}
-		50% {
-			opacity: 0.7;
-			transform: translateY(-10px) scale(1.02);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0) scale(1);
-		}
-	}
-
-	.cta-button {
-		box-shadow: 
-			0 0 20px rgba(184, 187, 240, 0.3),
-			inset 0 0 10px rgba(184, 187, 240, 0.1);
-		animation: buttonPulse 2s ease-in-out infinite;
-	}
-
-	@keyframes buttonPulse {
-		0%, 100% {
-			box-shadow: 
-				0 0 20px rgba(184, 187, 240, 0.3),
-				inset 0 0 10px rgba(184, 187, 240, 0.1);
-		}
-		50% {
-			box-shadow: 
-				0 0 30px rgba(184, 187, 240, 0.5),
-				inset 0 0 15px rgba(184, 187, 240, 0.2);
-		}
-	}
-
-	/* Section Filtres */
-	.filters-section {
-		animation: filtersFadeIn 1s ease-out 2.5s forwards;
-	}
-
-	@keyframes filtersFadeIn {
-		0% {
-			opacity: 0;
-			transform: translateY(20px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	/* Coins HUD décoratifs */
-	.hud-corner {
-		position: absolute;
-		width: 30px;
-		height: 30px;
-		z-index: 20;
-	}
-
-	.hud-corner::before,
-	.hud-corner::after {
-		content: '';
-		position: absolute;
-		background: var(--color-purple);
-		box-shadow: 0 0 10px var(--color-purple);
-	}
-
-	.hud-corner::before {
-		width: 100%;
-		height: 2px;
-	}
-
-	.hud-corner::after {
-		width: 2px;
-		height: 100%;
-	}
-
-	.hud-corner-tl {
-		top: -2px;
-		left: -2px;
-	}
-
-	.hud-corner-tl::before {
-		top: 0;
-		left: 0;
-	}
-
-	.hud-corner-tl::after {
-		top: 0;
-		left: 0;
-	}
-
-	.hud-corner-tr {
-		top: -2px;
-		right: -2px;
-	}
-
-	.hud-corner-tr::before {
-		top: 0;
-		right: 0;
-	}
-
-	.hud-corner-tr::after {
-		top: 0;
-		right: 0;
-	}
-
-	.hud-corner-bl {
-		bottom: -2px;
-		left: -2px;
-	}
-
-	.hud-corner-bl::before {
-		bottom: 0;
-		left: 0;
-	}
-
-	.hud-corner-bl::after {
-		bottom: 0;
-		left: 0;
-	}
-
-	.hud-corner-br {
-		bottom: -2px;
-		right: -2px;
-	}
-
-	.hud-corner-br::before {
-		bottom: 0;
-		right: 0;
-	}
-
-	.hud-corner-br::after {
-		bottom: 0;
-		right: 0;
-	}
-
-	.filters-wrapper {
-		box-shadow: 
-			0 0 30px rgba(184, 187, 240, 0.2),
-			inset 0 0 40px rgba(0, 0, 0, 0.6);
-		position: relative;
-	}
-
-	/* Grille de fond animée */
-	.filters-grid-bg {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-image: 
-			linear-gradient(rgba(184, 187, 240, 0.03) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(184, 187, 240, 0.03) 1px, transparent 1px);
-		background-size: 20px 20px;
-		opacity: 0.5;
-		z-index: 0;
-	}
-
-	/* Ligne de scan animée - DÉSACTIVÉE */
-	.scan-line {
-		display: none;
-	}
-
-	/* Header des filtres */
-	.filters-header {
-		text-shadow: 0 0 15px rgba(184, 187, 240, 0.5);
-	}
-
-	.filter-icon-wrapper {
-		position: relative;
-		padding: 8px;
-		border: 1px solid var(--color-purple);
-		border-radius: 4px;
-		background: rgba(0, 0, 0, 0.4);
-		box-shadow: 0 0 15px rgba(184, 187, 240, 0.3);
-	}
-
-	.filter-icon {
-		animation: iconPulse 2s ease-in-out infinite;
-		color: var(--color-purple) !important;
-		stroke: var(--color-purple) !important;
-	}
-
-	@keyframes iconPulse {
-		0%, 100% {
-			filter: drop-shadow(0 0 5px var(--color-purple));
-		}
-		50% {
-			filter: drop-shadow(0 0 10px var(--color-pink));
-		}
-	}
-
-	.filter-title {
-		text-shadow: 0 0 15px var(--color-purple);
-		color: var(--color-white) !important;
-	}
-
-	/* Indicateur de statut */
-	.status-indicator {
-		width: 12px;
-		height: 12px;
-		border-radius: 50%;
-		background: var(--color-purple);
-		box-shadow: 
-			0 0 5px var(--color-purple),
-			0 0 10px var(--color-purple),
-			inset 0 0 5px rgba(255, 255, 255, 0.5);
-		animation: statusBlink 2s ease-in-out infinite;
-	}
-
-	@keyframes statusBlink {
-		0%, 100% {
-			opacity: 1;
-			box-shadow: 
-				0 0 5px var(--color-purple),
-				0 0 10px var(--color-purple);
-		}
-		50% {
-			opacity: 0.5;
-			box-shadow: 
-				0 0 2px var(--color-purple),
-				0 0 5px var(--color-purple);
-		}
-	}
-
-	/* Labels des filtres */
-	.filter-label {
-		text-shadow: 0 0 10px rgba(184, 187, 240, 0.5);
-		animation: labelGlow 3s ease-in-out infinite;
-		color: var(--color-white) !important;
-	}
-
-	@keyframes labelGlow {
-		0%, 100% {
-			text-shadow: 0 0 5px rgba(184, 187, 240, 0.5);
-		}
-		50% {
-			text-shadow: 0 0 10px rgba(184, 187, 240, 0.8);
-		}
-	}
-
-	.label-indicator {
-		width: 6px;
-		height: 6px;
-		border-radius: 50%;
-		background: var(--color-purple);
-		box-shadow: 0 0 5px var(--color-purple);
-		animation: indicatorPulse 1.5s ease-in-out infinite;
-	}
-
-	@keyframes indicatorPulse {
-		0%, 100% {
-			transform: scale(1);
-			opacity: 1;
-		}
-		50% {
-			transform: scale(1.3);
-			opacity: 0.7;
-		}
-	}
-
-	/* Selects stylisés */
-	.select-wrapper {
-		position: relative;
-	}
-
-	.select-wrapper::before {
-		content: '';
-		position: absolute;
-		top: -2px;
-		left: -2px;
-		right: -2px;
-		bottom: -2px;
-		background: linear-gradient(45deg, 
-			var(--color-purple), 
-			var(--color-pink), 
-			var(--color-purple));
-		border-radius: 4px;
-		opacity: 0;
-		transition: opacity 0.3s ease;
-		z-index: -1;
-	}
-
-	.select-wrapper:hover::before {
-		opacity: 0.3;
-	}
-
-	.filter-select {
-		appearance: none;
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23B8BBF0' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
-		background-position: right 0.75rem center;
-		background-repeat: no-repeat;
-		background-size: 1.5em 1.5em;
-		padding-right: 3rem;
-		box-shadow: 
-			inset 0 0 20px rgba(0, 0, 0, 0.5),
-			0 0 0 rgba(184, 187, 240, 0);
-		transition: all 0.3s ease;
-	}
-
-	.filter-select:hover {
-		border-color: var(--color-purple);
-		box-shadow: 
-			inset 0 0 20px rgba(0, 0, 0, 0.5),
-			0 0 15px rgba(184, 187, 240, 0.4);
-		transform: translateY(-2px);
-	}
-
-	.filter-select:focus {
-		border-color: var(--color-pink);
-		box-shadow: 
-			inset 0 0 20px rgba(0, 0, 0, 0.5),
-			0 0 20px rgba(150, 46, 185, 0.5);
-	}
-
-	.filter-select option {
-		background-color: #0a0a0a;
-		color: white;
-		padding: 10px;
-	}
-
-	/* Séparateur */
-	.filter-separator {
-		height: 1px;
-		background: linear-gradient(90deg, 
-			transparent, 
-			var(--color-purple), 
-			var(--color-pink), 
-			var(--color-purple), 
-			transparent);
-		box-shadow: 0 0 10px rgba(184, 187, 240, 0.5);
-	}
-
-	/* Indicateur de résultats */
-	.results-indicator {
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-		background: var(--color-purple);
-		box-shadow: 
-			0 0 5px var(--color-purple),
-			0 0 10px var(--color-purple);
-		animation: resultsPulse 1s ease-in-out infinite;
-	}
-
-	@keyframes resultsPulse {
-		0%, 100% {
-			transform: scale(1);
-		}
-		50% {
-			transform: scale(1.2);
-		}
-	}
-
-	/* Bouton reset stylisé */
-	.reset-button {
-		position: relative;
-		box-shadow: 
-			0 0 10px rgba(184, 187, 240, 0.2),
-			inset 0 0 10px rgba(0, 0, 0, 0.5);
-		color: var(--color-white) !important;
-	}
-
-	.reset-button svg {
-		stroke: var(--color-white) !important;
-	}
-
-	.reset-button-bg {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: linear-gradient(45deg, 
-			var(--color-purple), 
-			var(--color-pink));
-		opacity: 0;
-		transition: opacity 0.3s ease;
-	}
-
-	.reset-button:hover .reset-button-bg {
-		opacity: 0.2;
-	}
-
-	.reset-button:hover {
-		box-shadow: 
-			0 0 20px rgba(184, 187, 240, 0.5),
-			inset 0 0 10px rgba(184, 187, 240, 0.1);
-		transform: translateY(-2px);
-		color: var(--color-pink) !important;
-	}
-
-	.reset-button:hover svg {
-		stroke: var(--color-pink) !important;
-	}
-
-	.reset-button:active {
-		transform: translateY(0);
-	}
-
-	/* Animation de masquage des cartes filtrées */
-	.project-card-link.hidden-by-filter {
-		display: none;
-	}
-
-	.project-card-link {
-		transition: all 0.3s ease;
-	}
-
-	/* Responsive adjustments */
-	@media (max-width: 768px) {
-		.projects-hero-title {
-			font-size: 2.5rem;
+				0 0 45px var(--color-purple);
+			transform: translateY(-2px);
 		}
 
-		.projects-stats {
-			flex-direction: column;
-			gap: 1rem;
-		}
-
+		/* Animations d'apparition des cartes projets */
 		.projects-grid {
-			gap: 1rem;
+			animation: gridFadeIn 1s ease-out 0.5s forwards;
+			opacity: 0;
 		}
 
-		.filters-grid {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>
-
-<script>
-	// Gestion des animations au scroll pour la page projets
-	document.addEventListener('DOMContentLoaded', () => {
-		const ctaSection = document.querySelector('.projects-cta-section');
-		let ctaAnimated = false;
-
-		const observerOptions = {
-			threshold: 0.3,
-			rootMargin: '0px 0px -50px 0px'
-		};
-
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					if (entry.target.classList.contains('projects-cta-section') && !ctaAnimated) {
-						entry.target.classList.add('cta-revealed');
-						ctaAnimated = true;
-					}
-				}
-			});
-		}, observerOptions);
-
-		if (ctaSection) {
-			observer.observe(ctaSection);
-		}
-
-		// Système de filtrage des projets
-		initializeFilters();
-	});
-
-	function initializeFilters() {
-		const projectCards = document.querySelectorAll('.project-card-link');
-		const categoryFilter = document.getElementById('filter-category') as HTMLSelectElement;
-		const studyYearFilter = document.getElementById('filter-study-year') as HTMLSelectElement;
-		const projectYearFilter = document.getElementById('filter-project-year') as HTMLSelectElement;
-		const resetButton = document.getElementById('reset-filters');
-		const resultsCount = document.getElementById('results-count');
-
-		// Extraction des données uniques depuis les projets
-		const categories = new Set<string>();
-		const studyYears = new Set<string>();
-		const projectYears = new Set<string>();
-
-		// Stocker les données de chaque carte pour le filtrage
-		const projectsData: Array<{
-			element: Element;
-			categories: string[];
-			studyYear: string;
-			projectYear: string;
-		}> = [];
-
-		projectCards.forEach((card) => {
-			// Récupérer les données depuis les attributs data ou le contenu
-			const cardElement = card.querySelector('[data-categories]') || card;
-			const categoriesAttr = cardElement.getAttribute('data-categories') || '';
-			const studyYearAttr = cardElement.getAttribute('data-study-year') || '';
-			const projectYearAttr = cardElement.getAttribute('data-project-year') || '';
-
-			const projectCategories = categoriesAttr ? categoriesAttr.split(',').map(c => c.trim()) : [];
-			const projectStudyYear = studyYearAttr.trim();
-			const projectProjectYear = projectYearAttr.trim();
-
-			projectsData.push({
-				element: card,
-				categories: projectCategories,
-				studyYear: projectStudyYear,
-				projectYear: projectProjectYear
-			});
-
-			// Ajouter aux sets pour les options de filtre
-			projectCategories.forEach(cat => cat && categories.add(cat));
-			if (projectStudyYear) studyYears.add(projectStudyYear);
-			if (projectProjectYear) projectYears.add(projectProjectYear);
-		});
-
-		// Peupler les selects avec les options
-		populateSelect(categoryFilter, Array.from(categories).sort());
-		populateSelect(studyYearFilter, Array.from(studyYears).sort());
-		populateSelect(projectYearFilter, Array.from(projectYears).sort().reverse());
-
-		// Fonction de filtrage
-		function applyFilters() {
-			const selectedCategory = categoryFilter.value;
-			const selectedStudyYear = studyYearFilter.value;
-			const selectedProjectYear = projectYearFilter.value;
-
-			let visibleCount = 0;
-
-			projectsData.forEach(project => {
-				let isVisible = true;
-
-				// Filtre par catégorie
-				if (selectedCategory && !project.categories.includes(selectedCategory)) {
-					isVisible = false;
-				}
-
-				// Filtre par année d'étude
-				if (selectedStudyYear && project.studyYear !== selectedStudyYear) {
-					isVisible = false;
-				}
-
-				// Filtre par année de projet
-				if (selectedProjectYear && project.projectYear !== selectedProjectYear) {
-					isVisible = false;
-				}
-
-				// Appliquer la visibilité
-				if (isVisible) {
-					project.element.classList.remove('hidden-by-filter');
-					visibleCount++;
-				} else {
-					project.element.classList.add('hidden-by-filter');
-				}
-			});
-
-			// Mettre à jour le compteur
-			if (resultsCount) {
-				resultsCount.textContent = visibleCount.toString();
+		@keyframes gridFadeIn {
+			0% {
+				opacity: 0;
+				transform: translateY(50px);
+			}
+			100% {
+				opacity: 1;
+				transform: translateY(0);
 			}
 		}
 
-		// Event listeners
-		categoryFilter.addEventListener('change', applyFilters);
-		studyYearFilter.addEventListener('change', applyFilters);
-		projectYearFilter.addEventListener('change', applyFilters);
+		/* Style pour les liens de cartes projets */
+		.project-card-link {
+			text-decoration: none;
+			color: inherit;
+			display: inline-block;
+		}
 
-		resetButton?.addEventListener('click', () => {
-			categoryFilter.value = '';
-			studyYearFilter.value = '';
-			projectYearFilter.value = '';
-			applyFilters();
-		});
-	}
+		.project-card-link:hover {
+			/* Désactivé pour éviter conflit avec animation de la carte */
+			/* transform: scale(1.05); */
+		}
 
-	function populateSelect(selectElement: HTMLSelectElement, options: string[]) {
-		options.forEach(option => {
-			const optionElement = document.createElement('option');
-			optionElement.value = option;
-			optionElement.textContent = option;
-			selectElement.appendChild(optionElement);
+		/* Section CTA animations */
+		.projects-cta-section {
+			opacity: 0;
+			transform: translateY(50px);
+			transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+
+		.projects-cta-section.cta-revealed {
+			opacity: 1;
+			transform: translateY(0);
+			animation: ctaSectionReveal 1s ease-out forwards;
+		}
+
+		@keyframes ctaSectionReveal {
+			0% {
+				opacity: 0;
+				transform: translateY(50px) scale(0.95);
+			}
+			50% {
+				opacity: 0.7;
+				transform: translateY(-10px) scale(1.02);
+			}
+			100% {
+				opacity: 1;
+				transform: translateY(0) scale(1);
+			}
+		}
+
+		.cta-button {
+			box-shadow:
+				0 0 20px rgba(184, 187, 240, 0.3),
+				inset 0 0 10px rgba(184, 187, 240, 0.1);
+			animation: buttonPulse 2s ease-in-out infinite;
+		}
+
+		@keyframes buttonPulse {
+			0%,
+			100% {
+				box-shadow:
+					0 0 20px rgba(184, 187, 240, 0.3),
+					inset 0 0 10px rgba(184, 187, 240, 0.1);
+			}
+			50% {
+				box-shadow:
+					0 0 30px rgba(184, 187, 240, 0.5),
+					inset 0 0 15px rgba(184, 187, 240, 0.2);
+			}
+		}
+
+		/* Animation de masquage des cartes filtrées */
+		.project-card-link.hidden-by-filter {
+			display: none;
+		}
+
+		.project-card-link {
+			transition: all 0.3s ease;
+		}
+
+		/* Responsive adjustments */
+		@media (max-width: 768px) {
+			.projects-hero-title {
+				font-size: 2.5rem;
+			}
+
+			.projects-stats {
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			.projects-grid {
+				gap: 1rem;
+			}
+
+			.filters-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+
+	<script>
+		// Gestion des animations au scroll pour la page projets
+		document.addEventListener("DOMContentLoaded", () => {
+			const ctaSection = document.querySelector(".projects-cta-section");
+			let ctaAnimated = false;
+
+			const observerOptions = {
+				threshold: 0.3,
+				rootMargin: "0px 0px -50px 0px",
+			};
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						if (
+							entry.target.classList.contains(
+								"projects-cta-section",
+							) &&
+							!ctaAnimated
+						) {
+							entry.target.classList.add("cta-revealed");
+							ctaAnimated = true;
+						}
+					}
+				});
+			}, observerOptions);
+
+			if (ctaSection) {
+				observer.observe(ctaSection);
+			}
 		});
-	}
-</script>
+	</script></Layout
+>

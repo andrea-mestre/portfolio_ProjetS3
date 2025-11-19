@@ -384,28 +384,26 @@ function generateProjectSlug(project: any): string {
 				</div>
 				
 				<!-- Bouton voir tous les projets -->
-				{projects.length > 3 && (
-					<div class="flex justify-center mt-12">
-						<a
-							href="/projets"
-							class="view-all-button group relative px-8 py-4 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink] inline-flex items-center gap-3"
-						>
-							
-							<div class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+				<div class="flex justify-center mt-12">
+					<a
+						href="/projets"
+						class="view-all-button group relative px-8 py-4 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink] inline-flex items-center gap-3"
+					>
+						
+						<div class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
-							
-							<div class="relative z-10 flex items-center gap-3">
-								<span>VOIR TOUS LES PROJETS</span>
-								<svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-									<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-								</svg>
-							</div>
+						
+						<div class="relative z-10 flex items-center gap-3">
+							<span>VOIR TOUS LES PROJETS</span>
+							<svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+							</svg>
+						</div>
 
-							<!-- Effet de scan -->
-							<div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"></div>
-						</a>
-					</div>
-				)}
+						<!-- Effet de scan -->
+						<div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"></div>
+					</a>
+				</div>
 			</div>
 		</section>
 
@@ -424,39 +422,29 @@ function generateProjectSlug(project: any): string {
 					<p
 						class="font-[family-name:var(--font-text)] text-lg md:text-xl text-white/70 leading-relaxed mb-8"
 					>
-						Entrons en contact pour vos projets d'interfaces
-						spatiales...
+						Entrons en contact pour vos projets...
 					</p>
 				</div>
-				<div class="content-item">
-					<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-						<div
-							class="p-6 border border-[rgba(184,187,240,0.3)] rounded-lg backdrop-blur-sm"
-						>
-							<h3 class="text-[--color-purple] text-lg mb-2">
-								Email
-							</h3>
-							<p class="text-white/60 text-sm">
-								contact@andreamestre.dev
-							</p>
+				<div class="content-item flex justify-center mt-12">
+					<a
+						href="/contact"
+						class="contact-button group relative px-8 py-4 bg-gradient-to-r from-[--color-darkpurple] to-[--color-purple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink] inline-flex items-center gap-3"
+					>
+						<!-- Effet lumineux de fond -->
+						<div class="absolute inset-0 bg-gradient-to-r from-[--color-pink]/20 to-[--color-purple]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+						<!-- Texte et icône -->
+						<div class="relative z-10 flex items-center gap-3">
+							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+								<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+								<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+							</svg>
+							<span>ME CONTACTER</span>
 						</div>
-						<div
-							class="p-6 border border-[rgba(184,187,240,0.3)] rounded-lg backdrop-blur-sm"
-						>
-							<h3 class="text-[--color-purple] text-lg mb-2">
-								LinkedIn
-							</h3>
-							<p class="text-white/60 text-sm">@andrea-mestre</p>
-						</div>
-						<div
-							class="p-6 border border-[rgba(184,187,240,0.3)] rounded-lg backdrop-blur-sm"
-						>
-							<h3 class="text-[--color-purple] text-lg mb-2">
-								GitHub
-							</h3>
-							<p class="text-white/60 text-sm">@andrea-mestre</p>
-						</div>
-					</div>
+
+						<!-- Effet de scan -->
+						<div class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"></div>
+					</a>
 				</div>
 			</div>
 		</section>
@@ -1129,6 +1117,76 @@ function generateProjectSlug(project: any): string {
 			transform: translateY(0);
 		}
 	}
+
+	/* Styles pour la section Contact */
+	.contact-section {
+		opacity: 0;
+		transform: translateY(50px);
+		transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	.contact-section.contact-revealed {
+		opacity: 1;
+		transform: translateY(0);
+		animation: contactSectionReveal 1s ease-out forwards;
+	}
+
+	@keyframes contactSectionReveal {
+		0% {
+			opacity: 0;
+			transform: translateY(50px) scale(0.95);
+		}
+		50% {
+			opacity: 0.7;
+			transform: translateY(-10px) scale(1.02);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	.contact-revealed .content-item {
+		animation: contactContentReveal 0.6s ease-out forwards;
+		opacity: 0;
+		transform: translateY(30px);
+	}
+
+	.contact-revealed .content-item:nth-child(1) { animation-delay: 0.1s; }
+	.contact-revealed .content-item:nth-child(2) { animation-delay: 0.2s; }
+	.contact-revealed .content-item:nth-child(3) { animation-delay: 0.3s; }
+
+	@keyframes contactContentReveal {
+		0% {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Bouton de contact */
+	.contact-button {
+		box-shadow: 
+			0 0 20px rgba(184, 187, 240, 0.3),
+			inset 0 0 10px rgba(184, 187, 240, 0.1);
+		animation: contactButtonPulse 2s ease-in-out infinite;
+	}
+
+	@keyframes contactButtonPulse {
+		0%, 100% {
+			box-shadow: 
+				0 0 20px rgba(184, 187, 240, 0.3),
+				inset 0 0 10px rgba(184, 187, 240, 0.1);
+		}
+		50% {
+			box-shadow: 
+				0 0 30px rgba(184, 187, 240, 0.5),
+				inset 0 0 15px rgba(184, 187, 240, 0.2);
+		}
+	}
 </style>
 
 <script>
@@ -1136,8 +1194,10 @@ function generateProjectSlug(project: any): string {
 	document.addEventListener('DOMContentLoaded', () => {
 		const skillsSection = document.querySelector('.skills-section');
 		const projectsSection = document.querySelector('.projects-section');
+		const contactSection = document.querySelector('.contact-section');
 		let skillsAnimated = false;
 		let projectsAnimated = false;
+		let contactAnimated = false;
 
 		const observerOptions = {
 			threshold: 0.3, // Déclencher quand 30% de la section est visible
@@ -1164,6 +1224,15 @@ function generateProjectSlug(project: any): string {
 						const event = new CustomEvent('projectsSectionRevealed');
 						window.dispatchEvent(event);
 					}
+					
+					if (entry.target.classList.contains('contact-section') && !contactAnimated) {
+						entry.target.classList.add('contact-revealed');
+						contactAnimated = true;
+						
+						// Déclencher l'événement personnalisé
+						const event = new CustomEvent('contactSectionRevealed');
+						window.dispatchEvent(event);
+					}
 				}
 			});
 		}, observerOptions);
@@ -1174,6 +1243,10 @@ function generateProjectSlug(project: any): string {
 		
 		if (projectsSection) {
 			observer.observe(projectsSection);
+		}
+		
+		if (contactSection) {
+			observer.observe(contactSection);
 		}
 	});
 </script>
