@@ -174,7 +174,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
               </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="grid grid-cols-1 gap-2">
               <div
                 class="project-info-block p-6 backdrop-blur-sm"
               >
@@ -191,20 +191,6 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
                         />
                       ) : null;
                     })
-                  }
-                </div>
-              </div>
-
-              <div
-                class="project-info-block backdrop-blur-sm"
-              >
-                <div class="flex flex-wrap gap-2">
-                  {
-                    project.categories.map((category: string) => (
-                      <span class="px-2 py-1 bg-[--color-pink]/20 border border-[--color-pink]/50 rounded text-xs text-[--color-pink] font-medium">
-                        {category}
-                      </span>
-                    ))
                   }
                 </div>
               </div>
