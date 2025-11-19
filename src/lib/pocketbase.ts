@@ -1,7 +1,13 @@
 import PocketBase from 'pocketbase';
 
-// Configuration PocketBase avec variable d'environnement
-const POCKETBASE_URL = import.meta.env.POCKETBASE_URL || import.meta.env.PUBLIC_POCKETBASE_URL || 'http://127.0.0.1:8090';
+// Configuration PocketBase selon l'environnement
+let POCKETBASE_URL: string;
+if (import.meta.env.MODE === 'development') {
+  POCKETBASE_URL = 'http://127.0.0.1:8090'; // Machine de développement
+} else {
+  POCKETBASE_URL = 'https://portfolio.andrea-mestre.eu:443'; // URL du site en production
+}
+
 const pb = new PocketBase(POCKETBASE_URL);
 
 // Export de l'URL pour utilisation dans d'autres composants
