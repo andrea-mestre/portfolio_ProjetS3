@@ -1,0 +1,18 @@
+<svg width="543" height="135" viewBox="0 0 543 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 47V23.5L16 2H111.5" stroke="white"/>
+<path d="M12.5 1.5C8.5 7.66667 0.5 20.1 0.5 20.5V5L12.5 1.5Z" stroke="white"/>
+<path d="M4 47C4 48.1046 3.10457 49 2 49C0.89543 49 0 48.1046 0 47C0 45.8954 0.89543 45 2 45C3.10457 45 4 45.8954 4 47Z" fill="white"/>
+<circle cx="112" cy="2" r="2" fill="white"/>
+<path d="M541 47V23.5L527 2H431.5" stroke="white"/>
+<path d="M530.5 1.5C534.5 7.66667 542.5 20.1 542.5 20.5V5L530.5 1.5Z" stroke="white"/>
+<path d="M539 47C539 48.1046 539.895 49 541 49C542.105 49 543 48.1046 543 47C543 45.8954 542.105 45 541 45C539.895 45 539 45.8954 539 47Z" fill="white"/>
+<circle cx="2" cy="2" r="2" transform="matrix(-1 0 0 1 433 0)" fill="white"/>
+<path d="M2 88V111.5L16 133H111.5" stroke="white"/>
+<path d="M12.5 133.5C8.5 127.333 0.5 114.9 0.5 114.5V130L12.5 133.5Z" stroke="white"/>
+<path d="M4 88C4 86.8954 3.10457 86 2 86C0.89543 86 0 86.8954 0 88C0 89.1046 0.89543 90 2 90C3.10457 90 4 89.1046 4 88Z" fill="white"/>
+<circle cx="2" cy="2" r="2" transform="matrix(1 0 0 -1 110 135)" fill="white"/>
+<path d="M541 88V111.5L527 133H431.5" stroke="white"/>
+<path d="M530.5 133.5C534.5 127.333 542.5 114.9 542.5 114.5V130L530.5 133.5Z" stroke="white"/>
+<path d="M539 88C539 86.8954 539.895 86 541 86C542.105 86 543 86.8954 543 88C543 89.1046 542.105 90 541 90C539.895 90 539 89.1046 539 88Z" fill="white"/>
+<circle cx="431" cy="133" r="2" transform="rotate(180 431 133)" fill="white"/>
+</svg>
