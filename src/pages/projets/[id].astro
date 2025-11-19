@@ -168,7 +168,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
     <section class="project-hero flex justify-center py-8 px-8">
       <div class="w-full max-w-7xl">
         <!-- Grille principale : Description à gauche, Image à droite -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-35 mb-12">
           <!-- Colonne gauche - Description du projet -->
           <div class="space-y-8">
             <!-- Description détaillée -->
@@ -246,7 +246,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
           <div class="flex items-start">
             {
               getProjectImageUrl(project) && (
-                <div class="project-image-main w-120 py-100 overflow-hidden">
+                <div class="project-image-main w-100 py-50 overflow-hidden">
                   <img
                     src={getProjectImageUrl(project)}
                     alt={project.titre}
@@ -373,6 +373,51 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
               >
             </p>
           </div>
+
+          <!-- Bouton projet suivant -->
+          {
+            (() => {
+              // Générer le slug du projet suivant
+              const currentIndex = projects.findIndex((p) => {
+                const slug = p.titre
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")
+                  .replace(/[^a-z0-9-]/g, "");
+                return slug === id;
+              });
+              let nextIndex = currentIndex + 1;
+              if (nextIndex >= projects.length) nextIndex = 0;
+              const nextProject = projects[nextIndex];
+              const nextSlug = nextProject.titre
+                .toLowerCase()
+                .replace(/\s+/g, "-")
+                .replace(/[^a-z0-9-]/g, "");
+              return (
+                <a
+                  href={`/projets/${nextSlug}`}
+                  class="group relative px-6 py-3 bg-gradient-to-r from-[--color-purple] to-[--color-darkpurple] border border-[--color-purple] rounded-lg font-[family-name:var(--font-text)] text-white font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 hover:border-[--color-pink] inline-flex items-center gap-3"
+                  style="margin-left: auto;"
+                >
+                  <span>PROJET SUIVANT</span>
+                  <svg
+                    class="w-4 h-4 group-hover:rotate-12 transition-transform"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                  <!-- Effet de scan -->
+                  <div
+                    class="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:left-full transition-all duration-1000"
+                  >
+                  </div>
+                </a>
+              );
+            })()
+          }
         </div>
       </div>
     </section>
