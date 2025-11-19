@@ -26,7 +26,7 @@ const { title, subtitle, description, stats, id, date, imageUrl, categories } = 
 				
 				<div class="card-header relative z-[2] pb-3 pt-16">
 					{imageUrl && (
-						<div class="w-60 h-40 rounded-lg overflow-hidden mx-auto mb-4 border border-[rgba(184,187,240,0.4)] p-2 bg-gradient-to-br from-[rgba(184,187,240,0.1)] to-[rgba(150,46,185,0.1)] shadow-[0_0_15px_rgba(184,187,240,0.3)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(184,187,240,0.5)] hover:scale-105">
+						<div class="w-60 h-40 rounded-lg overflow-hidden mx-auto mb-4">
 							<img src={imageUrl} alt={title} class="w-full h-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300 brightness-90 contrast-110" />
 						</div>
 					)}
@@ -39,18 +39,16 @@ const { title, subtitle, description, stats, id, date, imageUrl, categories } = 
 				<div class="card-content relative z-[2] px-6 flex-1">
 					<p class="font-[family-name:var(--font-text)] text-sm text-[#b3b3cc] leading-relaxed tracking-wide mb-6 text-center">{description}</p>
 
-					<div class="card-stats flex justify-between mb-5">
-						{stats.map((stat) => (
-							<div class="stat text-center">
-								<div class="font-[family-name:var(--font-smalltext)] text-xl text-[var(--color-purple)] font-bold" style="text-shadow: 0 0 10px rgba(184, 187, 240, 0.7);">{stat.value}</div>
-								<div class="font-[family-name:var(--font-text)] text-xs text-[#b3b3cc] uppercase tracking-wide mt-1">{stat.label}</div>
-							</div>
-						))}
-					</div>
-				</div>
-
-				<div class="card-footer relative z-[2] p-6 flex justify-center items-center">
-					<div class="font-[family-name:var(--font-smalltext)] text-xs text-[var(--color-purple)]" style="text-shadow: 0 0 10px rgba(184, 187, 240, 0.7);">{id}</div>
+					{stats && stats.length > 0 && (
+						<div class="card-stats flex justify-between mb-5">
+							{stats.map((stat) => (
+								<div class="stat text-center">
+									<div class="font-[family-name:var(--font-smalltext)] text-xl text-[var(--color-purple)] font-bold" style="text-shadow: 0 0 10px rgba(184, 187, 240, 0.7);">{stat.value}</div>
+									<div class="font-[family-name:var(--font-text)] text-xs text-[#b3b3cc] uppercase tracking-wide mt-1">{stat.label}</div>
+								</div>
+							))}
+						</div>
+					)}
 				</div>
 			</div>
 

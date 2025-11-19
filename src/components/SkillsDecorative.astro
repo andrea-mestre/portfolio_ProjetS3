@@ -1,7 +1,7 @@
 <!-- Partie gauche - Section décorative avec éléments violets -->
 <div class="relative p-4 min-h-[900px] md:min-h-[700px] sm:min-h-[500px] flex flex-col transform -translate-y-40 md:-translate-y-32 sm:-translate-y-20">
     <!-- SVG HUD Element Donut en arrière-plan -->
-    <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute inset-0 pointer-events-none" style="top: -110px;">
         <img
             src="/src/assets/svg/hud_elementdonut.svg?v=1731340000"
             alt="HUD Element Donut Frame"
@@ -11,15 +11,15 @@
 
     <!-- Éléments violets décoratifs positionnés à l'intérieur du HUD -->
     <div
-        class="relative z-10 flex-1 flex justify-center items-center px-5 py-16 md:py-12 sm:py-8 mt-8 md:mt-6 sm:mt-4"
+        class="relative z-10 flex-1 flex justify-center items-center px-5 py-16 md:py-12 sm:py-8 mt-8 md:mt-6 sm:mt-2"
     >
-        <div class="flex items-center justify-center gap-19 md:gap-12 sm:gap-6">
+        <div class="flex items-center justify-center gap-19 md:gap-12 sm:gap-3">
             <!-- Premier élément donut rond -->
             <div class="decorative-element relative">
                 <img
                     src="/src/assets/svg/donutround_hud.svg?v=1731340000"
                     alt="Donut Round Element"
-                    class="w-30 h-30 md:w-20 md:h-20 sm:w-16 sm:h-16 opacity-80"
+                    class="w-40 h-40 md:w-20 md:h-20 sm:w-16 sm:h-16 opacity-80"
                     style="animation: float 6s ease-in-out infinite;"
                 />
             </div>
@@ -29,7 +29,7 @@
                 <img
                     src="/src/assets/svg/donut_hud.svg?v=1731340000"
                     alt="Donut Central Element"
-                    class="w-50 h-50 md:w-36 md:h-36 sm:w-24 sm:h-24 opacity-90"
+                    class="w-60 h-60 md:w-36 md:h-36 sm:w-24 sm:h-24 opacity-90"
                     style="animation: float 6s ease-in-out infinite 2s;"
                 />
             </div>
@@ -39,7 +39,7 @@
                 <img
                     src="/src/assets/svg/donutround2.svg?v=1731340000"
                     alt="Donut Round Element 2"
-                    class="w-30 h-30 md:w-20 md:h-20 sm:w-16 sm:h-16 opacity-75"
+                    class="w-40 h-40 md:w-20 md:h-20 sm:w-16 sm:h-16 opacity-75"
                     style="animation: float 6s ease-in-out infinite 4s;"
                 />
             </div>
@@ -47,7 +47,7 @@
     </div>
 
     <!-- Nouvelle barre de chargement juste en dessous du HUD -->
-    <div class="relative z-10 flex flex-col items-center -mt-16 md:-mt-12 sm:-mt-8 space-y-8 md:space-y-6 sm:space-y-4">
+    <div class="relative z-10 flex flex-col items-center -mt-16 md:-mt-12 sm:-mt-8 space-y-24 md:space-y-20 sm:space-y-1">
         <!-- Troisième barre de chargement (nouvelle) -->
         <div class="progress-bar-container">
             <ul class="progress-bar">

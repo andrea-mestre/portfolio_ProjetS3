@@ -55,42 +55,8 @@ export async function getProject(id: string): Promise<Project | null> {
 
 // Fonction pour calculer les statistiques d'un projet
 export function calculateProjectStats(project: Project): ProjectStats[] {
-  const stats: ProjectStats[] = [];
-  
-  // Stat 1: Complexité basée sur le nombre d'outils
-  const toolsCount = Array.isArray(project.outils) ? project.outils.length : 0;
-  let complexityValue = '75%';
-  if (toolsCount >= 5) complexityValue = '95%';
-  else if (toolsCount >= 3) complexityValue = '85%';
-  
-  stats.push({
-    value: complexityValue,
-    label: 'Complexité'
-  });
-  
-  // Stat 2: Note basée sur les catégories
-  const categoriesCount = Array.isArray(project.categories) ? project.categories.length : 0;
-  let grade = 'B+';
-  if (categoriesCount >= 3) grade = 'A+';
-  else if (categoriesCount >= 2) grade = 'A';
-  
-  stats.push({
-    value: grade,
-    label: 'Grade'
-  });
-  
-  // Stat 3: Version basée sur l'année d'études
-  let version = '1.0';
-  const etude = project.etude_annee || '';
-  if (etude.includes('BUT MMI 2')) version = '2.0';
-  else if (etude.includes('BUT MMI 3')) version = '3.0';
-  
-  stats.push({
-    value: version,
-    label: 'Version'
-  });
-  
-  return stats;
+  // Retourne un tableau vide pour ne pas afficher de statistiques
+  return [];
 }
 
 // Fonction pour formater la date du projet
