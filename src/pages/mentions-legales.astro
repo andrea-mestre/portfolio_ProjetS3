@@ -6,15 +6,18 @@ import BackgroundHUD from "../components/BackgroundHUD.astro";
 
 <Layout title="Mentions Légales - Andrea Mestre">
 	<HudHeader currentPage="mentions-legales" />
-	<BackgroundHUD />
+	
+		<div class="hidden md:block">
+			<BackgroundHUD />
+		</div>
 
 	<main
-		class="min-h-screen pt-32 pb-16 px-8 relative z-10 flex flex-col justify-start items-center"
+		class="min-h-screen pt-32 pb-16 px-4 md:px-8 relative z-10 flex flex-col justify-start items-center"
 	>
-		<div class="w-full max-w-7xl relative p-8">
-			<div class="flex justify-center mb-12">
+		<div class="w-full max-w-7xl relative p-4 md:p-8">
+			<div class="flex justify-center mb-8 md:mb-12">
 				<h1
-					class="text-white tracking-wide whitespace-nowrap drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+					class="text-white tracking-wide drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] text-2xl md:text-4xl lg:text-5xl text-center"
 					style="font-family: var(--font-title1); font-size: var(--size-title1);"
 				>
 					MENTIONS LÉGALES
@@ -22,18 +25,18 @@ import BackgroundHUD from "../components/BackgroundHUD.astro";
 			</div>
 
 			<div
-				class="text-white space-y-16"
+				class="text-white space-y-12 md:space-y-16"
 				style="font-family: var(--font-text); line-height: 1.6; font-size: var(--size-text);"
 			>
 			
-				<section class="mb-19">
+				<section class="mb-10 md:mb-19">
 					<h2
-						class="content-item font-[family-name:var(--font-title2)] text-4xl font-bold mb-8 tracking-[0.15em] text-left section-neon"
+						class="content-item font-[family-name:var(--font-title2)] text-2xl md:text-4xl font-bold mb-6 md:mb-8 tracking-[0.15em] text-left section-neon"
 						style="color: var(--color-darkpurple);"
 					>
 						1. ÉDITEUR DU SITE
 					</h2>
-					<div class="pl-8 border-l-2 border-[#B8BBF0]">
+					<div class="pl-4 md:pl-8 border-l-2 border-[#B8BBF0]">
 						<p class="mb-4 text-[#E5E5E5]" style="font-size: var(--size-text);">
 							Le site est édité par Andréa Mestre, étudiante,
 							projet réalisé dans le cadre scolaire.
@@ -50,14 +53,14 @@ import BackgroundHUD from "../components/BackgroundHUD.astro";
 					</div>
 				</section>
 
-				<section class="mb-15">
+				<section class="mb-10 md:mb-15">
 					<h2
-						class="content-item font-[family-name:var(--font-title2)] text-4xl font-bold mb-8 tracking-[0.15em] text-left section-neon"
+						class="content-item font-[family-name:var(--font-title2)] text-2xl md:text-4xl font-bold mb-6 md:mb-8 tracking-[0.15em] text-left section-neon"
 						style="color: var(--color-darkpurple);"
 					>
 						2. HÉBERGEMENT
 					</h2>
-					<div class="pl-8 border-l-2 border-[#B8BBF0]">
+					<div class="pl-4 md:pl-8 border-l-2 border-[#B8BBF0]">
 						<p class="mb-4 text-[#E5E5E5]" style="font-size: var(--size-text);">
 							Le site est hébergé par : Infomaniak Network SA Rue
 							Eugène-Marziano 25, 1227 Genève, Suisse Site :
@@ -73,14 +76,14 @@ import BackgroundHUD from "../components/BackgroundHUD.astro";
 					</div>
 				</section>
 
-				<section class="mb-19">
+				<section class="mb-10 md:mb-19">
 					<h2
-						class="content-item font-[family-name:var(--font-title2)] text-4xl font-bold mb-8 tracking-[0.15em] text-left section-neon"
+						class="content-item font-[family-name:var(--font-title2)] text-2xl md:text-4xl font-bold mb-6 md:mb-8 tracking-[0.15em] text-left section-neon"
 						style="color: var(--color-darkpurple);"
 					>
 						3. PROPRIÉTÉ INTELLECTUELLE
 					</h2>
-					<div class="pl-8 border-l-2 border-[#B8BBF0]">
+					<div class="pl-4 md:pl-8 border-l-2 border-[#B8BBF0]">
 						<p class="text-[#E5E5E5]" style="font-size: var(--size-text);">
 							L'ensemble des contenus présents sur ce site
 							(textes, images, vidéos, animations, graphismes,
@@ -97,15 +100,15 @@ import BackgroundHUD from "../components/BackgroundHUD.astro";
 					</div>
 				</section>
 
-				<!-- Section 4 - Données personnelles -->
-				<section class="mb-19">
+
+				<section class="mb-10 md:mb-19">
 					<h2
-						class="content-item font-[family-name:var(--font-title2)] text-4xl font-bold mb-8 tracking-[0.15em] text-left section-neon"
+						class="content-item font-[family-name:var(--font-title2)] text-2xl md:text-4xl font-bold mb-6 md:mb-8 tracking-[0.15em] text-left section-neon"
 						style="color: var(--color-darkpurple);"
 					>
 						4. DONNÉES PERSONNELLES
 					</h2>
-					<div class="pl-8 border-l-2 border-[#B8BBF0]">
+					<div class="pl-4 md:pl-8 border-l-2 border-[#B8BBF0]">
 						<p class="text-[#E5E5E5]" style="font-size: var(--size-text);">
 							Aucune donnée personnelle n'est collectée à des fins
 							commerciales ou statistiques. Le formulaire de
@@ -149,16 +152,8 @@ import BackgroundHUD from "../components/BackgroundHUD.astro";
 		}
 	}
 
-	.section-neon:hover {
-		text-shadow:
-			0 0 15px var(--color-darkpurple),
-			0 0 25px var(--color-darkpurple),
-			0 0 35px var(--color-darkpurple),
-			0 0 45px var(--color-purple);
-		transform: translateY(-2px);
-	}
 
-	/* Responsive pour mobile */
+
 	@media (max-width: 768px) {
 		.section-neon {
 			font-size: 1.5rem;
