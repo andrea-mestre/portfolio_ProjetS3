@@ -109,7 +109,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
 
           <div class="flex-1 text-center">
             <span
-              class="text-white text-sm tracking-wider font-[family-name:var(--font-smalltext)]"
+              class="text-white text-sm tracking-wider font-[family-name:var(--font-smalltext)] uppercase"
             >
               {formatProjectDate(project.projet_annee)}
             </span>
@@ -204,7 +204,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
                   <img
                     src={getProjectImageUrl(project)}
                     alt={project.titre}
-                    class="w-full h-auto object-cover"
+                    class="w-full h-auto object-contain"
                   />
                 </div>
               )
@@ -213,92 +213,48 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
         </div>
 
 
-       
-        {project.hierarchie_descrip && (
-          <div class="project-hierarchy mb-12">
-            <div
-              class="p-8"
-            >
-              <h2
-                class="font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-15 text-center"
-                style="color: var(--color-darkpurple); font-size: var(--size-h2);"
-              >
-                HIÉRARCHIE DU PROJET
-              </h2>
+      </div>
+    </section>
 
-                <div class="hierarchy-container relative">
-                {project.images && project.images.length > 0 && (
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {project.images.map((image: string, index: number) => {
-                      const imageUrl = `${POCKETBASE_URL}/api/files/projet/${project.id}/${image}`;
-                      
-                      const liMatches = project.hierarchie_descrip.match(/<li>(.*?)<\/li>/gs);
-                      const paragraphContent = liMatches && liMatches[index] 
-                        ? liMatches[index].replace(/<\/?li>/g, '').trim() 
-                        : '';
-                      
-                      return (
-                        <div class={`hierarchy-image-wrapper group relative overflow-hidden  ${index === 0 ? 'md:col-span-1' : ''}`}>
-                          <img 
-                            src={imageUrl}
-                            alt={`Hiérarchie du projet - étape ${index + 1}`}
-                            class="w-full h-auto object-cover transition-transform duration-300"
-                          />
-                          {paragraphContent && (
-                            <div class="hierarchy-overlay absolute inset-0 bg-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 pointer-events-none">
-                              <div 
-                                class="text-white leading-relaxed font-[family-name:var(--font-text)] text-center"
-                                style="font-size: var(--size-text);"
-                                set:html={paragraphContent}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-
-       
-        {project.image_resultat && project.image_resultat.length > 0 && (
-          <div class="project-result mb-40">
-            <div
-              class="p-8 backdrop-blur-sm"
-            >
-              <h2
-                class="font-[family-name:var(--font-title2)] font-bold tracking-[0.15em] section-neon mb-15 text-center"
-                style="color: var(--color-darkpurple); font-size: var(--size-h2);"
-              >
-                RÉSULTAT FINAL
-              </h2>
-
-              <div class="result-container relative">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {project.image_resultat.map((image: string, index: number) => {
-                    const imageUrl = `${POCKETBASE_URL}/api/files/projet/${project.id}/${image}`;
-                    return (
-                      <div class="result-image-container overflow-hidden rounded-lg">
-                        <img 
-                          src={imageUrl}
-                          alt={`Résultat final - ${index + 1}`}
-                          class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105"
-                        />
-                      </div>
-                    );
-                  })}
+    {(project.images?.length > 0 || project.image_resultat?.length > 0) && (
+      <section class="project-gallery mb-16 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+            {project.images?.map((image: string, index: number) => {
+              const imageUrl = `${POCKETBASE_URL}/api/files/projet/${project.id}/${image}`;
+              return (
+                <div class="gallery-image-item relative overflow-hidden">
+                  <img 
+                    src={imageUrl}
+                    alt={`Process - étape ${index + 1}`}
+                    class="gallery-image"
+                  />
                 </div>
-              </div>
-            </div>
+              );
+            })}
+            
+            {project.image_resultat?.map((image: string, index: number) => {
+              const imageUrl = `${POCKETBASE_URL}/api/files/projet/${project.id}/${image}`;
+              return (
+                <div class="gallery-image-item relative overflow-hidden md:col-span-2">
+                  <img 
+                    src={imageUrl}
+                    alt={`Résultat final - ${index + 1}`}
+                    class="gallery-image"
+                  />
+                </div>
+              );
+            })}
           </div>
-        )}
+        </div>
+      </section>
+    )}
+
+    <section class="flex justify-center px-8">
 
         <!-- Section navigation -->
         <div
-          class="project-navigation flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t border-white/20"
+          class="project-navigation flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-white/20"
         >
           <a
             href="/projets"
@@ -468,15 +424,74 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
     }
   }
 
+  /* Gallery Grid styles */
+  .gallery-image-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    animation: fadeInScale 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Hauteur fixe pour les 2 premières images */
+  .gallery-image-item:nth-child(1),
+  .gallery-image-item:nth-child(2) {
+    height: 500px;
+  }
+
+  .gallery-image-item:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  .gallery-image-item:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .gallery-image-item:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  .gallery-image-item:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+
+  .gallery-image-item:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Image pleine largeur garde height: auto */
+  .gallery-image-item:nth-child(n+3) .gallery-image {
+    height: auto;
+    object-fit: contain;
+  }
+
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .project-info-block {
       margin-bottom: 1rem;
     }
 
-    .hierarchy-container .grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
+    .gallery-image-item {
+      padding: 0;
     }
   }
 </style>
@@ -485,7 +500,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
   // Animation d'apparition au scroll
   document.addEventListener("DOMContentLoaded", () => {
     const elements = document.querySelectorAll(
-      ".project-info-block, .project-description, .project-image-main",
+      ".project-info-block, .project-description, .project-image-main, .gallery-image-item",
     );
 
     const observer = new IntersectionObserver(
@@ -493,7 +508,7 @@ function getToolIcon(toolName: string): { src: string; alt: string } {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
+            entry.target.style.transform = "translateY(0) scale(1)";
           }
         });
       },
